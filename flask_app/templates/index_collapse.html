@@ -1,0 +1,114 @@
+{% extends 'model.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <p>
+            <a class="btn btn-primary" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="true" aria-controls="multiCollapseExample1">Login</a>
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Register</button>
+        </p>
+        <div class="row">
+            <div class="col">
+                <div class="collapse multi-collapse" id="multiCollapseExample1">
+                    <div class="card card-body bg-secondary whitesmoke">
+                        <h1>Login</h1>
+                        <form action="/login" method="post">
+                            <div class="mb-3 col-auto">
+                                <label for="exampleInputemail1" class="form-label">Email:</label>
+                                <input placeholder="Email" type="email" name="email" class="form-control" id="exampleInputemail1" aria-describedby="emailHelp">
+                            </div>
+                            {% if get_flashed_messages(category_filter=["login_email"]) %}
+                            <ul class="alert alert-danger">
+                                {% for message in get_flashed_messages(category_filter=["login_email"]) %}
+                                <li style="list-style-type:none;">{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                            <div class="mb-3 col-auto">
+                                <label for="exampleInputPassword1" class="form-label">Password:</label>
+                                <input placeholder="Password" type="password" name="password" class="form-control" id="exampleInputPassword1">
+                            </div>
+                            {% if get_flashed_messages(category_filter=["login_password"]) %}
+                            <ul class="alert alert-danger">
+                                {% for message in get_flashed_messages(category_filter=["login_password"]) %}
+                                <li style="list-style-type:none;">{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="collapse multi-collapse" id="multiCollapseExample2">
+                    <div class="card card-body bg-secondary whitesmoke">
+                        <h1>Registration</h1>
+                        <form action="/register" method="post">
+                            <div class="mb-3 col-auto">
+                                <label for="exampleInputfirst_name1" class="form-label">First Name:</label>
+                                <input placeholder="First Name" name="first_name" class="form-control" id="exampleInputfirst_name1" aria-describedby="first_nameHelp">
+                            </div>
+                            {% if get_flashed_messages(category_filter=["first_name"]) %}
+                            <ul class="alert alert-danger">
+                                {% for message in get_flashed_messages(category_filter=["first_name"]) %}
+                                <li style="list-style-type:none;">{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                            <div class="mb-3 col-auto">
+                                <label for="exampleInputlast_name1" class="form-label">Last Name:</label>
+                                <input placeholder="Last Name" type="last_name" name="last_name" class="form-control" id="exampleInputlast_name1" aria-describedby="last_nameHelp">
+                            </div>
+                            {% if get_flashed_messages(category_filter=["last_name"]) %}
+                            <ul class="alert alert-danger">
+                                {% for message in get_flashed_messages(category_filter=["last_name"]) %}
+                                <li style="list-style-type:none;">{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                            <div class="mb-3 col-auto">
+                                <label for="exampleInputemail1" class="form-label">Email:</label>
+                                <input placeholder="Email" type="email" name="email" class="form-control" id="exampleInputemail1" aria-describedby="emailHelp">
+                            </div>
+                            {% if get_flashed_messages(category_filter=["email"]) %}
+                            <ul class="alert alert-danger">
+                                {% for message in get_flashed_messages(category_filter=["email"]) %}
+                                <li style="list-style-type:none;">{{ message }}</li> 
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                            <div class="mb-3 col-auto">
+                                <label for="exampleInputusername1" class="form-label">Username:</label>
+                                <input type="text" name="username" placeholder="Username" class="form-control" id="exampleInputusername1">
+                            </div>
+                            {% if get_flashed_messages(category_filter=["username"]) %}
+                            <ul class="alert alert-danger">
+                                {% for message in get_flashed_messages(category_filter=["username"]) %}
+                                <li style="list-style-type:none;">{{ message }}</li> 
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                            <div class="mb-3 col-auto">
+                                <label for="exampleInputPassword1" class="form-label">Password:</label>
+                                <input placeholder="Password" type="password" name="password" class="form-control" id="exampleInputPassword1">
+                            </div>
+                            <div class="mb-3 col-auto">
+                                <label for="exampleInputPasswordConfirmation1" class="form-label">Confirm Password:</label>
+                                <input placeholder="Confirm Password" type="password" name="password_confirmation" class="form-control" id="exampleInputPasswordConfirmation1">
+                            </div>
+                            {% if get_flashed_messages(category_filter=["password"]) %}
+                            <ul class="alert alert-danger">
+                                {% for message in get_flashed_messages(category_filter=["password"]) %}
+                                <li style="list-style-type:none;">{{ message }}</li> 
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                            <button type="submit" class="btn btn-primary">Register Now!</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
