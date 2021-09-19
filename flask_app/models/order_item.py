@@ -1,6 +1,7 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import Flask, flash, session
 from flask_app.models.order import Order
+from flask_app.models.user import User
 app = Flask(__name__)
 DATABASE = "floral_schema"
 
@@ -33,16 +34,23 @@ class OrderItem:
 
     @classmethod
     def create_order_item(cls, data):
-        query1 = "select * from cart_items where cart_items.cart_id = %(cart_id)s"
+        user_data = "%(user_id)s"
+        # user = User.select(data=user_data)
+        query3 = "SELECT * from carts where user_id = %(user_id)s"
+        results3 = connectToMySQL(DATABASE).query_db(query3, data)
+        cart = cls(results3[0])
+        query1 = f"select * from cart_items where cart_items.cart_id = {cart.id}"
         results1 = connectToMySQL(DATABASE).query_db(query1, data)
-        order_data = "%(user_id)s"
-        Order.create_order(type='user_id', order_data=order_data)
-
-#STUFF MISSINGF STILLL
-
-        query2 = "INSERT INTO order_items (quantity, order_id, arrangement_id) VALUES (%(quantity)s, %(order_id)s, %(arrangement_id)s"
-        results2 =  connectToMySQL(DATABASE).query_db(query2, data)
-        return results2
+        order = Order.create_order(data = user_data)
+        for item in results1:
+            order_item_data = {
+                'quantity': item['quantity'],
+                'arrangement_id': item['arrangement_id'],
+                'order_id': order.id
+            }
+            query2 = "INSERT INTO order_items (quantity, order_id, arrangement_id) VALUES (%(quantity)s, %(order_id)s, %(arrangement_id)s"
+            connectToMySQL(DATABASE).query_db(query2, order_item_data)
+        return order
 
     @classmethod
     def edit_order_item(cls, data):
