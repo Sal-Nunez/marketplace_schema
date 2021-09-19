@@ -1,21 +1,18 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import Flask, flash, session
-import re
-from flask_bcrypt import Bcrypt
 app = Flask(__name__)
-bcrypt = Bcrypt(app)
 DATABASE = "floral_schema"
 
 class Order:
     def __init__(self, data):
         self.id = data['id']
-        self.size = data['size']
+        self.user_id = data['user_id']
 
     def __eq__(self, other):
         return self.id == other.id
 
     @classmethod
-    def select(cls, data=None, type='id'):
+    def select(cls, data=None, type='user_id'):
         if data:
             query = f"SELECT * FROM orders WHERE orders.{type} = %({type})s"
             results = connectToMySQL(DATABASE).query_db(query, data)

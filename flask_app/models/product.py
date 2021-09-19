@@ -1,10 +1,7 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import Flask, flash, session
-import re
-from flask_bcrypt import Bcrypt
 from flask_app.models.arrangement import Arrangement
 app = Flask(__name__)
-bcrypt = Bcrypt(app)
 DATABASE = "floral_schema"
 
 class Product:
