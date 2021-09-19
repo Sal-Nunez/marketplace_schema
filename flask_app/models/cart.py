@@ -17,6 +17,7 @@ class Cart:
         query = f"SELECT * FROM carts WHERE carts.user_id = {self.id}"
         results = connectToMySQL(DATABASE).query_db(query)
         owner = User(results[0])
+        return owner
 
     @classmethod
     def select(cls, data=None, type='user_id'):
