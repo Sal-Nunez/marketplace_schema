@@ -2,6 +2,7 @@ from flask_app.config.mysqlconnection import connectToMySQL
 from flask import Flask, flash, session
 import re
 from flask_bcrypt import Bcrypt
+from flask_app.models.order import Order
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 DATABASE = "floral_schema"
@@ -18,13 +19,22 @@ class User:
 
     def __eq__(self, other):
         return self.id == other.id
-
+        
     @property
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
+    
+    @property
+    def orders(self):
+        query = f"SELECT * FROM orders WHERE orders.user_id = {self.id}"
+        results = connectToMySQL(DATABASE).query_db(query)
+        orders = []
+        for order in results:
+            orders.append(Order(order))
+        return orders
 
     @classmethod
-    def select(cls, type='id', data=None):
+    def select(cls, data=None, type='id'):
         if data:
             query = f"SELECT * FROM users WHERE users.{type} = %({type})s"
             results = connectToMySQL(DATABASE).query_db(query, data)
