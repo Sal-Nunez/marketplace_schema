@@ -25,7 +25,6 @@ def register():
         return redirect('/')
     else:
         data = {
-            'username': request.form['username'],
             'first_name': request.form['first_name'],
             'last_name': request.form['last_name'],
             'email': request.form['email'],

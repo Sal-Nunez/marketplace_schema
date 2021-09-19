@@ -4,14 +4,13 @@ import re
 from flask_bcrypt import Bcrypt
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
-DATABASE = ""
+DATABASE = "floral_schema"
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 NAME_REGEX = re.compile(r'^[a-zA-Z]\S*$')
 
 class User:
     def __init__(self, data):
         self.id = data['id']
-        self.username = data['username']
         self.first_name = data['first_name']
         self.last_name = data['last_name']
         self.email = data['email']
@@ -51,7 +50,7 @@ class User:
     @classmethod
     def registration(cls, data):
         data['password'] = bcrypt.generate_password_hash(data['password'])
-        query = "INSERT INTO users (username, email, password) VALUES (%(username)s, %(email)s, %(password)s)"
+        query = "INSERT INTO users (first_name, last_name, email, password) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s)"
         results = connectToMySQL(DATABASE).query_db(query, data)
         if query:
             session['uuid'] = results
@@ -103,10 +102,15 @@ class User:
         if len(data['email']) < 7:
             flash('Email must be at least 7 characters', 'email')
             is_valid = False
-        if not NAME_REGEX.match(data['username']):
-            flash ("Username can only contain letters", 'username')
-        if len(data['username']) < 5:
-            flash("Username MUST be at least 5 characters long", 'username')
+        if not NAME_REGEX.match(data['first_name']):
+            flash ("first_name can only contain letters", 'first_name')
+        if len(data['first_name']) < 2:
+            flash("First Name MUST be at least 5 characters long", 'first_name')
+            is_valid = False
+        if not NAME_REGEX.match(data['last_name']):
+            flash ("last_name can only contain letters", 'last_name')
+        if len(data['last_name']) < 2:
+            flash("First Name MUST be at least 5 characters long", 'last_name')
             is_valid = False
         if not EMAIL_REGEX.match(data['email']):
             flash("Invalid Email Address!", 'email')
@@ -114,10 +118,6 @@ class User:
         query1 = "select * from users where users.email = %(email)s"
         if connectToMySQL(DATABASE).query_db(query1, data):
             flash("Email already exists, please Login, if you forgot your password TOUGH", 'email')
-            is_valid = False
-        query2 = "select * from users where users.username = %(username)s"
-        if connectToMySQL(DATABASE).query_db(query2, data):
-            flash("Username already exists, please Login, if you forgot your password TOUGH", 'username')
             is_valid = False
         if len(data['password']) < 8:
             flash('Password must be at least 8 characters', 'password')
