@@ -1,9 +1,7 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import Flask, flash, session
-import re
-from flask_bcrypt import Bcrypt
+from flask_app.models.product import Product
 app = Flask(__name__)
-bcrypt = Bcrypt(app)
 DATABASE = "floral_schema"
 
 class Arrangement:
@@ -19,6 +17,22 @@ class Arrangement:
 
     def __eq__(self, other):
         return self.id == other.id
+
+    @property
+    def images(self):
+        query = f"SELECT * FROM images WHERE arrangement_id = {self.id}"
+        results = connectToMySQL(DATABASE).query_db(query)
+        images = []
+        for image in results:
+            images.append(image['image'])
+        return images
+
+    @property
+    def product(self):
+        data = {
+            'id': self.product_id
+        }
+        return Product.select(data=data)
 
     @classmethod
     def select(cls, type='id', data=None):

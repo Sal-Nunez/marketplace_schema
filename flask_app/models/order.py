@@ -1,21 +1,24 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import Flask, flash, session
-import re
-from flask_bcrypt import Bcrypt
+from flask_app.models import user
+from flask_app.models import cart
 app = Flask(__name__)
-bcrypt = Bcrypt(app)
 DATABASE = "floral_schema"
 
 class Order:
     def __init__(self, data):
         self.id = data['id']
-        self.size = data['size']
+        self.user_id = data['user_id']
 
     def __eq__(self, other):
         return self.id == other.id
 
+    @property
+    def order_items(self):
+        pass
+
     @classmethod
-    def select(cls, data=None, type='id'):
+    def select(cls, data=None, type='user_id'):
         if data:
             query = f"SELECT * FROM orders WHERE orders.{type} = %({type})s"
             results = connectToMySQL(DATABASE).query_db(query, data)
@@ -30,10 +33,26 @@ class Order:
             return orders
 
     @classmethod
-    def create_order(cls, data):
-        query = "INSERT INTO orders (user_id) VALUES (%(user_id)s)"
-        results =  connectToMySQL(DATABASE).query_db(query, data)
-        return results
+    def new_order(cls, data):
+        user_data = {
+            'id': data['user_id']
+        }
+        user1 = user.User.select(data=user_data)
+        query3 = f"SELECT * from carts where user_id = {user1.id}"
+        results3 = connectToMySQL(DATABASE).query_db(query3)
+        cart1 = cart.Cart(results3[0])
+        query1 = f"select * from cart_items where cart_items.cart_id = {cart1.id}"
+        results1 = connectToMySQL(DATABASE).query_db(query1)
+        order = cls.create_order(data = user_data)
+        for item in results1:
+            order_item_data = {
+                'quantity': item['quantity'],
+                'arrangement_id': item['arrangement_id'],
+                'order_id': order.id
+            }
+            query2 = "INSERT INTO order_items (quantity, order_id, arrangement_id) VALUES (%(quantity)s, %(order_id)s, %(arrangement_id)s"
+            connectToMySQL(DATABASE).query_db(query2, order_item_data)
+        return order
 
 
     @classmethod
