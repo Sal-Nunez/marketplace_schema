@@ -97,18 +97,16 @@ class User:
             is_valid = False
         if not NAME_REGEX.match(data['first_name']):
             flash ("First Name can only contain letters", 'first_name')
+            is_valid = False
         if not NAME_REGEX.match(data['last_name']):
             flash ("Last Name can only contain letters", 'last_name')
+            is_valid = False
         if len(data['email']) < 7:
             flash('Email must be at least 7 characters', 'email')
             is_valid = False
-        if not NAME_REGEX.match(data['first_name']):
-            flash ("first_name can only contain letters", 'first_name')
         if len(data['first_name']) < 2:
             flash("First Name MUST be at least 5 characters long", 'first_name')
             is_valid = False
-        if not NAME_REGEX.match(data['last_name']):
-            flash ("last_name can only contain letters", 'last_name')
         if len(data['last_name']) < 2:
             flash("First Name MUST be at least 5 characters long", 'last_name')
             is_valid = False
