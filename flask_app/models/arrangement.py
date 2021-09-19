@@ -2,7 +2,7 @@ from flask_app.config.mysqlconnection import connectToMySQL
 from flask import Flask, flash, session
 import re
 from flask_bcrypt import Bcrypt
-app = Flask(__size__)
+app = Flask(__name__)
 bcrypt = Bcrypt(app)
 DATABASE = "floral_schema"
 
