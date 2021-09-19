@@ -15,7 +15,10 @@ class User:
         self.last_name = data['last_name']
         self.email = data['email']
         self.password = data['password']
-        
+
+    def __eq__(self, other):
+        return self.id == other.id
+
     @property
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
