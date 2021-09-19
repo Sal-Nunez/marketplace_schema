@@ -19,6 +19,15 @@ class Arrangement:
         return self.id == other.id
 
     @property
+    def images(self):
+        query = f"SELECT * FROM images WHERE arrangement_id = {self.id}"
+        results = connectToMySQL(DATABASE).query_db(query)
+        images = []
+        for image in results:
+            images.append(image['image'])
+        return images
+
+    @property
     def product(self):
         data = {
             'id': self.product_id

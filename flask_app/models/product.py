@@ -1,6 +1,7 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import Flask, flash, session
 from flask_app.models.arrangement import Arrangement
+from flask_app.models.category import Category
 app = Flask(__name__)
 DATABASE = "floral_schema"
 
@@ -15,6 +16,21 @@ class Product:
 
     def __eq__(self, other):
         return self.id == other.id
+
+    @property
+    def categories(self):
+        query = f"SELECT * FROM categories join product_category on categories.id = product_category.category_id join products on product_category.product_id = products.id WHERE products.id = {self.id}"
+        results = connectToMySQL(DATABASE).query_db(query)
+        categories = []
+        for category in results:
+            data = {
+                'id': category['id'],
+                'category': category['category'],
+                'created_at': category['created_at'],
+                'updated_at': category['updated_at']
+            }
+            categories.append(Category(data))
+        return categories
 
     @property
     def arrangements(self):

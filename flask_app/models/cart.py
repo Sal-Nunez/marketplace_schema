@@ -1,6 +1,6 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import Flask, flash, session
-from flask_app.models.user import User
+from flask_app.models import user
 app = Flask(__name__)
 DATABASE = "floral_schema"
 
@@ -16,7 +16,7 @@ class Cart:
     def owner(self):
         query = f"SELECT * FROM carts WHERE carts.user_id = {self.id}"
         results = connectToMySQL(DATABASE).query_db(query)
-        owner = User(results[0])
+        owner = user.User(results[0])
         return owner
 
     @classmethod
