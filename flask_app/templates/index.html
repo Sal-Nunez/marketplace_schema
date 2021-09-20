@@ -38,96 +38,33 @@
             </div>
             <div class="offcanvas-body">
                 <div class="page-content">
-                    <div class="form-v8-content">
-                        <div class="form-right">
-                            <div class="tab">
-                                <div class="tab-inner">
-                                    <button class="tablinks" onclick="openCity(event, 'sign-up')" id="defaultOpen">Sign
-                                        Up</button>
-                                </div>
-                                <div class="tab-inner">
-                                    <button class="tablinks" onclick="openCity(event, 'sign-in')">Sign
-                                        In</button>
-                                </div>
+                    <div class="page-content">
+                        <div class="form-v7-content">
+                            <div class="form-left">
+                                <img src="\static\assets\form-v7.jpg" alt="form">
+                                <p class="text-1">Sign Up</p>
+                                <p class="text-2">Privaci policy & Term of service</p>
                             </div>
-                            <form class="form-detail" action="#" method="post">
-                                <div class="tabcontent" id="sign-up">
-                                    <div class="form-row">
-                                        <label class="form-row-inner">
-                                            <input type="text" name="full_name" id="full_name" class="input-text"
-                                                required>
-                                            <span class="label">Full Name</span>
-                                            <span class="border"></span>
-                                        </label>
-                                    </div>
-                                    <div class="form-row">
-                                        <label class="form-row-inner">
-                                            <input type="text" name="your_email" id="your_email" class="input-text"
-                                                required>
-                                            <span class="label">E-Mail</span>
-                                            <span class="border"></span>
-                                        </label>
-                                    </div>
-                                    <div class="form-row">
-                                        <label class="form-row-inner">
-                                            <input type="password" name="password" id="password" class="input-text"
-                                                required>
-                                            <span class="label">Password</span>
-                                            <span class="border"></span>
-                                        </label>
-                                    </div>
-                                    <div class="form-row">
-                                        <label class="form-row-inner">
-                                            <input type="password" name="comfirm_password" id="comfirm_password"
-                                                class="input-text" required>
-                                            <span class="label">Comfirm
-                                                Password</span>
-                                            <span class="border"></span>
-                                        </label>
-                                    </div>
-                                    <div class="form-row-last">
-                                        <input type="submit" name="register" class="register" value="Register">
-                                    </div>
+                            <form class="form-detail" action="#" method="post" id="myform">
+                                <div class="form-row">
+                                    <label for="username">USERNAME</label>
+                                    <input type="text" name="username" id="username" class="input-text">
                                 </div>
-                            </form>
-                            <form class="form-detail" action="#" method="post">
-                                <div class="tabcontent" id="sign-in">
-                                    <div class="form-row">
-                                        <label class="form-row-inner">
-                                            <input type="text" name="full_name_1" id="full_name_1" class="input-text"
-                                                required>
-                                            <span class="label">Full Name</span>
-                                            <span class="border"></span>
-                                        </label>
-                                    </div>
-                                    <div class="form-row">
-                                        <label class="form-row-inner">
-                                            <input type="text" name="your_email_1" id="your_email_1" class="input-text"
-                                                required>
-                                            <span class="label">E-Mail</span>
-                                            <span class="border"></span>
-                                        </label>
-                                    </div>
-                                    <div class="form-row">
-                                        <label class="form-row-inner">
-                                            <input type="password" name="password_1" id="password_1" class="input-text"
-                                                required>
-                                            <span class="label">Password</span>
-                                            <span class="border"></span>
-                                        </label>
-                                    </div>
-                                    <div class="form-row">
-                                        <label class="form-row-inner">
-                                            <input type="password" name="comfirm_password_1" id="comfirm_password_1"
-                                                class="input-text" required>
-                                            <span class="label">Comfirm
-                                                Password</span>
-                                            <span class="border"></span>
-                                        </label>
-                                    </div>
-                                    <div class="form-row-last">
-                                        <input type="submit" name="register" class="register" value="Sign In">
-                                    </div>
+                                <div class="form-row">
+                                    <label for="your_email">E-MAIL</label>
+                                    <input type="text" name="your_email" id="your_email" class="input-text" required pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}">
+                                </div>
+                                <div class="form-row">
+                                    <label for="password">PASSWORD</label>
+                                    <input type="password" name="password" id="password" class="input-text" required>
+                                </div>
+                                <div class="form-row">
+                                    <label for="comfirm_password">CONFIRM PASSWORD</label>
+                                    <input type="password" name="comfirm_password" id="comfirm_password" class="input-text" required>
+                                </div>
+                                <div class="form-row-last">
+                                    <input type="submit" name="register" class="register" value="Register">
+                                    <p>Or<a href="#">Sign in</a></p>
                                 </div>
                             </form>
                         </div>
@@ -164,15 +101,15 @@
             <div class="carousel-item" data-bs-interval="5000">
                 <img src="\static\assets\pexels-anna-shvets-5894068.jpg" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>No seriously...</h5>
-                    <p>Let us.</p>
+                    <h5 style ="color: #D8E2DC;">No seriously...</h5>
+                    <p style ="color: #D8E2DC;">Let us.</p>
                 </div>
             </div>
             <div class="carousel-item" data-bs-interval="5000">
                 <img src="\static\assets\pexels-photo-7245414.jpg" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>I'm not kidding.</h5>
-                    <p>Order now.</p>
+                    <h5 style="color: #D8E2DC;">I'm not kidding.</h5>
+                    <p style ="color: #D8E2DC;">Order now.</p>
                 </div>
             </div>
         </div>
