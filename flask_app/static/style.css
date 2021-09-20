@@ -7,8 +7,10 @@
 }
 
 .thumbnail{
-    width: auto;
-    height: auto;
+    width: 280px;
+    height: 280px;
+	object-fit: cover;
+	object-position: 90% 10%;
     margin: 20px 0px;
     border-radius: 50%;
 }
@@ -16,6 +18,7 @@
 .dropdown:hover .dropdown-menu{
     display: block;
 }
+
 .dropdown-menu{
     margin-top: 0;
 }

@@ -1,11 +1,17 @@
 from flask_app import app
 from flask import render_template, redirect, request, session, flash
 from flask_app.models.user import User
-import datetime
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    if 'uuid' in session:
+        data = {
+            'id': session['uuid']
+        }
+        user = User.select(data)
+        return render_template('index.html', user=user)
+    else:
+        return render_template('index.html')
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -14,7 +20,7 @@ def login():
     if not User.check_login(request.form):
         return redirect('/')
     else:
-        return redirect('/homepage')
+        return redirect('/')
 
 @app.route('/register', methods=['POST'])
 def register():
@@ -28,7 +34,7 @@ def register():
             'password': request.form['password']
         }
         User.registration(data)
-    return redirect('/homepage')
+    return redirect('/')
 
 @app.route('/homepage')
 def homepage():
