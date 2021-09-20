@@ -9,6 +9,15 @@
  body {
 	margin:  0;
 }
+
+.thumbnail {
+  width: 280px;
+  height: 280px;
+  object-fit: cover;
+  object-position: 90% 10%;
+  margin: 20px 0px;
+  border-radius: 50%;
+}
 .page-content {
 	width: 100%;
 	margin:  0 auto;

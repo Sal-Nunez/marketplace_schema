@@ -3,6 +3,7 @@ from flask import Flask, flash, session
 import re
 from flask_bcrypt import Bcrypt
 from flask_app.models import order
+from flask_app.models import cart
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 DATABASE = "floral_schema"
