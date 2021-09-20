@@ -35,13 +35,11 @@ class Order:
     @classmethod
     def new_order(cls, data):
         user_data = {
-            'id': data['user_id']
+            'user_id': data['user_id']
         }
         cart1 = cart.Cart.select(data=user_data)
-        query1 = f"select * from cart_items where cart_items.cart_id = {cart1.id};"
-        results1 = connectToMySQL(DATABASE).query_db(query1)
         order = cls.create_order(data = user_data)
-        for item in results1:
+        for item in cart1.cart_items:
             order_item_data = {
                 'quantity': item['quantity'],
                 'arrangement_id': item['arrangement_id'],
@@ -51,7 +49,13 @@ class Order:
             connectToMySQL(DATABASE).query_db(query2, order_item_data)
         return order
 
-# Shouldn't be able to delete an order. Orders shoudl be considered immutable.
+    @classmethod
+    def create_order(cls, data):
+        query = "INSERT into orders (user_id) VALUES (%(user_id)s);"
+        results =  connectToMySQL(DATABASE).query_db(query, data)
+        return results
+
+# Orders should be treated as immutable and undeletable.
     # @classmethod
     # def delete_order(cls, data, type='id'):
     #     query = f"DELETE FROM orders WHERE orders.{type} = %({type})s;"
