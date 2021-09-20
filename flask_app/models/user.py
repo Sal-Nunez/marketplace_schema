@@ -10,7 +10,7 @@ DATABASE = "floral_schema"
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 NAME_REGEX = re.compile(r'^[a-zA-Z]\S*$')
 
-# TODO: Upon creating a user, create an associated cart
+# todo: Upon creating a user, create an associated cart
 class User:
     def __init__(self, data):
         self.id = data['id']
@@ -69,6 +69,10 @@ class User:
         results = connectToMySQL(DATABASE).query_db(query, data)
         if query:
             session['uuid'] = results
+        user_data = {
+            'user_id': results
+        }
+        cart.Cart.create_cart(data=user_data)
         return results
 
 # This is validation for login....at this point they already have their account....why are we doing this?

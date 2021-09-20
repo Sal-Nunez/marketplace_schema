@@ -45,6 +45,6 @@ class CartItem:
         return results
 
     @classmethod
-    def delete_cart_item(cls, data):
-        query = "DELETE FROM cart_items WHERE cart_items.id = %(id)s;"
+    def delete_cart_items(cls, data):
+        query = "DELETE FROM cart_items WHERE cart_items.cart_id = %(cart_id)s;"
         return connectToMySQL(DATABASE).query_db(query, data)
