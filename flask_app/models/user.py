@@ -9,7 +9,7 @@ DATABASE = "floral_schema"
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 NAME_REGEX = re.compile(r'^[a-zA-Z]\S*$')
 
-# Upon creating a user, create an associated cart
+# TODO: Upon creating a user, create an associated cart
 class User:
     def __init__(self, data):
         self.id = data['id']
@@ -20,14 +20,14 @@ class User:
 
     def __eq__(self, other):
         return self.id == other.id
-        
+
     @property
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
-    
+
     @property
     def orders(self):
-        query = f"SELECT * FROM orders WHERE orders.user_id = {self.id}"
+        query = f"SELECT * FROM orders WHERE orders.user_id = {self.id};"
         results = connectToMySQL(DATABASE).query_db(query)
         orders = []
         for order1 in results:
@@ -37,12 +37,12 @@ class User:
     @classmethod
     def select(cls, data=None, type='id'):
         if data:
-            query = f"SELECT * FROM users WHERE users.{type} = %({type})s"
+            query = f"SELECT * FROM users WHERE users.{type} = %({type})s;"
             results = connectToMySQL(DATABASE).query_db(query, data)
             user = cls(results[0])
             return user
         else:
-            query = "SELECT * FROM users"
+            query = "SELECT * FROM users;"
             results = connectToMySQL(DATABASE).query_db(query)
             users = []
             for user in results:
@@ -51,8 +51,8 @@ class User:
 
     @classmethod
     def check_login(cls, data):
-        query = "SELECT * FROM users WHERE users.email = %(email)s"
-        results = connectToMySQL(DATABASE).query_db( query, data )
+        query = "SELECT * FROM users WHERE users.email = %(email)s;"
+        results = connectToMySQL(DATABASE).query_db(query, data)
         user = cls(results[0])
         if user.email == data['email'] and bcrypt.check_password_hash(user.password, data['password']):
             session['uuid'] = user.id
@@ -64,17 +64,17 @@ class User:
     @classmethod
     def registration(cls, data):
         data['password'] = bcrypt.generate_password_hash(data['password'])
-        query = "INSERT INTO users (first_name, last_name, email, password) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s)"
+        query = "INSERT INTO users (first_name, last_name, email, password) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s);"
         results = connectToMySQL(DATABASE).query_db(query, data)
         if query:
             session['uuid'] = results
         return results
 
-
-    @staticmethod #login validation
+# This is validation for login....at this point they already have their account....why are we doing this?
+    @staticmethod
     def validate_login(data):
         is_valid = True
-        query1 = "select * from users where users.email = %(email)s"
+        query1 = "select * from users where users.email = %(email)s;"
         if not connectToMySQL(DATABASE).query_db(query1, data):
             flash("Email doesn't exist", 'login_email')
             is_valid = False
@@ -103,7 +103,7 @@ class User:
             is_valid = False
         return is_valid
 
-    @staticmethod #registration validation
+    @staticmethod
     def validate_register(data):
         is_valid = True
         if not data['password_confirmation'] == data['password']:
@@ -127,7 +127,7 @@ class User:
         if not EMAIL_REGEX.match(data['email']):
             flash("Invalid Email Address!", 'email')
             is_valid = False
-        query1 = "select * from users where users.email = %(email)s"
+        query1 = "select * from users where users.email = %(email)s;"
         if connectToMySQL(DATABASE).query_db(query1, data):
             flash("Email already exists, please Login, if you forgot your password TOUGH", 'email')
             is_valid = False

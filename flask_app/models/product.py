@@ -19,7 +19,7 @@ class Product:
 
     @property
     def categories(self):
-        query = f"SELECT * FROM categories join product_category on categories.id = product_category.category_id join products on product_category.product_id = products.id WHERE products.id = {self.id}"
+        query = f"SELECT * FROM categories join product_category on categories.id = product_category.category_id join products on product_category.product_id = products.id WHERE products.id = {self.id};"
         results = connectToMySQL(DATABASE).query_db(query)
         categories = []
         for category in results:
@@ -34,7 +34,7 @@ class Product:
 
     @property
     def arrangements(self):
-        query = f"SELECT * FROM arrangements where arrangements.product_id = {self.id}"
+        query = f"SELECT * FROM arrangements where arrangements.product_id = {self.id};"
         results = connectToMySQL(DATABASE).query_db(query)
         arrangements = []
         for arrangement in results:
@@ -51,7 +51,7 @@ class Product:
     @classmethod
     def select(cls, type='id', data=None):
         if data:
-            query = f"SELECT * FROM products WHERE products.{type} = %({type})s"
+            query = f"SELECT * FROM products WHERE products.{type} = %({type})s;"
             results = connectToMySQL(DATABASE).query_db(query, data)
             product = cls(results[0])
             return product
@@ -65,22 +65,22 @@ class Product:
 
     @classmethod
     def create_product(cls, data):
-        query = "INSERT INTO products (name, description, on_sale) VALUES (%(name)s, %(description)s, %(on_sale)s)"
+        query = "INSERT INTO products (name, description, on_sale) VALUES (%(name)s, %(description)s, %(on_sale)s);"
         results =  connectToMySQL(DATABASE).query_db(query, data)
         return results
 
     @classmethod
     def edit_product(cls, data):
-        query = "UPDATE products SET name = %(name)s, description = %(description)s, on_sale = %(on_sale)s WHERE products.id = %(id)s"
+        query = "UPDATE products SET name = %(name)s, description = %(description)s, on_sale = %(on_sale)s WHERE products.id = %(id)s;"
         results = connectToMySQL(DATABASE).query_db(query, data)
         return results
 
     @classmethod
     def delete_product(cls, data):
-        query = "DELETE FROM products WHERE products.id = %(id)s"
+        query = "DELETE FROM products WHERE products.id = %(id)s;"
         return connectToMySQL(DATABASE).query_db(query, data)
 
-
+# The shop owners can name their products whatever they want.
     # @classmethod
     # def validate_product_info(cls, data):
     #     is_valid = True
