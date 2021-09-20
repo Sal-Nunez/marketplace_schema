@@ -22,7 +22,7 @@ class Cart:
 # Owner needs a join, Jacib messed something up
     @property
     def owner(self):
-        query = f"SELECT * FROM carts WHERE carts.user_id = {self.id};"
+        query = f"SELECT * FROM users JOIN carts on users.id = carts.user_id WHERE carts.user_id = {self.id};"
         results = connectToMySQL(DATABASE).query_db(query)
         owner = user.User(results[0])
         return owner
