@@ -19,10 +19,10 @@ class Cart:
         }
         cart_items = cart_item.CartItem(data=data)
         return cart_items
-
+# Owner needs a join, Jacib messed something up
     @property
     def owner(self):
-        query = f"SELECT * FROM carts WHERE carts.user_id = {self.id}"
+        query = f"SELECT * FROM carts WHERE carts.user_id = {self.id};"
         results = connectToMySQL(DATABASE).query_db(query)
         owner = user.User(results[0])
         return owner
@@ -30,12 +30,12 @@ class Cart:
     @classmethod
     def select(cls, data=None, type='user_id'):
         if data:
-            query = f"SELECT * FROM carts WHERE carts.{type} = %({type})s"
+            query = f"SELECT * FROM carts WHERE carts.{type} = %({type})s;"
             results = connectToMySQL(DATABASE).query_db(query, data)
             cart = cls(results[0])
             return cart
         else:
-            query = "SELECT * FROM carts"
+            query = "SELECT * FROM carts;"
             results = connectToMySQL(DATABASE).query_db(query)
             carts = []
             for cart in results:
@@ -44,12 +44,11 @@ class Cart:
 
     @classmethod
     def create_cart(cls, data):
-        query = "INSERT INTO carts (user_id) VALUES (%(user_id)s)"
+        query = "INSERT INTO carts (user_id) VALUES (%(user_id)s);"
         results =  connectToMySQL(DATABASE).query_db(query, data)
         return results
 
-
     @classmethod
     def delete_cart(cls, data, type='id'):
-        query = f"DELETE FROM carts WHERE carts.{type} = %({type})s"
+        query = f"DELETE FROM carts WHERE carts.{type} = %({type})s;"
         return connectToMySQL(DATABASE).query_db(query, data)

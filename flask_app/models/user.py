@@ -9,6 +9,7 @@ DATABASE = "floral_schema"
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 NAME_REGEX = re.compile(r'^[a-zA-Z]\S*$')
 
+# Upon creating a user, create an associated cart
 class User:
     def __init__(self, data):
         self.id = data['id']

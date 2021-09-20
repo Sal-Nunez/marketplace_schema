@@ -20,12 +20,12 @@ class Order:
     @classmethod
     def select(cls, data=None, type='user_id'):
         if data:
-            query = f"SELECT * FROM orders WHERE orders.{type} = %({type})s"
+            query = f"SELECT * FROM orders WHERE orders.{type} = %({type})s;"
             results = connectToMySQL(DATABASE).query_db(query, data)
             order = cls(results[0])
             return order
         else:
-            query = "SELECT * FROM orders"
+            query = "SELECT * FROM orders;"
             results = connectToMySQL(DATABASE).query_db(query)
             orders = []
             for order in results:
@@ -38,7 +38,7 @@ class Order:
             'id': data['user_id']
         }
         cart1 = cart.Cart.select(data=user_data)
-        query1 = f"select * from cart_items where cart_items.cart_id = {cart1.id}"
+        query1 = f"select * from cart_items where cart_items.cart_id = {cart1.id};"
         results1 = connectToMySQL(DATABASE).query_db(query1)
         order = cls.create_order(data = user_data)
         for item in results1:
@@ -47,11 +47,12 @@ class Order:
                 'arrangement_id': item['arrangement_id'],
                 'order_id': order.id
             }
-            query2 = "INSERT INTO order_items (quantity, order_id, arrangement_id) VALUES (%(quantity)s, %(order_id)s, %(arrangement_id)s"
+            query2 = "INSERT INTO order_items (quantity, order_id, arrangement_id) VALUES (%(quantity)s, %(order_id)s, %(arrangement_id)s;"
             connectToMySQL(DATABASE).query_db(query2, order_item_data)
         return order
 
-    @classmethod
-    def delete_order(cls, data, type='id'):
-        query = f"DELETE FROM orders WHERE orders.{type} = %({type})s"
-        return connectToMySQL(DATABASE).query_db(query, data)
+# Shouldn't be able to delete an order. Orders shoudl be considered immutable.
+    # @classmethod
+    # def delete_order(cls, data, type='id'):
+    #     query = f"DELETE FROM orders WHERE orders.{type} = %({type})s;"
+    #     return connectToMySQL(DATABASE).query_db(query, data)

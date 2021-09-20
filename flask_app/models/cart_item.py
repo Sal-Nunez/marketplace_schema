@@ -18,14 +18,14 @@ class CartItem:
     @classmethod
     def select(cls, type='cart_id', data=None):
         if data:
-            query = f"SELECT * FROM cart_items WHERE cart_items.{type} = %({type})s"
+            query = f"SELECT * FROM cart_items WHERE cart_items.{type} = %({type})s;"
             results = connectToMySQL(DATABASE).query_db(query, data)
             cart_items = []
             for cart_item in results:
                 cart_items.append(cls(cart_item))
             return cart_items
         else:
-            query = "SELECT * FROM cart_items"
+            query = "SELECT * FROM cart_items;"
             results = connectToMySQL(DATABASE).query_db(query)
             cart_items = []
             for cart_item in results:
@@ -34,17 +34,17 @@ class CartItem:
 
     @classmethod
     def create_cart_item(cls, data):
-        query = "INSERT INTO cart_items (quantity, cart_id, arrangement_id) VALUES (%(quantity)s, %(cart_id)s, %(arrangement_id)s"
+        query = "INSERT INTO cart_items (quantity, cart_id, arrangement_id) VALUES (%(quantity)s, %(cart_id)s, %(arrangement_id)s;"
         results =  connectToMySQL(DATABASE).query_db(query, data)
         return results
 
     @classmethod
     def edit_cart_item(cls, data):
-        query = "UPDATE cart_items SET quantity = %(quantity)s, cart_id = %(cart_id)s, arrangement_id = %(arrangement_id)s WHERE cart_items.id = %(id)s"
+        query = "UPDATE cart_items SET quantity = %(quantity)s, cart_id = %(cart_id)s, arrangement_id = %(arrangement_id)s WHERE cart_items.id = %(id)s;"
         results = connectToMySQL(DATABASE).query_db(query, data)
         return results
 
     @classmethod
     def delete_cart_item(cls, data):
-        query = "DELETE FROM cart_items WHERE cart_items.id = %(id)s"
+        query = "DELETE FROM cart_items WHERE cart_items.id = %(id)s;"
         return connectToMySQL(DATABASE).query_db(query, data)

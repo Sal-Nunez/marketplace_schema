@@ -20,7 +20,7 @@ class Arrangement:
 
     @property
     def images(self):
-        query = f"SELECT * FROM images WHERE arrangement_id = {self.id}"
+        query = f"SELECT * FROM images WHERE arrangement_id = {self.id};"
         results = connectToMySQL(DATABASE).query_db(query)
         images = []
         for image in results:
@@ -37,12 +37,12 @@ class Arrangement:
     @classmethod
     def select(cls, type='id', data=None):
         if data:
-            query = f"SELECT * FROM arrangements WHERE arrangements.{type} = %({type})s"
+            query = f"SELECT * FROM arrangements WHERE arrangements.{type} = %({type})s;"
             results = connectToMySQL(DATABASE).query_db(query, data)
             arrangement = cls(results[0])
             return arrangement
         else:
-            query = "SELECT * FROM arrangements"
+            query = "SELECT * FROM arrangements;"
             results = connectToMySQL(DATABASE).query_db(query)
             arrangements = []
             for arrangement in results:
@@ -51,17 +51,17 @@ class Arrangement:
 
     @classmethod
     def create_arrangement(cls, data):
-        query = "INSERT INTO arrangements (size, price, inventory, sale_price, product_id) VALUES (%(size)s, %(price)s, %(inventory)s, %(sale_price)s, %(product_id)s)"
+        query = "INSERT INTO arrangements (size, price, inventory, sale_price, product_id) VALUES (%(size)s, %(price)s, %(inventory)s, %(sale_price)s, %(product_id)s);"
         results =  connectToMySQL(DATABASE).query_db(query, data)
         return results
 
     @classmethod
     def edit_arrangement(cls, data):
-        query = "UPDATE arrangements SET size = %(size)s, price = %(price)s, inventory = %(inventory, sale_price, product_id)s WHERE arrangements.id = %(id)s"
+        query = "UPDATE arrangements SET size = %(size)s, price = %(price)s, inventory = %(inventory, sale_price, product_id)s WHERE arrangements.id = %(id)s;"
         results = connectToMySQL(DATABASE).query_db(query, data)
         return results
 
     @classmethod
     def delete_arrangement(cls, data):
-        query = "DELETE FROM arrangements WHERE arrangements.id = %(id)s"
+        query = "DELETE FROM arrangements WHERE arrangements.id = %(id)s;"
         return connectToMySQL(DATABASE).query_db(query, data)

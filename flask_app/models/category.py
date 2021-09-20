@@ -1,6 +1,5 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import Flask, flash, session
-from flask_app.models.arrangement import Arrangement
 app = Flask(__name__)
 DATABASE = "floral_schema"
 
