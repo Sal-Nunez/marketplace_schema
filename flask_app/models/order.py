@@ -2,6 +2,7 @@ from flask_app.config.mysqlconnection import connectToMySQL
 from flask import Flask, flash, session
 from flask_app.models import user
 from flask_app.models import cart
+from flask_app.models import cart_item
 app = Flask(__name__)
 DATABASE = "floral_schema"
 
@@ -47,6 +48,10 @@ class Order:
             }
             query2 = "INSERT INTO order_items (quantity, order_id, arrangement_id) VALUES (%(quantity)s, %(order_id)s, %(arrangement_id)s;"
             connectToMySQL(DATABASE).query_db(query2, order_item_data)
+        cart_data = {
+            'cart_id': cart1.id
+        }
+        cart_item.CartItem.delete_cart_items(data=cart_data)
         return order
 
     @classmethod
