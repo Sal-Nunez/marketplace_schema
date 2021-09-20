@@ -1,6 +1,6 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import Flask, flash, session
-from flask_app.models import user
+from flask_app.models import user, cart_item
 app = Flask(__name__)
 DATABASE = "floral_schema"
 
@@ -11,6 +11,14 @@ class Cart:
 
     def __eq__(self, other):
         return self.id == other.id
+    
+    @property
+    def cart_items(self):
+        data = {
+            'cart_id': self.id
+        }
+        cart_items = cart_item.CartItem(data=data)
+        return cart_items
 
     @property
     def owner(self):

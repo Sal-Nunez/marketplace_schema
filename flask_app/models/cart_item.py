@@ -20,8 +20,10 @@ class CartItem:
         if data:
             query = f"SELECT * FROM cart_items WHERE cart_items.{type} = %({type})s"
             results = connectToMySQL(DATABASE).query_db(query, data)
-            cart_item = cls(results[0])
-            return cart_item
+            cart_items = []
+            for cart_item in results:
+                cart_items.append(cls(cart_item))
+            return cart_items
         else:
             query = "SELECT * FROM cart_items"
             results = connectToMySQL(DATABASE).query_db(query)

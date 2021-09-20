@@ -37,10 +37,7 @@ class Order:
         user_data = {
             'id': data['user_id']
         }
-        user1 = user.User.select(data=user_data)
-        query3 = f"SELECT * from carts where user_id = {user1.id}"
-        results3 = connectToMySQL(DATABASE).query_db(query3)
-        cart1 = cart.Cart(results3[0])
+        cart1 = cart.Cart.select(data=user_data)
         query1 = f"select * from cart_items where cart_items.cart_id = {cart1.id}"
         results1 = connectToMySQL(DATABASE).query_db(query1)
         order = cls.create_order(data = user_data)
@@ -53,7 +50,6 @@ class Order:
             query2 = "INSERT INTO order_items (quantity, order_id, arrangement_id) VALUES (%(quantity)s, %(order_id)s, %(arrangement_id)s"
             connectToMySQL(DATABASE).query_db(query2, order_item_data)
         return order
-
 
     @classmethod
     def delete_order(cls, data, type='id'):

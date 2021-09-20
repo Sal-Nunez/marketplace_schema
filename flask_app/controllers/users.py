@@ -5,10 +5,7 @@ import datetime
 
 @app.route('/')
 def index():
-    if not 'uuid' in session:
-        return render_template('index.html')
-    elif session['uuid'] > 0:
-        return redirect('/homepage')
+    return render_template('index.html')
 
 @app.route('/login', methods=['POST'])
 def login():
