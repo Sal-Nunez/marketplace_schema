@@ -45,7 +45,7 @@ class Cart:
     @classmethod
     def create_cart(cls, data):
         query = "INSERT INTO carts (user_id) VALUES (%(user_id)s);"
-        results =  connectToMySQL(DATABASE).query_db(query, data)
+        results = connectToMySQL(DATABASE).query_db(query, data)
         return results
 
     @classmethod
