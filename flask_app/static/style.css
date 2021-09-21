@@ -6958,9 +6958,10 @@ fieldset:disabled .btn {
     bottom: 1.25rem;
     left: 15%;
     padding-top: 1.25rem;
-    padding-bottom: 1050px;
+    padding-bottom: 550px;
     color: #fff;
     text-align: center;
+    font-size: 2rem;
 }
 
 .carousel-dark .carousel-control-prev-icon,

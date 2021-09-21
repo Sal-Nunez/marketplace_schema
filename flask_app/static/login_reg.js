@@ -26,7 +26,7 @@ regForm.addEventListener('submit', function(e) {
                     }
                 }
             } else if (data['status'] === 200) {
-                window.location.href = '/dashboard'
+                window.location.href = '/'
             }
         })
 })

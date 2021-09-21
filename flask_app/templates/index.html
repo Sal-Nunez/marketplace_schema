@@ -32,7 +32,9 @@
         </div>
         </li>
         </ul>
-        <button class="btn btn-primary me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Account</button>
+        {% if user %}
+        <a href="/myaccount" class="btn btn-primary me-3">Your Account</a> {% else %}
+        <button class="btn btn-primary me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Account</button> {% endif %}
         <form class="d-flex col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
@@ -76,7 +78,35 @@
                         </div>
                         <div class="form-row-last">
                             <input type="submit" name="register" class="register" value="Register">
-                            <p>Or<a href="#">Sign in</a></p>
+                            <p>Or<a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight2" aria-controls="offcanvasRight">Sign in</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight2" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="page-content">
+            <div class="page-content">
+                <div class="form-v7-content" style='width: 70%'>
+                    <form class="form-detail" id="reg-form">
+                        <div class="form-row">
+                            <label for="email">E-MAIL</label>
+                            <input type="text" name="email" id="email" class="input-text">
+                            <span class='errors' id='reg_email_error'></span>
+                        </div>
+                        <div class="form-row">
+                            <label for="password">PASSWORD</label>
+                            <input type="password" name="password" id="password" class="input-text">
+                        </div>
+                        <div class="form-row-last">
+                            <input type="submit" name="register" class="register" value="Sign In">
+                            <p>Or<a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Register</a></p>
                         </div>
                     </form>
                 </div>
@@ -94,22 +124,22 @@
         <div class="carousel-item active" data-bs-interval="5000">
             <img src="\static\assets\pexels-teona-swift-6913143.jpg" class="d-block w-100" alt="flower arrangement">
             <div class="carousel-caption d-none d-md-block">
-                <h5 style="color: #D8E2DC;">We're passionate about what we do</h5>
-                <p style="color: #D8E2DC;">Let us handle your flower arrangement needs</p>
+                <h4 style="color: #D8E2DC; text-shadow: 2px 2px black;">We're passionate about what we do</h4>
+                <p style="color: #D8E2DC; text-shadow: 2px 2px black;">Let us handle your flower arrangement needs</p>
             </div>
         </div>
         <div class="carousel-item" data-bs-interval="5000">
             <img src="\static\assets\pexels-anna-shvets-5894068.jpg" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
-                <h5 style="color: #D8E2DC;">No seriously...</h5>
-                <p style="color: #D8E2DC;">Let us.</p>
+                <h4 style="color: #D8E2DC; text-shadow: 2px 2px black;">No seriously...</h4>
+                <p style="color: #D8E2DC; text-shadow: 2px 2px black;">Let us.</p>
             </div>
         </div>
         <div class="carousel-item" data-bs-interval="5000">
-            <img src="\static\assets\pexels-photo-7245414.jpg" class="d-block w-100" alt="...">
+            <img src="\static\assets\pexels-lumn-1410225.jpg" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
-                <h5 style="color: #D8E2DC;">I'm not kidding.</h5>
-                <p style="color: #D8E2DC;">Order now.</p>
+                <h4 style="color: #D8E2DC; text-shadow: 2px 2px black;">I'm not kidding.</h4>
+                <p style="color: #D8E2DC; text-shadow: 2px 2px black;">Order now.</p>
             </div>
         </div>
     </div>
