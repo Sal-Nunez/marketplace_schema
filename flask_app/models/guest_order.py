@@ -51,6 +51,7 @@ class GuestOrder:
                 'quantity': quantity,
                 'guest_order_id': guest_order.id
             }
+            GuestOrderItem.create_guest_order_item(data)
             guest_order_item = GuestOrderItem.select(data)
             guest_order.guest_order_items.append(guest_order_item)
         return guest_order
