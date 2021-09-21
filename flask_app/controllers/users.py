@@ -78,8 +78,9 @@ def login():
             'email': request.form['email'],
             'password': request.form['password']
         }
-        User.registration(data)
-        return redirect('/')
+        user_id = User.registration(data)
+        session['uuid'] = user_id
+        return jsonify(msg)
 
 
 @app.route('/register1', methods=['POST'])
