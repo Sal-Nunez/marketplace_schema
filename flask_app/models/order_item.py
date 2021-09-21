@@ -30,6 +30,13 @@ class OrderItem:
                 order_items.append(cls(order_item))
             return order_items
 
+    @classmethod
+    def create_order_item(cls, data):
+        query = "INSERT INTO quest_order_items (quantity, order_id, arrangement_id) VALUES (%(quantity)s, %(order_id)s, %(arrangement_id)s);"
+        results =  connectToMySQL(DATABASE).query_db(query, data)
+        order_item = cls(results[0])
+        return order_item
+
 # Shouldn't have to use because orders are immutable.
     # @classmethod
     # def edit_order_item(cls, data):

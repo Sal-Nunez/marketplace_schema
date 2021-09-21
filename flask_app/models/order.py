@@ -3,6 +3,7 @@ from flask import Flask, flash, session
 from flask_app.models import user
 from flask_app.models import cart
 from flask_app.models import cart_item
+from flask_app.models.order_item import OrderItem
 app = Flask(__name__)
 DATABASE = "floral_schema"
 
@@ -14,10 +15,15 @@ class Order:
     def __eq__(self, other):
         return self.id == other.id
 
-# Todo: its literally not done... you just named it.
     @property
     def order_items(self):
-        pass
+        order_items = []
+        data = {
+            'order_id': self.id
+        }
+        order_item = OrderItem.select(data)
+        order_items.append(order_item)
+        return order_items
 
     @classmethod
     def select(cls, data=None, type='user_id'):
@@ -40,8 +46,7 @@ class Order:
             'user_id': session['uuid']
         }
         cart1 = cart.Cart.select(data=user_data)
-        # something is wrong here, please take another look Sal...
-        order = cls(cls.create_order(data = user_data))
+        order = cls(cls.select(data= {'user_id': (cls.create_order(data = user_data))}))
         for item in cart1.cart_items:
             order_item_data = {
                 'quantity': item['quantity'],
@@ -61,11 +66,6 @@ class Order:
         query = "INSERT into orders (user_id) VALUES (%(user_id)s);"
         results =  connectToMySQL(DATABASE).query_db(query, data)
         return results
-
-    # Takes in the guest account email, needs to generate an order with an order list, the orderlist will take from session['cart']
-    @classmethod
-    def new_guest_order(cls, data):
-        pass
 
 # Orders should be treated as immutable and undeletable.
     # @classmethod

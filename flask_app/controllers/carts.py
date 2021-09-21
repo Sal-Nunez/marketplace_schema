@@ -42,7 +42,7 @@ def remove_from_cart():
             }
             CartItem.delete_cart_item(data)
     else:
-        session['cart'].pop(request.form['arrangement_id'])
+        session['cart'].pop(f"{request.form['arrangement_id']}")
 
 # Takes as input cart_item "id", cart_item "user", qauntity, and arrangement_id, assume a hidden input
 @app.route('/carts/update_cart', methods=['POST'])
