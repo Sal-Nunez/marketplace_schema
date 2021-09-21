@@ -1,6 +1,6 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import Flask, flash, session
-from flask_app.models.product import Product
+from flask_app.models import product
 app = Flask(__name__)
 DATABASE = "floral_schema"
 
@@ -32,7 +32,7 @@ class Arrangement:
         data = {
             'id': self.product_id
         }
-        return Product.select(data=data)
+        return product.Product.select(data=data)
 
     @classmethod
     def select(cls, type='id', data=None):
