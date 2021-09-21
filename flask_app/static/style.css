@@ -6760,6 +6760,7 @@ fieldset:disabled .btn {
 .carousel-inner {
     position: relative;
     width: 100%;
+    max-height: 1200px !important;
     overflow: hidden;
 }
 
@@ -6957,7 +6958,7 @@ fieldset:disabled .btn {
     bottom: 1.25rem;
     left: 15%;
     padding-top: 1.25rem;
-    padding-bottom: 1.25rem;
+    padding-bottom: 1050px;
     color: #fff;
     text-align: center;
 }
