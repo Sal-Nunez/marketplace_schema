@@ -4658,6 +4658,7 @@ fieldset:disabled .btn {
 
 .navbar-toggler-icon {
     display: inline-block;
+    color: black;
     width: 1.5em;
     height: 1.5em;
     vertical-align: middle;
