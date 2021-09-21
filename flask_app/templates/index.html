@@ -42,31 +42,30 @@
                                 <p class="text-1"></p>
                                 <p class="text-2"></p>
                             </div> -->
-                            <form class="form-detail" action="#" method="post" id="login-form">
-                                <span class='errors' id='user_input_error'></span>
+                            <form class="form-detail" id="reg-form">
                                 <div class="form-row">
                                     <label for="username">FIRST NAME</label>
                                     <input type="text" name="first_name" id="first_name" class="input-text">
+                                    <span class='errors' id='reg_first_name_error'></span>
                                 </div>
-                                <span class='errors' id='user_input_error'></span>
                                 <div class="form-row">
                                     <label for="username">LAST NAME</label>
                                     <input type="text" name="last_name" id="last_name" class="input-text">
+                                    <span class='errors' id='reg_last_name_error'></span>
                                 </div>
                                 <div class="form-row">
-                                    <span class='errors' id='user_input_error'></span>
                                     <label for="your_email">E-MAIL</label>
                                     <input type="text" name="email" id="email" class="input-text">
+                                    <span class='errors' id='reg_email_error'></span>
                                 </div>
                                 <div class="form-row">
-                                    <span class='errors' id='user_input_error'></span>
                                     <label for="password">PASSWORD</label>
                                     <input type="password" name="password" id="password" class="input-text">
                                 </div>
                                 <div class="form-row">
-                                    <span class='errors' id='user_input_error'></span>
-                                    <label for="comfirm_password">CONFIRM PASSWORD</label>
-                                    <input type="password" name="comfirm_password" id="comfirm_password" class="input-text">
+                                    <label for="password_confirmation">CONFIRM PASSWORD</label>
+                                    <input type="password" name="password_confirmation" id="password_confirmation" class="input-text">
+                                    <span class="errors" id='reg_pw_error'></span>
                                 </div>
                                 <div class="form-row-last">
                                     <input type="submit" name="register" class="register" value="Register">

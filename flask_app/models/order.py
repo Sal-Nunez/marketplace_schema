@@ -46,7 +46,7 @@ class Order:
             'user_id': session['uuid']
         }
         cart1 = cart.Cart.select(data=user_data)
-        order = cls(cls.select(data= {'user_id': (cls.create_order(data = user_data))}))
+        order = cls(cls.select(type='id', data= {'id': (cls.create_order(data = user_data))}))
         for item in cart1.cart_items:
             order_item_data = {
                 'quantity': item['quantity'],
