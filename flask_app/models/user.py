@@ -10,7 +10,6 @@ DATABASE = "floral_schema"
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 NAME_REGEX = re.compile(r'^[a-zA-Z]\S*$')
 
-# todo: Upon creating a user, create an associated cart
 class User:
     def __init__(self, data):
         self.id = data['id']
@@ -34,6 +33,13 @@ class User:
         for order1 in results:
             orders.append(order.Order(order1))
         return orders
+
+    @property
+    def cart(self):
+        query = f"SELECT * FROM cart WHERE carts.user_id = {self.id}"
+        results = connectToMySQL(DATABASE).query_db(query)
+        cart1 = cart.Cart(results[0])
+        return cart1
 
     @classmethod
     def select(cls, data=None, type='id'):

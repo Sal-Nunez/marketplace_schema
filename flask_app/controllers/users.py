@@ -36,18 +36,27 @@ def register():
         User.registration(data)
     return redirect('/')
 
-@app.route('/homepage')
-def homepage():
+@app.route('/account')
+def account():
     if not 'uuid' in session:
         return redirect('/')
-    elif session['uuid'] > 0:
+    else:
         data = {
-            'user': User.select(type='id', data={'id': session['uuid']}),
-            'users': User.select(),
+            'user': User.select(type='id', data={'id': session['uuid']})
         }
-        return render_template('homepage.html', **data)
+        return render_template('account.html', **data)
 
 @app.route('/logout')
 def logout():
     session.pop('uuid')
-    return redirect('/homepage')
+    return redirect('/')
+
+@app.route('/dashboard')
+def dashboard():
+    if not 'master' in session:
+        return redirect('/')
+    else:
+        data = {
+            'user': User.select('someform of user id')
+        }
+        return render_template('master.html', **data)
