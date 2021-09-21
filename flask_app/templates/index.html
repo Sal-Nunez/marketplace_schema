@@ -1,5 +1,4 @@
-{% extends 'model.html' %}
-{% block content %}
+{% extends 'model.html' %} {% block content %}
 
 <header class="p-3 header-bg">
     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -8,7 +7,7 @@
                 <use xlink:href="#bootstrap" />
             </svg>
         </a>
-
+        <img src="\static\assets\clipart1771141 (3).png" alt="logo" href="#">
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
             <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
             <div class="nav-item dropdown">
@@ -28,39 +27,46 @@
                 </div>
             </div>
         </ul>
-        <button class="btn btn-primary me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-            aria-controls="offcanvasRight">Account</button>
+        <button class="btn btn-primary me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Account</button>
 
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header">
-                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                    aria-label="Close"></button>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
                 <div class="page-content">
                     <div class="page-content">
-                        <div class="form-v7-content">
-                            <div class="form-left">
-                                <img src="\static\assets\form-v7.jpg" alt="form">
-                                <p class="text-1">Sign Up</p>
-                                <p class="text-2">Privaci policy & Term of service</p>
-                            </div>
-                            <form class="form-detail" action="#" method="post" id="myform">
+                        <div class="form-v7-content" style='width: 70%'>
+                            <!-- <div class="form-left">
+                                <img src="\static\assets\Background_Image.jpg" alt="form">
+                                <p class="text-1"></p>
+                                <p class="text-2"></p>
+                            </div> -->
+                            <form class="form-detail" action="#" method="post" id="login-form">
+                                <span class='errors' id='user_input_error'></span>
                                 <div class="form-row">
-                                    <label for="username">USERNAME</label>
-                                    <input type="text" name="username" id="username" class="input-text">
+                                    <label for="username">FIRST NAME</label>
+                                    <input type="text" name="first_name" id="first_name" class="input-text">
+                                </div>
+                                <span class='errors' id='user_input_error'></span>
+                                <div class="form-row">
+                                    <label for="username">LAST NAME</label>
+                                    <input type="text" name="last_name" id="last_name" class="input-text">
                                 </div>
                                 <div class="form-row">
+                                    <span class='errors' id='user_input_error'></span>
                                     <label for="your_email">E-MAIL</label>
-                                    <input type="text" name="your_email" id="your_email" class="input-text" required pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}">
+                                    <input type="text" name="email" id="email" class="input-text">
                                 </div>
                                 <div class="form-row">
+                                    <span class='errors' id='user_input_error'></span>
                                     <label for="password">PASSWORD</label>
-                                    <input type="password" name="password" id="password" class="input-text" required>
+                                    <input type="password" name="password" id="password" class="input-text">
                                 </div>
                                 <div class="form-row">
+                                    <span class='errors' id='user_input_error'></span>
                                     <label for="comfirm_password">CONFIRM PASSWORD</label>
-                                    <input type="password" name="comfirm_password" id="comfirm_password" class="input-text" required>
+                                    <input type="password" name="comfirm_password" id="comfirm_password" class="input-text">
                                 </div>
                                 <div class="form-row-last">
                                     <input type="submit" name="register" class="register" value="Register">
@@ -76,19 +82,16 @@
             <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
         </form>
         <div>
-            <img src="\static\assets\cart-dark.png" alt="">
+            <img src="\static\assets\PikPng.com_wheelbarrow-png_5860717 (1).png" alt="cart">
         </div>
     </div>
 </header>
 <div>
     <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
-                aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
-                aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
-                aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active" data-bs-interval="5000">
@@ -101,15 +104,15 @@
             <div class="carousel-item" data-bs-interval="5000">
                 <img src="\static\assets\pexels-anna-shvets-5894068.jpg" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5 style ="color: #D8E2DC;">No seriously...</h5>
-                    <p style ="color: #D8E2DC;">Let us.</p>
+                    <h5 style="color: #D8E2DC;">No seriously...</h5>
+                    <p style="color: #D8E2DC;">Let us.</p>
                 </div>
             </div>
             <div class="carousel-item" data-bs-interval="5000">
                 <img src="\static\assets\pexels-photo-7245414.jpg" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
                     <h5 style="color: #D8E2DC;">I'm not kidding.</h5>
-                    <p style ="color: #D8E2DC;">Order now.</p>
+                    <p style="color: #D8E2DC;">Order now.</p>
                 </div>
             </div>
         </div>
