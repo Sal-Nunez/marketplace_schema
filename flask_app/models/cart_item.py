@@ -39,12 +39,17 @@ class CartItem:
         return results
 
     @classmethod
-    def edit_cart_item(cls, data):
-        query = "UPDATE cart_items SET quantity = %(quantity)s, cart_id = %(cart_id)s, arrangement_id = %(arrangement_id)s WHERE cart_items.id = %(id)s;"
+    def edit_cart_quantity(cls, data):
+        query = "UPDATE cart_items SET quantity = %(quantity)s WHERE cart_items.id = %(id)s;"
         results = connectToMySQL(DATABASE).query_db(query, data)
         return results
 
     @classmethod
     def delete_cart_item(cls, data):
         query = "DELETE FROM cart_items WHERE cart_items.id = %(id)s;"
+        return connectToMySQL(DATABASE).query_db(query, data)
+
+    @classmethod
+    def delete_cart_items(cls, data):
+        query = "DELETE FROM cart_items WHERE cart_items.cart_id = %(cart_id)s;"
         return connectToMySQL(DATABASE).query_db(query, data)
