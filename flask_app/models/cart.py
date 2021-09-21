@@ -19,7 +19,7 @@ class Cart:
         }
         cart_items = cart_item.CartItem(data=data)
         return cart_items
-# Owner needs a join, Jacib messed something up
+
     @property
     def owner(self):
         query = f"SELECT * FROM users JOIN carts on users.id = carts.user_id WHERE carts.user_id = {self.id};"
