@@ -4,7 +4,6 @@ from flask_app.models import order, user
 
 # Once they pay they are taken to this screen, it's their receipt.
 # Need to feed to the front a list of all the order items.
-    # Need to do this for cart as well.
 # Takes in guest email if still not logged in
 @app.route('/orders/confirmation', methods=['POST'])
 def confirmation():
