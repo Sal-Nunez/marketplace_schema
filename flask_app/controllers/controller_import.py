@@ -1,1 +1,1 @@
-from . import users, carts, orders, products
+from . import users, carts, orders, products, about_us
