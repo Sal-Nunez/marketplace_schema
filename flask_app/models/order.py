@@ -14,6 +14,7 @@ class Order:
     def __eq__(self, other):
         return self.id == other.id
 
+# Todo: its literally not done... you just named it.
     @property
     def order_items(self):
         pass
@@ -34,19 +35,20 @@ class Order:
             return orders
 
     @classmethod
-    def new_order(cls, data):
+    def new_order(cls):
         user_data = {
-            'user_id': data['user_id']
+            'user_id': session['uuid']
         }
         cart1 = cart.Cart.select(data=user_data)
-        order = cls.create_order(data = user_data)
+        # something is wrong here, please take another look Sal...
+        order = cls(cls.create_order(data = user_data))
         for item in cart1.cart_items:
             order_item_data = {
                 'quantity': item['quantity'],
                 'arrangement_id': item['arrangement_id'],
                 'order_id': order.id
             }
-            query2 = "INSERT INTO order_items (quantity, order_id, arrangement_id) VALUES (%(quantity)s, %(order_id)s, %(arrangement_id)s;"
+            query2 = "INSERT INTO order_items (quantity, order_id, arrangement_id) VALUES (%(quantity)s, %(order_id)s, %(arrangement_id)s);"
             connectToMySQL(DATABASE).query_db(query2, order_item_data)
         cart_data = {
             'cart_id': cart1.id
@@ -59,6 +61,11 @@ class Order:
         query = "INSERT into orders (user_id) VALUES (%(user_id)s);"
         results =  connectToMySQL(DATABASE).query_db(query, data)
         return results
+
+    # Takes in the guest account email, needs to generate an order with an order list, the orderlist will take from session['cart']
+    @classmethod
+    def new_guest_order(cls, data):
+        pass
 
 # Orders should be treated as immutable and undeletable.
     # @classmethod

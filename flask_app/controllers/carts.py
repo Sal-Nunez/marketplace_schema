@@ -1,6 +1,19 @@
 from flask_app import app
 from flask import render_template, redirect, request, session, flash
 from flask_app.models.cart_item import CartItem
+from flask_app.models import cart
+
+# Use this route to view cart. If guest, use session['cart'] on html side.
+@app.route('/cart')
+def view_cart():
+    if 'uuid' in session:
+        data = {
+            'user_id': session['uuid']
+        }
+        carts = cart.Cart.select(data)
+        return render_template('view_cart.html', cart = carts)
+    else:
+        return render_template('view_cart.html')
 
 # Takes as input the cart_id, arrangement_id, and quantity
 @app.route('/carts/add_arrangement', methods=['POST'])
