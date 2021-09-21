@@ -1,14 +1,13 @@
 {% extends 'model.html' %} {% block content %}
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid d-flex flex-wrap align-items-center justify-content-between justify-content-lg-start">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="button">
-        <span class="navbar-toggler-icon"></span>
-        </button>
+              <span class="navbar-toggler-icon"></span>
+              </button>
         <img src="\static\assets\clipart1771141 (3).png" alt="logo" href="#">
         <!-- <div id="cart">
-            <img src="\static\assets\PikPng.com_wheelbarrow-png_5860717 (1).png" alt="cart">
-        </div> -->
+                  <img src="\static\assets\PikPng.com_wheelbarrow-png_5860717 (1).png" alt="cart">
+              </div> -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
@@ -33,7 +32,7 @@
         </li>
         </ul>
         {% if user %}
-        <a href="/account" class="btn btn-primary me-3">Your Account</a> {% else %}
+        <a href="/logout" class="btn btn-primary me-3">Logout</a> {% else %}
         <button class="btn btn-primary me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Account</button> {% endif %}
         <form class="d-flex col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -114,67 +113,13 @@
         </div>
     </div>
 </div>
-<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-        <div class="carousel-item active" data-bs-interval="5000">
-            <img src="\static\assets\pexels-teona-swift-6913143.jpg" class="d-block w-100" alt="flower arrangement">
-            <div class="carousel-caption d-none d-md-block">
-                <h4 style="color: #D8E2DC; text-shadow: 2px 2px black;">We're passionate about what we do</h4>
-                <p style="color: #D8E2DC; text-shadow: 2px 2px black;">Let us handle your flower arrangement needs</p>
-            </div>
-        </div>
-        <div class="carousel-item" data-bs-interval="5000">
-            <img src="\static\assets\pexels-anna-shvets-5894068.jpg" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-                <h4 style="color: #D8E2DC; text-shadow: 2px 2px black;">No seriously...</h4>
-                <p style="color: #D8E2DC; text-shadow: 2px 2px black;">Let us.</p>
-            </div>
-        </div>
-        <div class="carousel-item" data-bs-interval="5000">
-            <img src="\static\assets\pexels-lumn-1410225.jpg" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-                <h4 style="color: #D8E2DC; text-shadow: 2px 2px black;">I'm not kidding.</h4>
-                <p style="color: #D8E2DC; text-shadow: 2px 2px black;">Order now.</p>
-            </div>
-        </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-</div>
-</div>
-<div class="d-flex justify-content-center">
-    <h1 class="fw-light">Trending Products:</h1>
-</div>
-<div class="d-flex justify-content-evenly">
-    <div class="">
-        <img src="\static\assets\pexels-karolina-grabowska-4195581.jpg" alt="" class="thumbnail">
-        <h5 class="text-center fw-light">Valentine's Day Bouquet</h5>
-    </div>
-    <div class="">
-        <img src="\static\assets\pexels-ylanite-koppens-2014698.jpg" alt="" class="thumbnail">
-        <h5 class="text-center fw-light">20 Pink Roses</h5>
-    </div>
-    <div class="">
-        <img src="\static\assets\pexels-element-digital-837257.jpg" alt="" class="thumbnail">
-        <h5 class="text-center fw-light">5 Red Roses</h5>
+<div class="container d-flex justify-content-between">
+    <h1>{{user.first_name}} {{user.last_name}}</h1>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+        <label class="form-check-label" for="flexCheckDefault">Interested in emails?</label>
     </div>
 </div>
-
-<div class="d-flex justify-content-center">
-    <h1 class="fw-light">Buy from us or die</h1>
-</div>
-
 <div class="container">
     <footer class="py-5">
         <div class="d-flex justify-content-between">
@@ -204,17 +149,16 @@
             <p>&copy; 2021 Company, Inc. All rights reserved.</p>
             <ul class="list-unstyled d-flex">
                 <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
-                            <use xlink:href="#twitter" />
-                        </svg></a></li>
+                                  <use xlink:href="#twitter" />
+                              </svg></a></li>
                 <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
-                            <use xlink:href="#instagram" />
-                        </svg></a></li>
+                                  <use xlink:href="#instagram" />
+                              </svg></a></li>
                 <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
-                            <use xlink:href="#facebook" />
-                        </svg></a></li>
+                                  <use xlink:href="#facebook" />
+                              </svg></a></li>
             </ul>
         </div>
     </footer>
 </div>
-
 {% endblock %}
