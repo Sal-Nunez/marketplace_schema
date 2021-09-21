@@ -6,3 +6,7 @@ $(document).ready(function() {
         }
     });
 });
+
+function getURL() {
+    return window.location.href;
+}

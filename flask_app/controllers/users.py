@@ -78,7 +78,7 @@ def register():
             'email': request.form['email'],
             'password': request.form['password']
         }
-        user_id = User.registration(data)
+        User.registration(data)
         return jsonify(msg)
 
 
