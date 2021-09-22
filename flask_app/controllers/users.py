@@ -127,11 +127,17 @@ def account():
     if not 'uuid' in session:
         return redirect('/')
     else:
-        data = {
-            'user': User.select(type='id', data={'id': session['uuid']}),
-            'orders': Order.select(data={'user_id':session['uuid']})
-        }
-        return render_template('account.html', **data)
+        if Order.select(type = 'user_id', data={'user_id':session['uuid']}):
+            data = {
+                'user': User.select(type='id', data={'id': session['uuid']}),
+                'orders': Order.select(data={'user_id':session['uuid']})
+            }
+            return render_template('account.html', **data)
+        else:
+            data = {
+                'user': User.select(type='id', data={'id': session['uuid']})
+            }
+            return render_template('account.html', **data)
 
 @app.route('/logout')
 def logout():
