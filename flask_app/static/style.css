@@ -4310,7 +4310,7 @@ fieldset:disabled .btn {
 
 .dropdown-item {
     display: block;
-    width: 90%;
+    width: 100%;
     margin-right: 100px;
     padding: 0.25rem 1rem;
     clear: both;
