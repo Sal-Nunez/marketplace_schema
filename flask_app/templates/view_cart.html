@@ -1,5 +1,4 @@
 {% extends 'model.html' %} {% block content %}
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid d-flex flex-wrap align-items-center justify-content-between justify-content-lg-start">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="button">
@@ -117,107 +116,93 @@
         </div>
     </div>
 </div>
-<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-        <div class="carousel-item active" data-bs-interval="5000">
-            <img src="\static\assets\pexels-teona-swift-6913143.jpg" class="d-block w-100" alt="flower arrangement">
-            <div class="carousel-caption d-none d-md-block">
-                <h4 style="color: #D8E2DC; text-shadow: 2px 2px black;">We're passionate about what we do</h4>
-                <p style="color: #D8E2DC; text-shadow: 2px 2px black;">Let us handle your flower arrangement needs</p>
-            </div>
-        </div>
-        <div class="carousel-item" data-bs-interval="5000">
-            <img src="\static\assets\pexels-anna-shvets-5894068.jpg" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-                <h4 style="color: #D8E2DC; text-shadow: 2px 2px black;">No seriously...</h4>
-                <p style="color: #D8E2DC; text-shadow: 2px 2px black;">Let us.</p>
-            </div>
-        </div>
-        <div class="carousel-item" data-bs-interval="5000">
-            <img src="\static\assets\pexels-lumn-1410225.jpg" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-                <h4 style="color: #D8E2DC; text-shadow: 2px 2px black;">I'm not kidding.</h4>
-                <p style="color: #D8E2DC; text-shadow: 2px 2px black;">Order now.</p>
-            </div>
-        </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-</div>
-</div>
-<div class="d-flex justify-content-center">
-    <h1 class="fw-light">Trending Products:</h1>
-</div>
-<div class="d-flex justify-content-evenly">
-    <div class="">
-        <img src="\static\assets\pexels-karolina-grabowska-4195581.jpg" alt="" class="thumbnail">
-        <h5 class="text-center fw-light">Valentine's Day Bouquet</h5>
-    </div>
-    <div class="">
-        <img src="\static\assets\pexels-ylanite-koppens-2014698.jpg" alt="" class="thumbnail">
-        <h5 class="text-center fw-light">20 Pink Roses</h5>
-    </div>
-    <div class="">
-        <img src="\static\assets\pexels-element-digital-837257.jpg" alt="" class="thumbnail">
-        <h5 class="text-center fw-light">5 Red Roses</h5>
-    </div>
-</div>
+{% if user %}
+<div class="shopping-background">
 
-<div class="d-flex justify-content-center">
-    <h1 class="fw-light">Buy from us or die</h1>
-</div>
+    <div class="container d-flex justify-content-between">
+        <h1>{{user.first_name}} {{user.last_name}}</h1> {% endif %}
+        <div class='mt-3'>
+            <form action="/newsletter_signup" methods=[ 'post']>
+                <label class="form-check-label" for="flexCheckDefault">Interested in emails?</label>
+                <input type="hidden" name='email' value='{{user.email}}'>
+                <button class='btn btn-primary me-3'>Sign Up</button>
+            </form>
+        </div>
+    </div>
+    <div class="justify-content-center d-flex">
+        <div>
+            <h1>Your Cart</h1>
+        </div>
+    </div>
+    <div class='container row ms-auto me-auto'>
+        <div class="col">
+            <h1>Product</h1>
+            <img src="https://images.pexels.com/photos/3800363/pexels-photo-3800363.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="" class='thumbnail1'>
+        </div>
+        <div class='col'>
+            <div class='d-flex justify-content-between'>
+                <h1>Price</h1>
+                <h1>Quantity</h1>
+                <h1>Total</h1>
+            </div>
+            <div class='d-flex justify-content-between'>
+                <h1>$50</h1>
+                <select class="form-select1" aria-label="Default select example">
+                                                  <option value="1">1</option>
+                                                  <option value="2">2</option>
+                                                  <option value="3">3</option>
+                                        </select>
+                <h1>$50</h1>
+            </div>
+        </div>
+    </div>
 
-<div class="container">
-    <footer class="py-5">
-        <div class="d-flex justify-content-between">
-            <div class="col-2">
-                <h5>Section</h5>
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Flowers</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Occasions</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+
+    <div class="container">
+        <footer class="py-5">
+            <div class="d-flex justify-content-between">
+                <div class="col-2">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Flowers</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Occasions</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                    </ul>
+                </div>
+                <div class="col-4">
+                    <form>
+                        <h5>Subscribe to our newsletter</h5>
+                        <p>Monthly digest of whats new and exciting from us.</p>
+                        <div class="d-flex w-100 gap-2">
+                            <label for="newsletter1" class="visually-hidden">Email
+                                                                                address</label>
+                            <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+                            <button class="btn btn-primary" type="button">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between py-4 my-4 border-top">
+                <p>&copy; 2021 Company, Inc. All rights reserved.</p>
+                <ul class="list-unstyled d-flex">
+                    <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24"
+                              height="24">
+                              <use xlink:href="#twitter" />
+                    </svg></a></li>
+                    <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24"
+                              height="24">
+                              <use xlink:href="#instagram" />
+                    </svg></a></li>
+                    <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24"
+                              height="24">
+                              <use xlink:href="#facebook" />
+                    </svg></a></li>
                 </ul>
             </div>
-            <div class="col-4">
-                <form>
-                    <h5>Subscribe to our newsletter</h5>
-                    <p>Monthly digest of whats new and exciting from us.</p>
-                    <div class="d-flex w-100 gap-2">
-                        <label for="newsletter1" class="visually-hidden">Email address</label>
-                        <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-                        <button class="btn btn-primary" type="button">Subscribe</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div class="d-flex justify-content-between py-4 my-4 border-top">
-            <p>&copy; 2021 Company, Inc. All rights reserved.</p>
-            <ul class="list-unstyled d-flex">
-                <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
-                            <use xlink:href="#twitter" />
-                        </svg></a></li>
-                <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
-                            <use xlink:href="#instagram" />
-                        </svg></a></li>
-                <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
-                            <use xlink:href="#facebook" />
-                        </svg></a></li>
-            </ul>
-        </div>
-    </footer>
+        </footer>
+    </div>
 </div>
 
 {% endblock %}

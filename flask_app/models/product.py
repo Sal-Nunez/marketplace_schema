@@ -62,6 +62,25 @@ class Product:
             for product in results:
                 products.append(cls(product))
             return products
+#notdone
+    @classmethod
+    def search_products(cls, data):
+        '''
+        data = {
+            'name': enterNameHere
+        }
+        '''
+        print(f"{'data':*^30}", data)
+        query = "SELECT * FROM products WHERE name LIKE %(name)s LIMIT 6;"
+        results = connectToMySQL(DATABASE).query_db(query, {'name': data['name']+'%'})
+        products = []
+        if results:
+            for product in results:
+                cls(product)
+                products.append(product.name)
+            return products
+        else:
+            return False
 
     @classmethod
     def create_product(cls, data):

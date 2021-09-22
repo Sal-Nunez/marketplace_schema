@@ -13,12 +13,21 @@ function updateValue(e) {
         if (product.toLowerCase().includes(userInput)) {
             const li = document.createElement('li');
             li.onclick = e => search.value = li.innerText;
+            li.classList.add('dropdown-item')
             li.innerText = product
             suggestions.append(li)
         }
     }
-    // e.target.value;
-    // console.log(suggestions.innerText);
 }
 
 console.log("Hello");
+
+search.addEventListener('input', function(e) {
+    let userInput = e.target.value.toLowerCase();
+    suggestions.innerHTML = ""
+    fetch(`/search/${userInput}`)
+    .then(resp => resp.json())
+    .then(data => {
+        console.log(data)
+    })
+});
