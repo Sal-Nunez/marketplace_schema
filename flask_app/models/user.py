@@ -3,7 +3,7 @@ from flask import Flask, flash, session
 import re
 from flask_bcrypt import Bcrypt
 from flask_app.models import order
-from flask_app.models import cart
+from flask_app.models import cart, cart_item
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 DATABASE = "floral_schema"
@@ -67,7 +67,6 @@ class User:
             session['uuid'] = user.id
             return True
         else:
-            flash("Incorrect email/password try again", 'login_email')
             return False
 
     @classmethod
@@ -80,5 +79,18 @@ class User:
         user_data = {
             'user_id': results
         }
-        cart.Cart.create_cart(data=user_data)
-        return results
+        if 'cart' not in session:
+            cart.Cart.create_cart(data=user_data)
+            return results
+        else:
+            cart_id = cart.Cart.create_cart(data=user_data)
+            # INSERT INTO cart_items (quantity, cart_id, arrangement_id)
+            for key, value in session['cart']:
+                cart_item_data = {
+                    'arrangement_id': key,
+                    'quantity': value,
+                    'cart_id': cart_id
+                }
+                cart_item.CartItem.create_cart_item(data=cart_item_data)
+            session.pop['cart']
+            return cart_id
