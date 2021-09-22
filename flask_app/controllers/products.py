@@ -40,3 +40,20 @@ def all_products():
             'products': product.Product.select()
         }
         return render_template('products.html', **data)
+#notdone
+@app.route('/search/<string:name>')
+def search_dropdown(name):
+    print('name*****************************', name)
+    msg = {
+        'status': 200
+    }
+    is_valid = True
+    # product_list = {}
+    product_data = {
+        'name': name
+    }
+    products = product.Product.search_products(data=product_data)
+    if products:
+        print('products****************************',products)
+    else:
+        is_valid = False
