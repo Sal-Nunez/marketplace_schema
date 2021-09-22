@@ -14,10 +14,6 @@ regForm.addEventListener('submit', function(e) {
         .then(data => {
             console.log(data);
             if (data['status'] === 400) {
-                // let userInputError = document.querySelector('#user_input_error')
-                // let pwError = document.querySelector('#pw_error')
-                // userInputError.innerText = 'Something'
-
                 let allErrors = document.querySelectorAll(".errors")
                 for (const error of allErrors) {
                     let errorID = error.getAttribute('id')
@@ -44,10 +40,6 @@ loginForm.addEventListener('submit', function(e) {
         .then(data => {
             console.log(data);
             if (data['status'] === 400) {
-                // let userInputError = document.querySelector('#user_input_error')
-                // let pwError = document.querySelector('#pw_error')
-                // userInputError.innerText = 'Something'
-
                 let allErrors = document.querySelectorAll(".errors")
                 for (const error of allErrors) {
                     let errorID = error.getAttribute('id')

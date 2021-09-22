@@ -11,18 +11,18 @@ class Order:
     def __init__(self, data):
         self.id = data['id']
         self.user_id = data['user_id']
+        self.created_at = data['created_at']
+        self.updated_at = data['updated_at']
 
     def __eq__(self, other):
         return self.id == other.id
 
     @property
     def order_items(self):
-        order_items = []
         data = {
             'order_id': self.id
         }
-        order_item = OrderItem.select(data)
-        order_items.append(order_item)
+        order_items = OrderItem.select(data)
         return order_items
 
     @classmethod

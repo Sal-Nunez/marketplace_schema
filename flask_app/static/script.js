@@ -6,8 +6,10 @@ $(document).ready(function() {
         }
     });
 });
-
 function myFunction() {
     var x = document.getElementById("mySelect").value;
     console.log('hello')
+}
+function getURL() {
+    return window.location.href;
 }
