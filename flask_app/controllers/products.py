@@ -17,12 +17,12 @@ def one_product(product_name):
             'product': product.Product.select(type='name', data=product_data),
             'user': user.User.select(data = id)
         }
-        return render_template('/product.html', **data)
+        return render_template('product.html', **data)
     else:
         data = {
             'product': product.Product.select(type='name', data=product_data)
         }
-        return render_template('/product.html', **data)
+        return render_template('product.html', **data)
 
 @app.route('/products/all')
 def all_products():
@@ -34,9 +34,9 @@ def all_products():
             'user': user.User.select(data=id),
             'products': product.Product.select()
         }
-        return render_template('/products', **data)
+        return render_template('products.html', **data)
     else:
         data = {
             'products': product.Product.select()
         }
-        return render_template('/products.html', **data)
+        return render_template('products.html', **data)

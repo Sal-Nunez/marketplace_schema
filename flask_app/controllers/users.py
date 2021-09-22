@@ -4,6 +4,7 @@ from flask import render_template, redirect, request, session, flash, jsonify
 from flask_bcrypt import Bcrypt
 DATABASE = "floral_schema"
 from flask_app.models.user import User
+from flask_app.models.order import Order
 import re
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 NAME_REGEX = re.compile(r'^[a-zA-Z]\S*$')
@@ -127,7 +128,8 @@ def account():
         return redirect('/')
     else:
         data = {
-            'user': User.select(type='id', data={'id': session['uuid']})
+            'user': User.select(type='id', data={'id': session['uuid']}),
+            'orders': Order.select(data={'user_id':session['uuid']})
         }
         return render_template('account.html', **data)
 
