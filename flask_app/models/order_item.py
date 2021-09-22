@@ -1,5 +1,7 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import Flask, flash, session
+from flask_app.models.product import Product
+from flask_app.models.arrangement import Arrangement
 app = Flask(__name__)
 DATABASE = "floral_schema"
 
@@ -15,13 +17,29 @@ class OrderItem:
     def __eq__(self, other):
         return self.id == other.id
 
+    @property
+    def product(self):
+        query = f"SELECT * FROM products join arrangements on products.id = arrangements.product_id join order_items on arrangements.id = order_items.arrangement_id where order_items.id = {self.id};"
+        results = connectToMySQL(DATABASE).query_db(query)
+        product = Product(results[0])
+        return product
+
+    @property
+    def arrangement(self):
+        query = f"SELECT * FROM arrangements join order_items on arrangements.id = order_items.arrangement_id WHERE order_items.id = {self.id};"
+        results = connectToMySQL(DATABASE).query_db(query)
+        arrangement = Arrangement(results[0])
+        return arrangement
+
     @classmethod
     def select(cls, type='order_id', data=None):
         if data:
             query = f"SELECT * FROM order_items WHERE order_items.{type} = %({type})s;"
             results = connectToMySQL(DATABASE).query_db(query, data)
-            order_item = cls(results[0])
-            return order_item
+            order_items = []
+            for order_item in results:
+                order_items.append(order_item)
+                return order_items
         else:
             query = "SELECT * FROM order_items;"
             results = connectToMySQL(DATABASE).query_db(query)
