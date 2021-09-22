@@ -1,7 +1,12 @@
-var search = document.querySelector('#search')
+const search = document.querySelector('#search')
+const searchInput = document.querySelector('#search_input')
 
-search.addEventListener('search', updateValue);
+search.addEventListener('input', updateValue);
 
 function updateValue(e) {
-    return e.target.value
+    // var log;
+    searchInput.innerText = e.target.value;
+    console.log(searchInput.innerText);
 }
+
+console.log("Hello");
