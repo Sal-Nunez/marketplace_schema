@@ -4,6 +4,7 @@ from flask import render_template, redirect, request, session, flash, jsonify
 from flask_bcrypt import Bcrypt
 DATABASE = "floral_schema"
 from flask_app.models.user import User
+from flask_app.models.order import Order
 import re
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 NAME_REGEX = re.compile(r'^[a-zA-Z]\S*$')
@@ -20,7 +21,7 @@ def index():
         return render_template('index.html')
 
 @app.route('/register', methods=['POST'])
-def login():
+def register():
         msg = {
         'status': 200
         }
@@ -79,32 +80,64 @@ def login():
             'password': request.form['password']
         }
         User.registration(data)
-        return redirect('/')
+        return jsonify(msg)
 
 
-@app.route('/register1', methods=['POST'])
-def register():
-    if not User.validate_register(request.form):
-        return redirect('/')
-    else:
-        data = {
-            'first_name': request.form['first_name'],
-            'last_name': request.form['last_name'],
-            'email': request.form['email'],
-            'password': request.form['password']
+@app.route('/login', methods=['POST'])
+def login():
+    msg = {
+    'status': 200
+    }
+    is_valid = True
+    errors = {}
+    data = {
+        'email': request.form['email']
         }
-        User.registration(data)
-    return redirect('/')
+    query1 = "select * from users where users.email = %(email)s;"
+    if not connectToMySQL(DATABASE).query_db(query1, data):
+        errors['login_email_error'] = 'Email Doesn\'t Exist'
+        is_valid = False
+    if len(request.form['email']) < 1:
+        errors['login_email_error'] = 'Must Enter Email'
+        is_valid = False
+    if len(request.form['password']) < 1:
+        errors['login_password_error'] = 'Must Enter Password'
+        is_valid = False
+    if not EMAIL_REGEX.match(request.form['email']):
+        errors['login_email_error'] = 'Invalid Email Address!'
+        is_valid = False
+    if not is_valid:
+        msg['status'] = 400
+        msg['errors'] = errors
+        return jsonify(msg)
+    data1 = {
+        'email': request.form['email'],
+        'password': request.form['password']
+    }
+    if User.check_login (data=data1):
+        return jsonify(msg)
+    else:
+        errors['login_password_error'] = 'incorrect Password'
+        msg['status'] = 400
+        msg['errors'] = errors
+        return jsonify(msg)
 
 @app.route('/account')
 def account():
     if not 'uuid' in session:
         return redirect('/')
     else:
-        data = {
-            'user': User.select(type='id', data={'id': session['uuid']})
-        }
-        return render_template('account.html', **data)
+        if Order.select(type = 'user_id', data={'user_id':session['uuid']}):
+            data = {
+                'user': User.select(type='id', data={'id': session['uuid']}),
+                'orders': Order.select(data={'user_id':session['uuid']})
+            }
+            return render_template('account.html', **data)
+        else:
+            data = {
+                'user': User.select(type='id', data={'id': session['uuid']})
+            }
+            return render_template('account.html', **data)
 
 @app.route('/logout')
 def logout():
