@@ -13,6 +13,7 @@ function updateValue(e) {
         if (product.toLowerCase().includes(userInput)) {
             const li = document.createElement('li');
             li.onclick = e => search.value = li.innerText;
+            li.classList.add('dropdown-item')
             li.innerText = product
             suggestions.append(li)
         }
