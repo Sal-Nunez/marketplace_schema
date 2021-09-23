@@ -1,6 +1,6 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import Flask, flash, session
-from flask_app.models.arrangement import Arrangement
+from flask_app.models import arrangement
 from flask_app.models.category import Category
 app = Flask(__name__)
 DATABASE = "floral_schema"
@@ -37,18 +37,18 @@ class Product:
         query = f"SELECT * FROM arrangements where arrangements.product_id = {self.id};"
         results = connectToMySQL(DATABASE).query_db(query)
         arrangements = []
-        for arrangement in results:
+        for arrangement1 in results:
             data = {
-                'id': arrangement['id'],
-                'size': arrangement['size'],
-                'price': arrangement['price'],
-                'inventory': arrangement['inventory'],
-                'sale_price': arrangement['sale_price'],
+                'id': arrangement1['id'],
+                'size': arrangement1['size'],
+                'price': arrangement1['price'],
+                'inventory': arrangement1['inventory'],
+                'sale_price': arrangement1['sale_price'],
                 'product_id': self.id,
-                'created_at': arrangement['created_at'],
-                'updated_at': arrangement['updated_at']
+                'created_at': arrangement1['created_at'],
+                'updated_at': arrangement1['updated_at']
             }
-            arrangements.append(Arrangement(data))
+            arrangements.append(arrangement.Arrangement(data))
         return arrangements
 
     @classmethod
