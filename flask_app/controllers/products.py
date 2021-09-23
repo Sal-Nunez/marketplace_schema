@@ -1,5 +1,5 @@
 from flask_app import app
-from flask import render_template, redirect, request, session, flash
+from flask import render_template, redirect, request, session, flash, jsonify
 from flask_app.models import product
 from flask_app.models import user, arrangement
 
@@ -49,13 +49,14 @@ def search_dropdown(name):
     msg = {
         'status': 200
     }
-    is_valid = True
     # product_list = {}
     product_data = {
-        'name': name
+        'name': name+'%'
     }
+    print (f"{'product_data':*^40}", product_data['name'])
     products = product.Product.search_products(data=product_data)
+    print('products****************************',products)
     if products:
-        print('products****************************',products)
+        return jsonify(msg)
     else:
-        is_valid = False
+        return jsonify(msg)
