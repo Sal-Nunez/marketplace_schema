@@ -129,9 +129,8 @@
     {% for arrangement in arrangements %}
     <div class='col-3'>
         <img src="{{arrangement.image}}" alt="" class='thumbnail2 align-center'>
-        <form action="/products" method="post">
+        <form action="/product/{{ arrangement.id }}">
             <p class='text-center'><button class='text-center button1'>{{arrangement.product.name}}</button></p>
-            <input type="hidden" name='id' value="{{arrangement.id}}">
         </form>
         <p class='text-center'>${{arrangement.price | round | int}}</p>
     </div>

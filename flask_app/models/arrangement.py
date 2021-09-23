@@ -50,6 +50,14 @@ class Arrangement:
             return arrangements
 
     @classmethod
+    def select_one(cls, data):
+        query = "SELECT * FROM arrangements WHERE arrangements.id = %(id)s"
+        results = query_db(query, data)
+        print ("**************************", results)
+        arrangement = cls(results[0])
+        return arrangement
+
+    @classmethod
     def create_arrangement(cls, data):
         query = "INSERT INTO arrangements (size, price, inventory, sale_price, product_id) VALUES (%(size)s, %(price)s, %(inventory)s, %(sale_price)s, %(product_id)s);"
         results =  query_db(query, data)
