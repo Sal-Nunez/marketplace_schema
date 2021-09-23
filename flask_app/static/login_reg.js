@@ -25,7 +25,7 @@ regForm.addEventListener('submit', function(e) {
                 window.location.href = '/'
             }
         })
-})
+    })
 
 loginForm.addEventListener('submit', function(e) {
     e.preventDefault()
@@ -51,4 +51,4 @@ loginForm.addEventListener('submit', function(e) {
                 window.location.href = '/'
             }
         })
-})
+    })
