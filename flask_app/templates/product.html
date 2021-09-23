@@ -125,9 +125,8 @@
     </div>
     <div class='container row ms-auto me-auto'>
         <div class="col mt-4">
-            <h1>{{product.name}}</h1>
-            {% for arrangement in product.arrangements %} {% if arrangement.size == "Original" %}
-            <img src="{{arrangement.image}}" alt="" class='thumbnail3'> {% endif %} {% endfor %}
+            <h1>{{arrangement.product.name}}</h1>
+            <img src="{{arrangement.image}}" alt="" class='thumbnail3'>
         </div>
         <div class='col mt-4'>
             <div class='d-flex justify-content-between'>

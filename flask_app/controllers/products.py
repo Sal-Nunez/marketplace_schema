@@ -4,27 +4,29 @@ from flask_app.models import product
 from flask_app.models import user, arrangement
 
 
-@app.route('/products/<string:product_name>', methods=['POST'])
-def one_product(product_name):
-    product_data = {
-        'name': product_name
-    }
+@app.route('/product')
+def one_product():
+    print("***************", session['arrangement_id'])
     if 'uuid' in session:
         id = {
             'id': session['uuid']
         }
         data = {
-            'product': product.Product.select(type='name', data=product_data),
             'user': user.User.select(data = id),
-            'arrangement': arrangement.Arrangement.select(data={'id':request.form['id']})
+            'arrangement': arrangement.Arrangement.select(data={'id':session['arrangement_id']})[0]
         }
-        return redirect(f"/products/{product_name}", **data)
+        return render_template('product.html', **data)
     else:
         data = {
-            'product': product.Product.select(type='name', data=product_data),
-            'arrangement': arrangement.Arrangement.select(data={'id':request.form['id']})
+            'arrangement': arrangement.Arrangement.select(data={'id':session['arrangement_id']})[0]
         }
-        return redirect(f"/products/{product_name}", **data)
+        return render_template('product.html', **data)
+
+@app.route("/products", methods=["POST"])
+def products():
+    session['arrangement_id'] = request.form['id']
+    print("ID***************", request.form['id'])
+    return redirect(f'/product')
 
 @app.route('/products/all')
 def all_products():
@@ -34,12 +36,12 @@ def all_products():
         }
         data = {
             'user': user.User.select(data=id),
-            'products': product.Product.select()
+            'arrangements': arrangement.Arrangement.select(type='size', data={'size': 'Deluxe'})
         }
         return render_template('products.html', **data)
     else:
         data = {
-            'products': product.Product.select()
+            'arrangements': arrangement.Arrangement.select(type='size', data={'size': 'Deluxe'})
         }
         return render_template('products.html', **data)
 #notdone

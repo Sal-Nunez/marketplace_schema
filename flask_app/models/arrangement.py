@@ -38,8 +38,10 @@ class Arrangement:
         if data:
             query = f"SELECT * FROM arrangements WHERE arrangements.{type} = %({type})s;"
             results = connectToMySQL(DATABASE).query_db(query, data)
-            arrangement = cls(results[0])
-            return arrangement
+            arrangements = []
+            for arrangement in results:
+                arrangements.append(cls(arrangement))
+            return arrangements
         else:
             query = "SELECT * FROM arrangements;"
             results = connectToMySQL(DATABASE).query_db(query)

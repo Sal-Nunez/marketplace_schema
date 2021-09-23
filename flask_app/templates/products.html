@@ -126,16 +126,16 @@
     </div>
 </div>
 <div class="row">
-    {% for product in products %} {% for arrangement in product.arrangements %} {% if arrangement.size == 'Deluxe' %}
+    {% for arrangement in arrangements %}
     <div class='col-3'>
-        <img src="{{arrangement.image}}" alt="" class='thumbnail2'>
-        <form action="/product/{{product.name}}" methods=[ 'post']>
-            <p class='text-center'><button class='text-center button1'>{{product.name}}</button></p>
-            <input type="hidden" name='id' value='{{arrangement.id}}'>
+        <img src="{{arrangement.image}}" alt="" class='thumbnail2 align-center'>
+        <form action="/products" method="post">
+            <p class='text-center'><button class='text-center button1'>{{arrangement.product.name}}</button></p>
+            <input type="hidden" name='id' value="{{arrangement.id}}">
         </form>
         <p class='text-center'>${{arrangement.price | round | int}}</p>
     </div>
-    {% endif %} {% endfor %} {% endfor %}
+    {% endfor %}
 </div>
 
 
