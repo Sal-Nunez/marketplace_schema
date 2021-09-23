@@ -43,7 +43,10 @@ class Product:
                 'size': arrangement['size'],
                 'price': arrangement['price'],
                 'inventory': arrangement['inventory'],
-                'sale_price': arrangement['sale_price']
+                'sale_price': arrangement['sale_price'],
+                'product_id': self.id,
+                'created_at': arrangement['created_at'],
+                'updated_at': arrangement['updated_at']
             }
             arrangements.append(Arrangement(data))
         return arrangements
@@ -67,16 +70,15 @@ class Product:
     def search_products(cls, data):
         '''
         data = {
-            'name': enterNameHere
+            'name': name + '%'
         }
         '''
-        print(f"{'data':*^30}", data)
-        query = "SELECT * FROM products WHERE name LIKE %(name)s LIMIT 6;"
-        results = connectToMySQL(DATABASE).query_db(query, {'name': data['name']+'%'})
+        print(f"{'data':*^30}")
+        query = "SELECT * FROM products WHERE products.name LIKE %(name)s LIMIT 6;"
+        results = connectToMySQL(DATABASE).query_db(query, data)
         products = []
         if results:
             for product in results:
-                cls(product)
                 products.append(product.name)
             return products
         else:
