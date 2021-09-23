@@ -65,6 +65,13 @@ body {
     margin: 20px 0px;
 }
 
+.thumbnail4 {
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+    object-position: 40% 60%;
+}
+
 .page-content {
     width: 100%;
     margin: 0 auto;
@@ -11405,6 +11412,11 @@ fieldset:disabled .btn {
         display: none !important;
     }
 }
+
+
+/* * {
+    outline: 1px solid red !important;
+} */
 
 
 /*# sourceMappingURL=bootstrap.css.map */

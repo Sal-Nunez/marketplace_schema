@@ -18,7 +18,7 @@ class CartItem:
 
     @property
     def arrangement(self):
-        query = f"SELECT * FROM arrangements join cart_items on arragements.id = cart_item.arrangement_id where carts.id = {self.id}"
+        query = f"SELECT * FROM arrangements join cart_items on arrangements.id = cart_items.arrangement_id where cart_items.id = {self.id}"
         results = connectToMySQL(DATABASE).query_db(query)
         arrangement1 = arrangement.Arrangement(results[0])
         return arrangement1

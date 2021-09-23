@@ -135,75 +135,74 @@
             <h1>Your Cart</h1>
         </div>
     </div>
-    <div class='container row ms-auto me-auto'>
-        <div class="col">
+    <div class='container ms-auto me-auto'>
+        <div class='d-flex justify-content-between'>
             <h1>Product</h1>
-            {% for item in cart.cart_items %}
-            <img src="{{item.arrangement_id}}" alt="" class='thumbnail1'>
-        </div>
-        <div class='col'>
-            <div class='d-flex justify-content-between'>
+            <div class=' d-flex justify-content-between' style='gap: 75px'>
                 <h1>Price</h1>
                 <h1>Quantity</h1>
                 <h1>Total</h1>
             </div>
-            <div class='d-flex justify-content-between'>
-                <h1 id='price'>50</h1>
-                <select class="form-select1" aria-label="Default select example" name='form-select1' onchange="selectChange()" id='form'>
-                    <option value="0">0</option>
-                    <option value="{{item.quantity}}" selected>{{item.quantity}}</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
+        </div>
+        {% for item in cart.cart_items %}
+        <div class="d-flex row mb-3 align-items-end" style='flex-wrap:nowrap'>
+            <img src="{{item.arrangement.image}}" alt="" style='flex:6' class='thumbnail4'>
+            <h1 id='price' style='flex:1'>50</h1>
+            <select class="form-select1" aria-label="Default select example" name='form-select1' onchange="selectChange()" id='form' style='flex:1'>
+                        <option value="0">0</option>
+                        <option value="{{item.quantity}}" selected>{{item.quantity}}</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
                 </select>
-                <h1 class='result' id='result'>0</h1>
-            </div>
+            <h1 class='result' id='result' style='flex:1'>0</h1>
         </div>
         {% endfor %}
     </div>
+</div>
 
 
-    <div class="container">
-        <footer class="py-5">
-            <div class="d-flex justify-content-between">
-                <div class="col-2">
-                    <h5>Section</h5>
-                    <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Flowers</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Occasions</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-                    </ul>
-                </div>
-                <div class="col-4">
-                    <form>
-                        <h5>Subscribe to our newsletter</h5>
-                        <p>Monthly digest of whats new and exciting from us.</p>
-                        <div class="d-flex w-100 gap-2">
-                            <label for="newsletter1" class="visually-hidden">Email
-                                address</label>
-                            <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-                            <button class="btn btn-primary" type="button">Subscribe</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <div class="d-flex justify-content-between py-4 my-4 border-top">
-                <p>&copy; 2021 Company, Inc. All rights reserved.</p>
-                <ul class="list-unstyled d-flex">
-                    <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
-                                <use xlink:href="#twitter" />
-                            </svg></a></li>
-                    <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
-                                <use xlink:href="#instagram" />
-                            </svg></a></li>
-                    <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
-                                <use xlink:href="#facebook" />
-                            </svg></a></li>
+<div class="container">
+    <footer class="py-5">
+        <div class="d-flex justify-content-between">
+            <div class="col-2">
+                <h5>Section</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Flowers</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Occasions</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
                 </ul>
             </div>
-        </footer>
-    </div>
+            <div class="col-4">
+                <form>
+                    <h5>Subscribe to our newsletter</h5>
+                    <p>Monthly digest of whats new and exciting from us.</p>
+                    <div class="d-flex w-100 gap-2">
+                        <label for="newsletter1" class="visually-hidden">Email
+                                address</label>
+                        <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+                        <button class="btn btn-primary" type="button">Subscribe</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between py-4 my-4 border-top">
+            <p>&copy; 2021 Company, Inc. All rights reserved.</p>
+            <ul class="list-unstyled d-flex">
+                <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
+                                <use xlink:href="#twitter" />
+                            </svg></a></li>
+                <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
+                                <use xlink:href="#instagram" />
+                            </svg></a></li>
+                <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
+                                <use xlink:href="#facebook" />
+                            </svg></a></li>
+            </ul>
+        </div>
+    </footer>
+</div>
 </div>
 
 {% endblock %}
