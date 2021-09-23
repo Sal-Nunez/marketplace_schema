@@ -36,7 +36,7 @@ body {
     width: 280px;
     height: 280px;
     object-fit: cover;
-    object-position: 90% 10%;
+    object-position: 30% 70%;
     margin: 20px 0px;
     border-radius: 50%;
 }
@@ -46,6 +46,22 @@ body {
     height: 50px;
     object-fit: cover;
     object-position: 90% 10%;
+    margin: 20px 0px;
+}
+
+.thumbnail2 {
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+    object-position: 30% 70%;
+    margin-left: 170px;
+}
+
+.thumbnail3 {
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+    object-position: 30% 70%;
     margin: 20px 0px;
 }
 
@@ -686,6 +702,18 @@ label {
 
 button {
     border-radius: 0;
+}
+
+.button1 {
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    /*optional*/
+    font-family: arial, sans-serif;
+    /*input has OS specific font-family*/
+    color: #069;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 button:focus:not(:focus-visible) {
