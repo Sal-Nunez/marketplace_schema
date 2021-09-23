@@ -39,7 +39,7 @@
             <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
     </div>
-    <img src="\static\assets\PikPng.com_wheelbarrow-png_5860717 (1).png" alt="cart">
+    <a href="/cart"><img src="\static\assets\PikPng.com_wheelbarrow-png_5860717 (1).png" alt="cart" style='margin-right: 50px;' href="/cart"></a>
     </div>
 </nav>
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
@@ -118,22 +118,30 @@
 </div>
 <div class="container">
     <div class="container text-center">
-        <h1 class='text-center'>Search Products:</h1>
-        <select class="selectpicker form-select" data-show-subtext="true" data-live-search="true" id="mySelect" onchange="myFunction()">
+        <h1 class='text-center'>Products:</h1>
+        <!-- <select class="selectpicker form-select" data-show-subtext="true" data-live-search="true" id="mySelect" onchange="myFunction()">
             <option value="bouquets">Bouquets</option>
             <option value="assortment">Assortment</option>
-        </select>
+        </select> -->
     </div>
 </div>
-<div class="row">
+<div class="row w-50 mx-auto" style='gap: 15%'>
     {% for arrangement in arrangements %}
-    <div class='col-3'>
-        <img src="{{arrangement.image}}" alt="" class='thumbnail2 align-center'>
-        <form action="/products" method="post">
-            <p class='text-center'><button class='text-center button1'>{{arrangement.product.name}}</button></p>
-            <input type="hidden" name='id' value="{{arrangement.id}}">
-        </form>
-        <p class='text-center'>${{arrangement.price | round | int}}</p>
+    <div class="card col-3 mb-5" style="width: 18rem;">
+        <img src="{{arrangement.image}}" class="card-img-top" alt="arrangement image">
+        <div class="card-body">
+            <form action="/products" method='post'>
+                <h5><button class='button1' type='submit'>{{arrangement.product.name}}</button></h5>
+            </form>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item text-center">Deluxe: ${{arrangement.price | round | int}}</li>
+        </ul>
+        <div class="card-body">
+            <form action="/products" method='post'>
+                <button class='button1' type='submit'>Order</button>
+            </form>
+        </div>
     </div>
     {% endfor %}
 </div>
