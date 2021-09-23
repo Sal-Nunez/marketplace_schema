@@ -1,7 +1,7 @@
 from flask_app import app
 from flask import render_template, redirect, request, session, flash
 from flask_app.models.cart_item import CartItem
-from flask_app.models import cart, user
+from flask_app.models import cart, user, arrangement
 
 # Use this route to view cart. If guest, use session['cart'] on html side.
 @app.route('/cart')
@@ -22,7 +22,7 @@ def view_cart():
 # Takes as input the cart_id, arrangement_id, and quantity
 @app.route('/carts/add_arrangement', methods=['POST'])
 def add_to_cart():
-    if session['uuid']:
+    if 'uuid' in session:
         user1 = user.User.select(data={'id':session['uuid']})
         data = {
             'quantity': request.form['quantity'],
@@ -33,16 +33,19 @@ def add_to_cart():
         CartItem.create_cart_item(data)
         return redirect('/cart')
     else:
-        if request.form['arrangement_id'] in session['cart']:
-            session['cart']['arrangement_id'] = int(request.form['quantity'])
+        arrangement1 = request.form['arrangement_id']
+        print("**********************",arrangement1)
+        if arrangement1 in session:
+            session[arrangement1] += int(request.form['quantity'])
         else:
-            session['cart'] = {request.form['arrangement_id']: int(request.form['quantity'])}
+            session[arrangement1] = int(request.form['quantity'])
+    print(f"****************************", session)
     return redirect('/cart') # redirect to current page
 
 # Takes as input the cart_item "id" and cart_item "user_id" and arrangement_id, assume a hidden input
 @app.route('/carts/remove_arrangement', methods=['POST'])
 def remove_from_cart():
-    if session['uuid']:
+    if 'uuid' in session:
         if request.form['user_id'] == session['uuid']:
             data = {
                 'cart_items.id': request.form['id']

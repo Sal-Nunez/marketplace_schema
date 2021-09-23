@@ -26,7 +26,7 @@ console.log("Hello");
 search.addEventListener('input', function(e) {
     let userInput = e.target.value.toLowerCase();
     suggestions.innerHTML = ""
-    fetch(`/search/${userInput}`)
+    fetch(`/api/search/${userInput}`)
     .then(resp => resp.json())
     .then(data => {
         console.log(data)

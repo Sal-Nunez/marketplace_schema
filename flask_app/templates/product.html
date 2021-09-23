@@ -137,9 +137,8 @@
                 <h1>${{arrangement.price | round | int}}</h1>
                 <div>
                     {% for arrangement in arrangement.product.arrangements %}
-                    <form action="/products" method='post'>
+                    <form action="/product/{{ arrangement.id }}">
                         <button type="submit" class="btn btn-outline-dark btn-rounded mt-3" data-mdb-ripple-color="dark">{{arrangement.size}}</button>
-                        <input type="hidden" value='{{arrangement.id}}' name='id'>
                     </form>
                     {% endfor %}
                 </div>
