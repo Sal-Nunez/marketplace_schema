@@ -67,5 +67,13 @@ def all_products():
 @app.route('/search/<name>')
 def filter_users(name):
     query = "SELECT name FROM products WHERE products.name LIKE %(name)s LIMIT 5;"
-    results = query_db(query,{"name":name+"%"})
-    return jsonify(results)
+    results1 = query_db(query,{"name":"%"+name+"%"})
+    query = "SELECT category FROM categories WHERE categories.category LIKE %(name)s LIMIT 5"
+    results2 = query_db(query, {"name": "%"+name+"%"})
+    print(results1)
+    result = []
+    results1.extend(results2)
+    for myDict in results1:
+        if myDict not in result:
+            result.append(myDict)
+    return jsonify(result)
