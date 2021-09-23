@@ -1,11 +1,10 @@
-from flask_app.config.mysqlconnection import connectToMySQL
+from flask_app.config.mysqlconnection import query_db
 from flask import Flask, flash, session
 from flask_app.models import user
 from flask_app.models import cart
 from flask_app.models import cart_item
 from flask_app.models.order_item import OrderItem
 app = Flask(__name__)
-DATABASE = "floral_schema"
 
 class Order:
     def __init__(self, data):
@@ -30,14 +29,14 @@ class Order:
     def select(cls, type='email', data=None):
         if data:
             query = f"SELECT * FROM orders WHERE orders.{type} = %({type})s;"
-            results = connectToMySQL(DATABASE).query_db(query, data)
+            results = query_db(query, data)
             if results:
                 order = cls(results[0])
                 return order
             else: return False
         else:
             query = "SELECT * FROM orders;"
-            results = connectToMySQL(DATABASE).query_db(query)
+            results = query_db(query)
             orders = []
             for order in results:
                 orders.append(cls(order))
@@ -82,11 +81,11 @@ class Order:
     @classmethod
     def create_order(cls, data):
         query = "INSERT into orders (user_id, email) VALUES (%(user_id)s, %(email)s);"
-        results =  connectToMySQL(DATABASE).query_db(query, data)
+        results =  query_db(query, data)
         return results
 
 # Orders should be treated as immutable and undeletable.
     # @classmethod
     # def delete_order(cls, data, type='id'):
     #     query = f"DELETE FROM orders WHERE orders.{type} = %({type})s;"
-    #     return connectToMySQL(DATABASE).query_db(query, data)
+    #     return query_db(query, data)

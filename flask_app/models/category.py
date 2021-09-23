@@ -1,7 +1,6 @@
-from flask_app.config.mysqlconnection import connectToMySQL
+from flask_app.config.mysqlconnection import query_db
 from flask import Flask, flash, session
 app = Flask(__name__)
-DATABASE = "floral_schema"
 
 class Category:
     def __init__(self, data):
