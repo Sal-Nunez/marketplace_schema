@@ -1,5 +1,6 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import Flask, flash, session
+from flask_app.models import arrangement
 app = Flask(__name__)
 DATABASE = "floral_schema"
 
@@ -14,6 +15,13 @@ class CartItem:
 
     def __eq__(self, other):
         return self.id == other.id
+
+    @property
+    def arrangement(self):
+        query = f"SELECT * FROM arrangements join cart_items on arragements.id = cart_item.arrangement_id where carts.id = {self.id}"
+        results = connectToMySQL(DATABASE).query_db(query)
+        arrangement1 = arrangement.Arrangement(results[0])
+        return arrangement1
 
     @classmethod
     def select(cls, type='cart_id', data=None):

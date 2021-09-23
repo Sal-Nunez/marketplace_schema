@@ -23,12 +23,15 @@ def view_cart():
 @app.route('/carts/add_arrangement', methods=['POST'])
 def add_to_cart():
     if session['uuid']:
+        user1 = user.User.select(data={'id':session['uuid']})
         data = {
             'quantity': request.form['quantity'],
-            'cart_id': request.form['cart_id'],
+            #can get cart from session cart or uuid
+            'cart_id': user1.cart.id,
             'arrangement_id': request.form['arrangement_id']
         }
         CartItem.create_cart_item(data)
+        return redirect('/cart')
     else:
         if request.form['arrangement_id'] in session['cart']:
             session['cart']['arrangement_id'] = int(request.form['quantity'])
