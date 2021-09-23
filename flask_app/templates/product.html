@@ -134,13 +134,23 @@
                 <h1>Size</h1>
             </div>
             <div class='d-flex justify-content-between'>
-                <h1>$50</h1>
-                <div class="row">
-                    <button type="button" class="btn btn-outline-dark btn-rounded mt-3" data-mdb-ripple-color="dark">Original</button>
-                    <button type="button" class="btn btn-outline-dark btn-rounded mt-3" data-mdb-ripple-color="dark">Deluxe</button>
-                    <button type="button" class="btn btn-outline-dark btn-rounded mt-3" data-mdb-ripple-color="dark">Grande</button>
+                <h1>${{arrangement.price | round | int}}</h1>
+                <div>
+                    {% for arrangement in arrangement.product.arrangements %}
+                    <form action="/products" method='post'>
+                        <button type="submit" class="btn btn-outline-dark btn-rounded mt-3" data-mdb-ripple-color="dark">{{arrangement.size}}</button>
+                        <input type="hidden" value='{{arrangement.id}}' name='id'>
+                    </form>
+                    {% endfor %}
                 </div>
             </div>
+        </div>
+        <div class='row'>
+            <form action="/carts/add_arrangement" method='post'>
+                <button type="submit" class="btn btn-dark btn-rounded mt-3" data-mdb-ripple-color="dark">Add To Cart</button>
+                <input type="hidden" name='quantity' value='1'>
+                <input type="hidden" name='arrangement_id' value='{{arrangement.id}}'>
+            </form>
         </div>
     </div>
 

@@ -38,7 +38,7 @@ class User:
 
     @property
     def cart(self):
-        query = f"SELECT * FROM cart WHERE carts.user_id = {self.id}"
+        query = f"SELECT * FROM carts WHERE carts.user_id = {self.id}"
         results = connectToMySQL(DATABASE).query_db(query)
         cart1 = cart.Cart(results[0])
         return cart1

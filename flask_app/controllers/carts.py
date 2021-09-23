@@ -23,9 +23,12 @@ def view_cart():
 @app.route('/carts/add_arrangement', methods=['POST'])
 def add_to_cart():
     if session['uuid']:
+        user1 = user.User.select(data={'id':session['uuid']})
+        print(user1, user1.cart, user1.cart.id)
         data = {
             'quantity': request.form['quantity'],
-            'cart_id': request.form['cart_id'],
+            #can get cart from session cart or uuid
+            'cart_id': user1.cart.id,
             'arrangement_id': request.form['arrangement_id']
         }
         CartItem.create_cart_item(data)
@@ -34,7 +37,7 @@ def add_to_cart():
             session['cart']['arrangement_id'] = int(request.form['quantity'])
         else:
             session['cart'] = {request.form['arrangement_id']: int(request.form['quantity'])}
-    return redirect(f"{request.form['url']}") # redirect to current page
+    return redirect('/cart') # redirect to current page
 
 # Takes as input the cart_item "id" and cart_item "user_id" and arrangement_id, assume a hidden input
 @app.route('/carts/remove_arrangement', methods=['POST'])
