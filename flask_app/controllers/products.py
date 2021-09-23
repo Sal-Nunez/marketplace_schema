@@ -1,10 +1,10 @@
 from flask_app import app
 from flask import render_template, redirect, request, session, flash
 from flask_app.models import product
-from flask_app.models import user
+from flask_app.models import user, arrangement
 
 
-@app.route('/products/<string:product_name>')
+@app.route('/products/<string:product_name>', methods=['POST'])
 def one_product(product_name):
     product_data = {
         'name': product_name
@@ -15,14 +15,16 @@ def one_product(product_name):
         }
         data = {
             'product': product.Product.select(type='name', data=product_data),
-            'user': user.User.select(data = id)
+            'user': user.User.select(data = id),
+            'arrangement': arrangement.Arrangement.select(data={'id':request.form['id']})
         }
-        return render_template('product.html', **data)
+        return redirect(f"/products/{product_name}", **data)
     else:
         data = {
-            'product': product.Product.select(type='name', data=product_data)
+            'product': product.Product.select(type='name', data=product_data),
+            'arrangement': arrangement.Arrangement.select(data={'id':request.form['id']})
         }
-        return render_template('product.html', **data)
+        return redirect(f"/products/{product_name}", **data)
 
 @app.route('/products/all')
 def all_products():

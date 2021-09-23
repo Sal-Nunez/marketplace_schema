@@ -43,7 +43,10 @@ class Product:
                 'size': arrangement['size'],
                 'price': arrangement['price'],
                 'inventory': arrangement['inventory'],
-                'sale_price': arrangement['sale_price']
+                'sale_price': arrangement['sale_price'],
+                'product_id': self.id,
+                'created_at': arrangement['created_at'],
+                'updated_at': arrangement['updated_at']
             }
             arrangements.append(Arrangement(data))
         return arrangements

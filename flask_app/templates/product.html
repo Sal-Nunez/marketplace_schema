@@ -1,13 +1,14 @@
 {% extends 'model.html' %} {% block content %}
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid d-flex flex-wrap align-items-center justify-content-between justify-content-lg-start">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="button">
-            <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
         </button>
         <img src="\static\assets\clipart1771141 (3).png" alt="logo" href="#">
         <!-- <div id="cart">
-                    <img src="\static\assets\PikPng.com_wheelbarrow-png_5860717 (1).png" alt="cart">
-                    </div> -->
+            <img src="\static\assets\PikPng.com_wheelbarrow-png_5860717 (1).png" alt="cart">
+        </div> -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
@@ -32,15 +33,17 @@
             </ul>
         </div>
         {% if user %}
-        <a href="/logout" class="btn btn-primary me-3">Logout</a> {% else %}
+        <a href="/account" class="btn btn-primary me-3">Your Account</a> {% else %}
         <button class="btn btn-primary me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Account</button> {% endif %}
         <form class="d-flex col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            <div>
+                <input class="form-control me-2 mt-3" type="search" placeholder="Search" aria-label="Search" id='search' style='position: relative'>
+                <ul id="suggestions" class='suggestions-dropdown'></ul>
+            </div>
+            <button class="btn btn-outline-success m-3" type="submit">Search</button>
         </form>
     </div>
-    <img src="\static\assets\PikPng.com_wheelbarrow-png_5860717 (1).png" alt="cart">
-    </div>
+    <a href="/cart"><img src="\static\assets\PikPng.com_wheelbarrow-png_5860717 (1).png" alt="cart" style='margin-right: 50px;' href="/cart"></a>
 </nav>
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
@@ -71,15 +74,13 @@
                             <input type="password" name="password" id="password" class="input-text">
                         </div>
                         <div class="form-row">
-                            <label for="password_confirmation">CONFIRM
-                                PASSWORD</label>
+                            <label for="password_confirmation">CONFIRM PASSWORD</label>
                             <input type="password" name="password_confirmation" id="password_confirmation" class="input-text">
                             <span class="errors" id='reg_pw_error'></span>
                         </div>
                         <div class="form-row-last">
                             <input type="submit" name="register" class="register" value="Register">
-                            <p>Or<a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight2" aria-controls="offcanvasRight">Sign
-                                    in</a></p>
+                            <p>Or<a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight2" aria-controls="offcanvasRight">Sign in</a></p>
                         </div>
                     </form>
                 </div>
@@ -95,20 +96,20 @@
         <div class="page-content">
             <div class="page-content">
                 <div class="form-v7-content" style='width: 70%'>
-                    <form class="form-detail" id="reg-form">
+                    <form class="form-detail" id="login-form">
                         <div class="form-row">
                             <label for="email">E-MAIL</label>
                             <input type="text" name="email" id="email" class="input-text">
-                            <span class='errors' id='reg_email_error'></span>
+                            <span class='errors' id='login_email_error'></span>
                         </div>
                         <div class="form-row">
                             <label for="password">PASSWORD</label>
                             <input type="password" name="password" id="password" class="input-text">
+                            <span class='errors' id='login_password_error'></span>
                         </div>
                         <div class="form-row-last">
                             <input type="submit" name="register" class="register" value="Sign In">
-                            <p>Or<a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Register</a>
-                            </p>
+                            <p>Or<a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Register</a></p>
                         </div>
                     </form>
                 </div>
@@ -116,71 +117,74 @@
         </div>
     </div>
 </div>
-<div class="container">
-    <div class="container text-center">
-        <h1 class='text-center'>Search Products:</h1>
-        <select class="selectpicker form-select" data-show-subtext="true" data-live-search="true" id="mySelect" onchange="myFunction()">
-            <option value="bouquets">Bouquets</option>
-            <option value="assortment">Assortment</option>
-        </select>
+{% if user %}
+<div class="shopping-background">
+
+    <div class="container d-flex justify-content-between">
+        <h1>{{user.first_name}} {{user.last_name}}</h1> {% endif %}
     </div>
-</div>
-<div class="row">
-    {% for product in products %} {% for arrangement in product.arrangements %} {% if arrangement.size == 'Deluxe' %}
-    <div class='col-3'>
-        <img src="{{arrangement.image}}" alt="" class='thumbnail2'>
-        <form action="/product/{{product.name}}" methods=[ 'post']>
-            <p class='text-center'><button class='text-center button1'>{{product.name}}</button></p>
-            <input type="hidden" name='id' value='{{arrangement.id}}'>
-        </form>
-        <p class='text-center'>${{arrangement.price | round | int}}</p>
-    </div>
-    {% endif %} {% endfor %} {% endfor %}
-</div>
-
-
-
-
-<div class="container">
-    <footer class="py-5">
-        <div class="d-flex justify-content-between">
-            <div class="col-2">
-                <h5>Section</h5>
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Flowers</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Occasions</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-                </ul>
+    <div class='container row ms-auto me-auto'>
+        <div class="col mt-4">
+            <h1>{{product.name}}</h1>
+            {% for arrangement in product.arrangements %} {% if arrangement.size == "Original" %}
+            <img src="{{arrangement.image}}" alt="" class='thumbnail3'> {% endif %} {% endfor %}
+        </div>
+        <div class='col mt-4'>
+            <div class='d-flex justify-content-between'>
+                <h1>Price</h1>
+                <h1>Size</h1>
             </div>
-            <div class="col-4">
-                <form>
-                    <h5>Subscribe to our newsletter</h5>
-                    <p>Monthly digest of whats new and exciting from us.</p>
-                    <div class="d-flex w-100 gap-2">
-                        <label for="newsletter1" class="visually-hidden">Email
-                            address</label>
-                        <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-                        <button class="btn btn-primary" type="button">Subscribe</button>
-                    </div>
-                </form>
+            <div class='d-flex justify-content-between'>
+                <h1>$50</h1>
+                <div class="row">
+                    <button type="button" class="btn btn-outline-dark btn-rounded mt-3" data-mdb-ripple-color="dark">Original</button>
+                    <button type="button" class="btn btn-outline-dark btn-rounded mt-3" data-mdb-ripple-color="dark">Deluxe</button>
+                    <button type="button" class="btn btn-outline-dark btn-rounded mt-3" data-mdb-ripple-color="dark">Grande</button>
+                </div>
             </div>
         </div>
+    </div>
 
-        <div class="d-flex justify-content-between py-4 my-4 border-top">
-            <p>&copy; 2021 Company, Inc. All rights reserved.</p>
-            <ul class="list-unstyled d-flex">
-                <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
+    <div class="container">
+        <footer class="py-5">
+            <div class="d-flex justify-content-between">
+                <div class="col-2">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Flowers</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Occasions</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                    </ul>
+                </div>
+                <div class="col-4">
+                    <form>
+                        <h5>Subscribe to our newsletter</h5>
+                        <p>Monthly digest of whats new and exciting from us.</p>
+                        <div class="d-flex w-100 gap-2">
+                            <label for="newsletter1" class="visually-hidden">Email address</label>
+                            <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+                            <button class="btn btn-primary" type="button">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between py-4 my-4 border-top">
+                <p>&copy; 2021 Company, Inc. All rights reserved.</p>
+                <ul class="list-unstyled d-flex">
+                    <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
                             <use xlink:href="#twitter" />
                         </svg></a></li>
-                <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
+                    <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
                             <use xlink:href="#instagram" />
                         </svg></a></li>
-                <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
+                    <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
                             <use xlink:href="#facebook" />
                         </svg></a></li>
-            </ul>
-        </div>
-    </footer>
-</div>
-{% endblock %}
+                </ul>
+            </div>
+        </footer>
+    </div>
+
+    {% endblock %}
