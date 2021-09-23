@@ -1,8 +1,9 @@
+from flask_app.config.mysqlconnection import query_db
 from flask_app import app
 from flask import render_template, redirect, request, session, flash, jsonify
 from flask_app.models import product
 from flask_app.models import user, arrangement
-
+DATABASE = "floral_schema"
 
 @app.route('/product')
 def one_product():
@@ -45,20 +46,26 @@ def all_products():
         }
         return render_template('products.html', **data)
 #notdone
-@app.route('/search/<string:name>')
-def search_dropdown(name):
-    print('name*****************************', name)
-    msg = {
-        'status': 200
-    }
-    # product_list = {}
-    product_data = {
-        'name': name+'%'
-    }
-    print (f"{'product_data':*^40}", product_data['name'])
-    products = product.Product.search_products(data=product_data)
-    print('products****************************',products)
-    if products:
-        return jsonify(msg)
-    else:
-        return jsonify(msg)
+# @app.route('/search/<string:name>')
+# def search_dropdown(name):
+#     print('name*****************************', name)
+#     msg = {
+#         'status': 200
+#     }
+#     # product_list = {}
+#     product_data = {
+#         'name': name+'%'
+#     }
+#     print (f"{'product_data':*^40}", product_data['name'])
+#     products = product.Product.search_products(data=product_data)
+#     print('products****************************',products)
+#     if products:
+#         return jsonify(msg)
+#     else:
+#         return jsonify(msg)
+
+@app.route('/search/<name>')
+def filter_users(name):
+    query = "SELECT name FROM products WHERE products.name LIKE %(name)s LIMIT 5;"
+    results = query_db(query,{"name":name+"%"})
+    return jsonify(results)

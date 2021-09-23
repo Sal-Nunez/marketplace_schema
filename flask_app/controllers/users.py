@@ -1,8 +1,7 @@
 from flask_app import app
-from flask_app.config.mysqlconnection import connectToMySQL
+from flask_app.config.mysqlconnection import query_db
 from flask import render_template, redirect, request, session, flash, jsonify
 from flask_bcrypt import Bcrypt
-DATABASE = "floral_schema"
 from flask_app.models.user import User
 from flask_app.models.order import Order
 import re
@@ -49,7 +48,7 @@ def register():
             errors['reg_email_error'] = "Invalid Email Address!"
             is_valid = False
         query1 = "select * from users where users.email = %(email)s;"
-        if connectToMySQL(DATABASE).query_db(query1, data=request.form):
+        if query_db(query1, data=request.form):
             errors['reg_email_error'] = "Email already exists, please Login"
             is_valid = False
         if len(request.form['password']) < 8:
@@ -94,7 +93,7 @@ def login():
         'email': request.form['email']
         }
     query1 = "select * from users where users.email = %(email)s;"
-    if not connectToMySQL(DATABASE).query_db(query1, data):
+    if not query_db(query1, data):
         errors['login_email_error'] = 'Email Doesn\'t Exist'
         is_valid = False
     if len(request.form['email']) < 1:

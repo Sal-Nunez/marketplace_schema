@@ -1,9 +1,8 @@
-from flask_app.config.mysqlconnection import connectToMySQL
+from flask_app.config.mysqlconnection import query_db
 from flask import Flask, flash, session
 from flask_app.models.product import Product
 from flask_app.models.arrangement import Arrangement
 app = Flask(__name__)
-DATABASE = "floral_schema"
 
 
 class OrderItem:
@@ -21,14 +20,14 @@ class OrderItem:
     @property
     def product(self):
         query = f"SELECT * FROM products join arrangements on products.id = arrangements.product_id join order_items on arrangements.id = order_items.arrangement_id where order_items.id = {self.id};"
-        results = connectToMySQL(DATABASE).query_db(query)
+        results = query_db(query)
         product = Product(results[0])
         return product
 
     @property
     def arrangement(self):
         query = f"SELECT * FROM arrangements join order_items on arrangements.id = order_items.arrangement_id WHERE order_items.id = {self.id};"
-        results = connectToMySQL(DATABASE).query_db(query)
+        results = query_db(query)
         arrangement = Arrangement(results[0])
         return arrangement
 
@@ -36,14 +35,14 @@ class OrderItem:
     def select(cls, type='order_id', data=None):
         if data:
             query = f"SELECT * FROM order_items WHERE order_items.{type} = %({type})s;"
-            results = connectToMySQL(DATABASE).query_db(query, data)
+            results = query_db(query, data)
             order_items = []
             for order_item in results:
                 order_items.append(order_item)
                 return order_items
         else:
             query = "SELECT * FROM order_items;"
-            results = connectToMySQL(DATABASE).query_db(query)
+            results = query_db(query)
             order_items = []
             for order_item in results:
                 order_items.append(cls(order_item))
@@ -52,18 +51,18 @@ class OrderItem:
     @classmethod
     def create_order_item(cls, data):
         query = "INSERT INTO order_items (quantity, order_id, arrangement_id) VALUES (%(quantity)s, %(order_id)s, %(arrangement_id)s);"
-        results = connectToMySQL(DATABASE).query_db(query, data)
+        results = query_db(query, data)
         return results
 
 # Shouldn't have to use because orders are immutable.
     # @classmethod
     # def edit_order_item(cls, data):
     #     query = "UPDATE order_items SET quantity = %(quantity)s, order_id = %(order_id)s, arrangement_id = %(arrangement_id)s WHERE order_items.id = %(id)s;"
-    #     results = connectToMySQL(DATABASE).query_db(query, data)
+    #     results = query_db(query, data)
     #     return results
 
 # Shouldn't have to use because orders are immutable.
     # @classmethod
     # def delete_order_item(cls, data):
     #     query = "DELETE FROM order_items WHERE order_items.id = %(id)s;"
-    #     return connectToMySQL(DATABASE).query_db(query, data)
+    #     return query_db(query, data)

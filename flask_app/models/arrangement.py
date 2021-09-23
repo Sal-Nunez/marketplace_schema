@@ -1,8 +1,7 @@
-from flask_app.config.mysqlconnection import connectToMySQL
+from flask_app.config.mysqlconnection import query_db
 from flask import Flask, flash, session
 from flask_app.models import product
 app = Flask(__name__)
-DATABASE = "floral_schema"
 
 class Arrangement:
     def __init__(self, data):
@@ -21,7 +20,7 @@ class Arrangement:
     @property
     def image(self):
         query = f"SELECT * FROM images WHERE arrangement_id = {self.id};"
-        results = connectToMySQL(DATABASE).query_db(query)
+        results = query_db(query)
         image1 = results[0]
         image = image1['image']
         return image
@@ -37,14 +36,14 @@ class Arrangement:
     def select(cls, type='id', data=None):
         if data:
             query = f"SELECT * FROM arrangements WHERE arrangements.{type} = %({type})s;"
-            results = connectToMySQL(DATABASE).query_db(query, data)
+            results = query_db(query, data)
             arrangements = []
             for arrangement in results:
                 arrangements.append(cls(arrangement))
             return arrangements
         else:
             query = "SELECT * FROM arrangements;"
-            results = connectToMySQL(DATABASE).query_db(query)
+            results = query_db(query)
             arrangements = []
             for arrangement in results:
                 arrangements.append(cls(arrangement))
@@ -53,16 +52,16 @@ class Arrangement:
     @classmethod
     def create_arrangement(cls, data):
         query = "INSERT INTO arrangements (size, price, inventory, sale_price, product_id) VALUES (%(size)s, %(price)s, %(inventory)s, %(sale_price)s, %(product_id)s);"
-        results =  connectToMySQL(DATABASE).query_db(query, data)
+        results =  query_db(query, data)
         return results
 
     @classmethod
     def edit_arrangement(cls, data):
         query = "UPDATE arrangements SET size = %(size)s, price = %(price)s, inventory = %(inventory, sale_price, product_id)s WHERE arrangements.id = %(id)s;"
-        results = connectToMySQL(DATABASE).query_db(query, data)
+        results = query_db(query, data)
         return results
 
     @classmethod
     def delete_arrangement(cls, data):
         query = "DELETE FROM arrangements WHERE arrangements.id = %(id)s;"
-        return connectToMySQL(DATABASE).query_db(query, data)
+        return query_db(query, data)

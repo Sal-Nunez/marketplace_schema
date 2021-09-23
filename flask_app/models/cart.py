@@ -1,8 +1,7 @@
-from flask_app.config.mysqlconnection import connectToMySQL
+from flask_app.config.mysqlconnection import query_db
 from flask import Flask, flash, session
 from flask_app.models import user, cart_item
 app = Flask(__name__)
-DATABASE = "floral_schema"
 
 class Cart:
     def __init__(self, data):
@@ -25,7 +24,7 @@ class Cart:
     @property
     def owner(self):
         query = f"SELECT * FROM users JOIN carts on users.id = carts.user_id WHERE carts.user_id = {self.id};"
-        results = connectToMySQL(DATABASE).query_db(query)
+        results = query_db(query)
         owner = user.User(results[0])
         return owner
 
@@ -33,12 +32,12 @@ class Cart:
     def select(cls, data=None, type='user_id'):
         if data:
             query = f"SELECT * FROM carts WHERE carts.{type} = %({type})s;"
-            results = connectToMySQL(DATABASE).query_db(query, data)
+            results = query_db(query, data)
             cart = cls(results[0])
             return cart
         else:
             query = "SELECT * FROM carts;"
-            results = connectToMySQL(DATABASE).query_db(query)
+            results = query_db(query)
             carts = []
             for cart in results:
                 carts.append(cls(cart))
@@ -47,10 +46,10 @@ class Cart:
     @classmethod
     def create_cart(cls, data):
         query = "INSERT INTO carts (user_id) VALUES (%(user_id)s);"
-        results = connectToMySQL(DATABASE).query_db(query, data)
+        results = query_db(query, data)
         return results
 
     @classmethod
     def delete_cart(cls, data, type='id'):
         query = f"DELETE FROM carts WHERE carts.{type} = %({type})s;"
-        return connectToMySQL(DATABASE).query_db(query, data)
+        return query_db(query, data)
