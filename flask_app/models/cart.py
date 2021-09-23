@@ -19,7 +19,7 @@ class Cart:
         data = {
             'cart_id': self.id
         }
-        cart_items = cart_item.CartItem(data=data)
+        cart_items = cart_item.CartItem.select(data=data)
         return cart_items
 
     @property

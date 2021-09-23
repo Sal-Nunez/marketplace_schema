@@ -34,7 +34,7 @@ class CartItem:
 
     @classmethod
     def create_cart_item(cls, data):
-        query = "INSERT INTO cart_items (quantity, cart_id, arrangement_id) VALUES (%(quantity)s, %(cart_id)s, %(arrangement_id)s;"
+        query = "INSERT INTO cart_items (quantity, cart_id, arrangement_id) VALUES (%(quantity)s, %(cart_id)s, %(arrangement_id)s);"
         results =  connectToMySQL(DATABASE).query_db(query, data)
         return results
 

@@ -122,7 +122,7 @@
     <div class="container d-flex justify-content-between">
         <h1>{{user.first_name}} {{user.last_name}}</h1> {% endif %}
         <div class='mt-3'>
-            <form action="/newsletter_signup" methods=[ 'post']>
+            <form action="/newsletter_signup" methods='post'>
                 <label class="form-check-label" for="flexCheckDefault">Interested in emails?</label> {% if user %}
                 <input type="hidden" name='email' value='{{user.email}}'> {% else %}
                 <input type="text" name="email"> {% endif %}
@@ -138,7 +138,8 @@
     <div class='container row ms-auto me-auto'>
         <div class="col">
             <h1>Product</h1>
-            <img src="https://images.pexels.com/photos/3800363/pexels-photo-3800363.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="" class='thumbnail1'>
+            {% for item in cart.cart_items %}
+            <img src="{{item.arrangement_id}}" alt="" class='thumbnail1'>
         </div>
         <div class='col'>
             <div class='d-flex justify-content-between'>
@@ -150,13 +151,14 @@
                 <h1 id='price'>50</h1>
                 <select class="form-select1" aria-label="Default select example" name='form-select1' onchange="selectChange()" id='form'>
                     <option value="0">0</option>
-                    <option value="1">1</option>
+                    <option value="{{item.quantity}}" selected>{{item.quantity}}</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                 </select>
                 <h1 class='result' id='result'>0</h1>
             </div>
         </div>
+        {% endfor %}
     </div>
 
 
