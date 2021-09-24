@@ -7,19 +7,22 @@ DATABASE = "floral_schema"
 
 @app.route('/product/<int:id>')
 def one_product(id):
-    print("***************", id)
+    print("***************ID", id)
     user_id = {
+        'id': session['uuid']
+    }
+    product_id = {
         'id': id
     }
     if 'uuid' in session:
         data = {
             'user': user.User.select(data = user_id),
-            'arrangement': arrangement.Arrangement.select_one(data=user_id)
+            'arrangement': arrangement.Arrangement.select_one(data=product_id)
         }
         return render_template('product.html', **data)
     else:
         data = {
-            'arrangement': arrangement.Arrangement.select_one(data=user_id)
+            'arrangement': arrangement.Arrangement.select_one(data=product_id)
         }
         return render_template('product.html', **data)
 
