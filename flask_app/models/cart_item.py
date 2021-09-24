@@ -18,14 +18,14 @@ class CartItem:
 
     @property
     def arrangement(self):
-        query = f"SELECT * FROM arrangements join cart_items on arrangements.id = cart_items.arrangement_id where cart_items.id = {self.id}"
+        query = f"SELECT * FROM arrangements join cart_items on arrangements.id = cart_items.arrangement_id where cart_items.id = {self.id};"
         results = query_db(query)
         arrangement1 = arrangement.Arrangement(results[0])
         return arrangement1
     
     @property
     def guest_arrangement(self):
-        query = f"SELECT * FROM arrangements WHERE arrangements.id = {self.arrangement_id}"
+        query = f"SELECT * FROM arrangements WHERE arrangements.id = {self.arrangement_id};"
         results = query_db(query)
         arrangement1 = arrangement.Arrangement(results[0])
         return arrangement1

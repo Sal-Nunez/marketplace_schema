@@ -58,7 +58,7 @@ class Product:
             product = cls(results[0])
             return product
         else:
-            query = "SELECT * FROM products"
+            query = "SELECT * FROM products;"
             results = query_db(query)
             products = []
             for product in results:

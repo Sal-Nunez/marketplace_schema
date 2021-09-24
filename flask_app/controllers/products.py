@@ -65,7 +65,7 @@ def all_products():
 def filter_users(name):
     query = "SELECT name FROM products WHERE products.name LIKE %(name)s LIMIT 5;"
     results1 = query_db(query,{"name":"%"+name+"%"})
-    query = "SELECT category FROM categories WHERE categories.category LIKE %(name)s LIMIT 5"
+    query = "SELECT category FROM categories WHERE categories.category LIKE %(name)s LIMIT 5;"
     results2 = query_db(query, {"name": "%"+name+"%"})
     print(results1)
     result = []
