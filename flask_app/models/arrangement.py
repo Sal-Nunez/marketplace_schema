@@ -53,7 +53,6 @@ class Arrangement:
     def select_one(cls, data):
         query = "SELECT * FROM arrangements WHERE arrangements.id = %(id)s;"
         results = query_db(query, data)
-        print ("**************************", results)
         arrangement = cls(results[0])
         return arrangement
 

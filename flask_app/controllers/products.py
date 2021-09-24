@@ -7,7 +7,6 @@ DATABASE = "floral_schema"
 
 @app.route('/product/<int:id>')
 def one_product(id):
-    print("***************ID", id)
     product_id = {
         'id': id
     }
@@ -67,7 +66,6 @@ def filter_users(name):
     results1 = query_db(query,{"name":"%"+name+"%"})
     query = "SELECT category FROM categories WHERE categories.category LIKE %(name)s LIMIT 5;"
     results2 = query_db(query, {"name": "%"+name+"%"})
-    print(results1)
     result = []
     results1.extend(results2)
     for myDict in results1:
