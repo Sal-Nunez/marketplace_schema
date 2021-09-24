@@ -121,32 +121,35 @@
 </div>
 <div class="container">
     <div class="container text-center">
-        <h1 class='text-center'>Products:</h1>
+        <h1 class='text-center mt-5'>Products:</h1>
         <!-- <select class="selectpicker form-select" data-show-subtext="true" data-live-search="true" id="mySelect" onchange="myFunction()">
             <option value="bouquets">Bouquets</option>
             <option value="assortment">Assortment</option>
         </select> -->
     </div>
 </div>
-<div class="row w-50 mx-auto" style='gap: 15%'>
-    {% for arrangement in arrangements %}
-    <div class="card col-3 mb-5" style="width: 18rem;">
-        <img src="{{arrangement.image}}" class="card-img-top" alt="arrangement image">
-        <div class="card-body text-center">
-            <form action="/product/{{ arrangement.id }}">
-                <h5><button class='button1' type='submit'>{{arrangement.product.name}}</button></h5>
-            </form>
+<div class="d-flex justify-content-center">
+    <div class="row mt-5 ms-5">
+        {% for arrangement in arrangements %}
+        <div class="card col-2 mb-5">
+            <img src="{{arrangement.image}}" class="card-img-top" alt="arrangement image">
+            <div class="card-body text-center">
+                <form action="/product/{{ arrangement.id }}">
+                    <h5><button class='button1' type='submit'>{{arrangement.product.name}}</button></h5>
+                </form>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item text-center">Deluxe: ${{arrangement.price | round | int}}</li>
+            </ul>
+            <div class="card-body text-center">
+                <form action="/product/{{ arrangement.id }}">
+                    <button class='button1' type='submit'>Order</button>
+                </form>
+            </div>
         </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item text-center">Deluxe: ${{arrangement.price | round | int}}</li>
-        </ul>
-        <div class="card-body text-center">
-            <form action="/product/{{ arrangement.id }}">
-                <button class='button1' type='submit'>Order</button>
-            </form>
-        </div>
+        <div class="col-1"></div>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
 
 
