@@ -2,8 +2,9 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid d-flex flex-wrap align-items-center justify-content-between justify-content-lg-start">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="button">
-        <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="button">
+            <span class="navbar-toggler-icon"></span>
         </button>
         <img src="\static\assets\clipart1771141 (3).png" alt="logo" href="#">
         <!-- <div id="cart">
@@ -37,16 +38,16 @@
         <a href="/logout" class="btn btn-primary me-3">Logout</a>
         {% else %}
         <button class="btn btn-primary me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Account</button> {% endif %}
-        <form class="d-flex col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+        <form action="/search" method="post" class="d-flex col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
             <div>
-                <input class="form-control me-2 mt-3" type="search" placeholder="Search" aria-label="Search" id='search' style='position: relative'>
+                <input class="form-control me-2 mt-3" name="product_name" type="text" placeholder="Search" aria-label="Search" id='search' style='position: relative'>
                 <ul id="suggestions" class='suggestions-dropdown'></ul>
             </div>
-            <form action="/search"></form>
             <button class="btn btn-outline-success m-3" type="submit">Search</button>
         </form>
     </div>
-    <a href="/cart"><img src="\static\assets\PikPng.com_wheelbarrow-png_5860717 (1).png" alt="cart" style='margin-right: 50px;' href="/cart"></a>
+    <a href="/cart"><img src="\static\assets\PikPng.com_wheelbarrow-png_5860717 (1).png" alt="cart"
+            style='margin-right: 50px;' href="/cart"></a>
 </nav>
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
@@ -78,12 +79,14 @@
                         </div>
                         <div class="form-row">
                             <label for="password_confirmation">CONFIRM PASSWORD</label>
-                            <input type="password" name="password_confirmation" id="password_confirmation" class="input-text">
+                            <input type="password" name="password_confirmation" id="password_confirmation"
+                                class="input-text">
                             <span class="errors" id='reg_pw_error'></span>
                         </div>
                         <div class="form-row-last">
                             <input type="submit" name="register" class="register" value="Register">
-                            <p>Or<a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight2" aria-controls="offcanvasRight">Sign in</a></p>
+                            <p>Or<a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight2"
+                                    aria-controls="offcanvasRight">Sign in</a></p>
                         </div>
                     </form>
                 </div>
@@ -112,7 +115,8 @@
                         </div>
                         <div class="form-row-last">
                             <input type="submit" name="register" class="register" value="Sign In">
-                            <p>Or<a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Register</a></p>
+                            <p>Or<a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                                    aria-controls="offcanvasRight">Register</a></p>
                         </div>
                     </form>
                 </div>
@@ -120,6 +124,10 @@
         </div>
     </div>
 </div>
+<!-- END HEADER -->
+{% for message in get_flashed_messages() %}
+<p class="flash-message alert alert-danger text-center">{{ message }}</p>
+{% endfor %}
 <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
     <div class="carousel-inner" style="max-height: 800px !important;">
         <div class="carousel-item active" data-bs-interval="5000">
@@ -151,19 +159,22 @@
 </div>
 <div class="d-flex justify-content-evenly">
     <div class="">
-        <img src="https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/C5375D_LOL_preset_ftd-hero-lv-new.jpeg?v=1614292587" alt="" class="thumbnail">
+        <img src="https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/C5375D_LOL_preset_ftd-hero-lv-new.jpeg?v=1614292587"
+            alt="" class="thumbnail">
         <a href="/product/2">
             <h5 class="text-center fw-light">Light of My Life Bouqet</h5>
         </a>
     </div>
     <div class="/products/all">
-        <img src="https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/CGPD_LOL_preset_ftd-hero-lv-new.jpeg?v=1614357614" alt="" class="thumbnail">
+        <img src="https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/CGPD_LOL_preset_ftd-hero-lv-new.jpeg?v=1614357614"
+            alt="" class="thumbnail">
         <a href="/product/5">
             <h5 class="text-center fw-light">Fiesta Bouquet</h5>
         </a>
     </div>
     <div class="">
-        <img src="https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/S5272D_LOL_preset_ftd-hero-lv-new.jpeg?v=1615900536" alt="" class="thumbnail">
+        <img src="https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/S5272D_LOL_preset_ftd-hero-lv-new.jpeg?v=1615900536"
+            alt="" class="thumbnail">
         <a href="/product/8">
             <h5 class="text-center fw-light">Beautiful Spirit Basket</h5>
         </a>

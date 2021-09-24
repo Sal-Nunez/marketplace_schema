@@ -57,6 +57,16 @@ class Arrangement:
         return arrangement
 
     @classmethod
+    def select_arrangement_from_product(cls, data):
+        query = "SELECT * FROM arrangements JOIN products on arrangements.product_id = products.id WHERE arrangements.size = 'Deluxe' AND products.name = %(name)s"
+        results = query_db(query, data)
+        if results:
+            arrangement = cls(results[0])
+            return arrangement
+        else:
+            return False
+
+    @classmethod
     def create_arrangement(cls, data):
         query = "INSERT INTO arrangements (size, price, inventory, sale_price, product_id) VALUES (%(size)s, %(price)s, %(inventory)s, %(sale_price)s, %(product_id)s);"
         results =  query_db(query, data)
