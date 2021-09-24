@@ -7,31 +7,34 @@ While not logged in:
 
 Logged in as Burrito Jones:
     ~~~FIXED: None of the carousel arrows work.
-    Subscribe to our newsletter button doesn't seem to do anything. Don't know if this is unqiue to being logged in.
     ~~~FIXED: While logged in, I am still presented with the account button leading to the login and registration. Ie, there is no account page.
         ~~~FIXED: There doesn't seem to be a logout button anywhere.
     ~~~FIXED: Attempting to manually log out (entering '/logout' in the html bar results in the uuid error).
-    Email signup button on accounts page leads to 404 is not found.
-    Total should not be interactable in cart.
-    Need remove from cart button.
+    ~~~FIXED: Total should not be interactable in cart.
+    ~~~FIXED: Email signup button on accounts page leads to 404 is not found.
+    ~~~FIXED: Subscribe to our newsletter button doesn't seem to do anything. Don't know if this is unqiue to being logged in.
+    ~~~FIXED: Need remove from cart button.
+    Cart does not clear after completing order.
+    Order is not added to the order history.
 
 General:
-    Order button in each product card just takes to the product page instead of adding to cart.
-    Pictures in cart look bad.
-    FIXED: Searchbar elements are janky
-    No about us page has been made. As such the link results in an error.
-    Never did institute categories.
+    ~~~NON ISSUE: Order button in each product card just takes to the product page instead of adding to cart.
+    ~~~FIXED: Pictures in cart look bad.
+    ~~~FIXED: Searchbar elements are janky
+    ~~~FIXED: No about us page has been made. As such the link results in an error.
     ~~~FIXED: On all product page, only shows two columns unless strecthed across 20-30% of my second screen.
     ~~~FIXED: Print statements throughout code.
+    ~~~FIXED: Console.log files throughout.
     NONE OF THE FOLLOWING ARE IN USE:
-        hello1.html
-        homepage.html
-        test.html
-        2 different font css pages are just commented out.
+        ~~~FIXED: hello1.html
+        ~~~FIXED: homepage.html
+        ~~~FIXED: test.html
+        ~~~FIXED: 2 different font css pages are just commented out.
         Most of the downloaded css is irrelevant.
+    Never did implement categories.
 
 FIX LOG:
-    Added links to footer on each page.
+    FIXED Added links to footer on each page.
     Fixed the uuid error.
     Fixed carousel side/base buttons by removing them.
     Fixed the trending product links.
@@ -39,3 +42,11 @@ FIX LOG:
     FIXED print statement cleanup
     FIXED added logout button to all pages header while logged in.
     FIXED (Sal) Searchbar implementation.
+    FIXED (Sal) Total is no longer interactable
+    FIXED removed font folder
+    FIXED removed console.log and cleaned up some code.
+    FIXED removed extra html files
+    FIXED (Tristan) created the about_us page
+    FIXED (Sal) fixed the cart pics
+    FIXED (Sal) set up the email/newsletter buttons
+    FIXED (Sal) remove from cart button
