@@ -156,12 +156,14 @@
                 </select>
             <h1 class='result' id='result' style='flex:1'>0</h1>
         </div>
-        {% endfor %} {% else %}
-        <p>TEST</p>
-        {% for arrangement in session %}
-        <p>{{ arrangement }}</p>
-        <p>{{session[arrangement]}}</p>
-        {% endfor %} {% endif %}
+        {% endfor %}
+        {% else %}
+        <p>NOT SIGNED IN</p>
+        {% for cart_item in cart_items %}
+        <p>{{ cart_item.guest_arrangement.product.name }}</p>
+        <p>{{cart_item.quantity}}</p>
+        {% endfor %}
+        {% endif %}
     </div>
     <div class='d-flex justify-content-center'>
         <form action="" method='post'>
