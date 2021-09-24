@@ -17,7 +17,18 @@ def view_cart():
         user1 = user.User.select(data = user_data)
         return render_template('view_cart.html', cart = carts, user = user1)
     else:
-        return render_template('view_cart.html')
+        cart_items = []
+        for cart_item in session:
+            data = {
+                'id': cart_item,
+                'quantity': session[cart_item]
+            }
+            cart_item = CartItem.create_guest_cart_item(data)
+            cart_items.append(cart_item)
+        data1 = {
+            'cart_items': cart_items 
+        }
+        return render_template('view_cart.html', **data1)
 
 # Takes as input the cart_id, arrangement_id, and quantity
 @app.route('/carts/add_arrangement', methods=['POST'])
