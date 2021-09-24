@@ -152,3 +152,9 @@ def dashboard():
             'user': User.select('someform of user id')
         }
         return render_template('master.html', **data)
+
+@app.route('/newsletter_signup', methods=['POST'])
+def newsletter_signup():
+    request.form['email']
+    flash("Congrats on Signing up to our Newsletter!", "success")
+    return redirect('/')

@@ -55,14 +55,18 @@ def add_to_cart():
 @app.route('/carts/remove_arrangement', methods=['POST'])
 def remove_from_cart():
     if 'uuid' in session:
-        if request.form['user_id'] == session['uuid']:
-            data = {
-                'id': request.form['id']
-            }
-            CartItem.delete_cart_item(data)
-            return redirect('/cart') # redirect to current page
+        data = {
+            'id': request.form['id']
+        }
+        CartItem.delete_cart_item(data)
+        return redirect('/cart') # redirect to current page
     else:
-        session['cart'].pop(f"{request.form['arrangement_id']}")
+        arrangement1 = request.form['arrangement_id']
+        if arrangement1 in session:
+            if session[arrangement1] > 1:
+                session[arrangement1] -= 1
+            else:
+                session.pop(arrangement1)
         return redirect('/cart') # redirect to current page
 
 # Takes as input cart_item "id", cart_item "user", qauntity, and arrangement_id, assume a hidden input

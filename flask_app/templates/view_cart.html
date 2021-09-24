@@ -4,10 +4,13 @@
     <div class="container d-flex justify-content-between">
         <h1>{{user.first_name}} {{user.last_name}}</h1> {% endif %}
         <div class='mt-3'>
-            <form action="/newsletter_signup" methods='post'>
-                <label class="form-check-label" for="flexCheckDefault">Interested in emails?</label> {% if user %}
-                <input type="hidden" name='email' value='{{user.email}}'> {% else %}
-                <input type="text" name="email"> {% endif %}
+            <form action="/newsletter_signup" method='POST'>
+                <label class="form-check-label" for="flexCheckDefault">Interested in emails?</label>
+                {% if user %}
+                <input type="hidden" name='email' value='{{user.email}}'>
+                {% else %}
+                <input type="email" name='email'>
+                {% endif %}
                 <button class='btn btn-primary me-3'>Sign Up</button>
             </form>
         </div>
@@ -33,6 +36,10 @@
             <div style="flex:2"></div>
             <h1 class="quantity" style='flex:1'>{{ item.quantity }}</h1>
             <h1 class='result' style='flex:1'></h1>
+            <form style='flex:1' action="/carts/remove_arrangement" method="post">
+                <input type="hidden" name="id" value="{{ item.id }}">
+                <button>Remove from Cart</button>
+            </form>
         </div>
         {% endfor %}
         {% else %}
@@ -45,6 +52,10 @@
                     <p>Arrangement: {{ cart_item.guest_arrangement.size }}</p>
                     <p>Quantity: <span class="quantity">{{ cart_item.quantity }}</span></p>
                     <p>Price: $<span class="price">{{ cart_item.guest_arrangement.price| round| int}}</span></p>
+                    <form style='flex:1' action="/carts/remove_arrangement" method="post">
+                        <input type="hidden" name="arrangement_id" value="{{ cart_item.arrangement_id }}">
+                        <button>Remove from Cart</button>
+                    </form>
                 </div>
                 {% endfor %}
             </div>
