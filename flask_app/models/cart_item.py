@@ -22,7 +22,7 @@ class CartItem:
         results = query_db(query)
         arrangement1 = arrangement.Arrangement(results[0])
         return arrangement1
-    
+
     @property
     def guest_arrangement(self):
         query = f"SELECT * FROM arrangements WHERE arrangements.id = {self.arrangement_id};"

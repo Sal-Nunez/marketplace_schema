@@ -33,6 +33,10 @@
             <div style="flex:2"></div>
             <h1 class="quantity" style='flex:1'>{{ item.quantity }}</h1>
             <h1 class='result' style='flex:1'></h1>
+            <form style='flex:1' action="/carts/remove_arrangement" method="post">
+                <input type="hidden" name="id" value="{{ item.id }}">
+                <button>Remove from Cart</button>
+            </form>
         </div>
         {% endfor %}
         {% else %}
@@ -45,6 +49,10 @@
                     <p>Arrangement: {{ cart_item.guest_arrangement.size }}</p>
                     <p>Quantity: <span class="quantity">{{ cart_item.quantity }}</span></p>
                     <p>Price: $<span class="price">{{ cart_item.guest_arrangement.price| round| int}}</span></p>
+                    <form style='flex:1' action="/carts/remove_arrangement" method="post">
+                        <input type="hidden" name="arrangement_id" value="{{ cart_item.arrangement_id }}">
+                        <button>Remove from Cart</button>
+                    </form>
                 </div>
                 {% endfor %}
             </div>
