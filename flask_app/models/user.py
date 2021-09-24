@@ -63,6 +63,15 @@ class User:
         results = query_db(query, data)
         user = cls(results[0])
         if user.email == data['email'] and bcrypt.check_password_hash(user.password, data['password']):
+            cart_id = user.cart.id
+            for item in session:
+                cart_item_data = {
+                    'arrangement_id': item,
+                    'quantity': session[item],
+                    'cart_id': cart_id
+                }
+                cart_item.CartItem.create_cart_item(data=cart_item_data)
+            session.clear()
             session['uuid'] = user.id
             return True
         else:
@@ -73,23 +82,19 @@ class User:
         data['password'] = bcrypt.generate_password_hash(data['password'])
         query = "INSERT INTO users (first_name, last_name, email, password) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s);"
         results = query_db(query, data)
-        if query:
-            session['uuid'] = results
         user_data = {
             'user_id': results
         }
-        if 'cart' not in session:
-            cart.Cart.create_cart(data=user_data)
-            return results
-        else:
+        if session:
             cart_id = cart.Cart.create_cart(data=user_data)
-            # INSERT INTO cart_items (quantity, cart_id, arrangement_id)
-            for key, value in session['cart']:
+            for item in session:
                 cart_item_data = {
-                    'arrangement_id': key,
-                    'quantity': value,
+                    'arrangement_id': item,
+                    'quantity': session[item],
                     'cart_id': cart_id
                 }
                 cart_item.CartItem.create_cart_item(data=cart_item_data)
-            session.pop['cart']
-            return cart_id
+        session.clear()
+        if query:
+            session['uuid'] = results
+        return results
