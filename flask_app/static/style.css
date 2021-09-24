@@ -72,6 +72,14 @@ body {
     object-position: 40% 60%;
 }
 
+.thumbnail5 {
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+    object-position: 40% 60%;
+    border-radius: 25px;
+}
+
 .page-content {
     width: 100%;
     margin: 0 auto;
