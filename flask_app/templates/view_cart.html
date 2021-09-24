@@ -159,10 +159,10 @@
         </div>
         {% endfor %}
         {% else %}
-        <p>TEST</p>
-        {% for arrangement in session %}
-        <p>{{ arrangement }}</p>
-        <p>{{session[arrangement]}}</p>
+        <p>NOT SIGNED IN</p>
+        {% for cart_item in cart_items %}
+        <p>{{ cart_item.guest_arrangement.product.name }}</p>
+        <p>{{cart_item.quantity}}</p>
         {% endfor %}
         {% endif %}
     </div>
