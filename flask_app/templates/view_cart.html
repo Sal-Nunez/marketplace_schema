@@ -4,10 +4,13 @@
     <div class="container d-flex justify-content-between">
         <h1>{{user.first_name}} {{user.last_name}}</h1> {% endif %}
         <div class='mt-3'>
-            <form action="/newsletter_signup" methods='post'>
-                <label class="form-check-label" for="flexCheckDefault">Interested in emails?</label> {% if user %}
-                <input type="hidden" name='email' value='{{user.email}}'> {% else %}
-                <input type="text" name="email"> {% endif %}
+            <form action="/newsletter_signup" method='POST'>
+                <label class="form-check-label" for="flexCheckDefault">Interested in emails?</label>
+                {% if user %}
+                <input type="hidden" name='email' value='{{user.email}}'>
+                {% else %}
+                <input type="email" name='email'>
+                {% endif %}
                 <button class='btn btn-primary me-3'>Sign Up</button>
             </form>
         </div>

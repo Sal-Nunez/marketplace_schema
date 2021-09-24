@@ -49,7 +49,7 @@ def search():
     if product1:
         return redirect(f"/product/{product1.id}")
     else:
-        flash(f"There is no product called \"{request.form['product_name']}\"")
+        flash(f"There is no product called \"{request.form['product_name']}\"", 'search_error')
         return redirect('/')
 
 

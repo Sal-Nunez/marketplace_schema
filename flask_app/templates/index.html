@@ -1,7 +1,14 @@
 {% extends 'model.html' %} {% block content %}
-{% for message in get_flashed_messages() %}
+{% if get_flashed_messages(category_filter=["search_error"]) %}
+{% for message in get_flashed_messages(category_filter=["search_error"]) %}
 <p class="flash-message alert alert-danger text-center">{{ message }}</p>
 {% endfor %}
+{% endif %}
+{% if get_flashed_messages(category_filter=["success"]) %}
+{% for message in get_flashed_messages(category_filter=["success"]) %}
+<p class="flash-message alert alert-success text-center">{{ message }}</p>
+{% endfor %}
+{% endif %}
 <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
     <div class="carousel-inner" style="max-height: 800px !important;">
         <div class="carousel-item active" data-bs-interval="5000">
