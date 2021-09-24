@@ -137,6 +137,7 @@
             <h1>Your Cart</h1>
         </div>
     </div>
+    {% if cart %} {% for item in cart.cart_items %}
     <div class='container ms-auto me-auto'>
         <div class='d-flex justify-content-between'>
             <h1>Product</h1>
@@ -146,7 +147,6 @@
                 <h1>Total</h1>
             </div>
         </div>
-        {% if cart %} {% for item in cart.cart_items %}
         <div class="d-flex row mb-3 align-items-end" style='flex-wrap:nowrap'>
             <img src="{{item.arrangement.image}}" alt="" style='flex:6' class='thumbnail4'>
             <h1 class="price" id='price' style='flex:1'>{{ item.arrangement.price | round | int }}</h1>
@@ -159,7 +159,7 @@
             <div class="row">
             {% for cart_item in cart_items %}
             <div class="col-auto">
-                <img class="thumbnail4" src="{{ cart_item.guest_arrangement.image }}" alt="">
+                <img class="thumbnail5" src="{{ cart_item.guest_arrangement.image }}" alt="">
                 <p>Product: {{ cart_item.guest_arrangement.product.name }}</p>
                 <p>Arrangement: {{ cart_item.guest_arrangement.size }}</p>
                 <p>Quantity: <span class="quantity">{{ cart_item.quantity }}</span></p>
@@ -170,6 +170,7 @@
     </div>
         {% endif %}
     </div>
+    <h3 class="text-center">Total: $<span id="amount"></span></h3>
     <div class='d-flex justify-content-center'>
         <form action="/checkout">
             <button class='btn btn-dark btn-rounded mt-3' type='submit'>Checkout</button>

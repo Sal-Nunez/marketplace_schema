@@ -135,7 +135,7 @@
     <div class="row">
         {% for cart_item in cart.cart_items %}
         <div class="col-auto">
-            <img class="thumbnail4" src="{{ cart_item.guest_arrangement.image }}" alt="">
+            <img class="thumbnail5" src="{{ cart_item.guest_arrangement.image }}" alt="">
             <p>Product: {{ cart_item.guest_arrangement.product.name }}</p>
             <p>Arrangement: {{ cart_item.guest_arrangement.size }}</p>
             <p>Quantity: <span class="quantity">{{ cart_item.quantity }}</span></p>
@@ -149,7 +149,7 @@
     <div class="row">
         {% for cart_item in cart_items %}
         <div class="col-auto">
-            <img class="thumbnail4" src="{{ cart_item.guest_arrangement.image }}" alt="">
+            <img class="thumbnail5" src="{{ cart_item.guest_arrangement.image }}" alt="">
             <p>Product: {{ cart_item.guest_arrangement.product.name }}</p>
             <p>Arrangement: {{ cart_item.guest_arrangement.size }}</p>
             <p>Quantity: <span class="quantity">{{ cart_item.quantity }}</span></p>
