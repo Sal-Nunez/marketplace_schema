@@ -1,0 +1,202 @@
+SELECT * FROM arrangements;
+SELECT * FROM cart_items;
+SELECT * FROM carts;
+SELECT * FROM categories;
+SELECT * FROM images;
+SELECT * FROM master;
+SELECT * FROM order_items;
+SELECT * FROM orders;
+SELECT * FROM product_category;
+SELECT * FROM products;
+SELECT * FROM users;
+
+
+INSERT INTO users (first_name, last_name, email, password) VALUES ('Master', 'Account', 'masteraccount@placeholder.com', '$2b$12$a.U4xRwTzHDia8N7hrcHVOn/uNKX9JHYfeLlLULnuqJiGE25se.V6');
+INSERT INTO users (first_name, last_name, email, password) VALUES ('Guest', 'Access', 'guest@access.com', '$2b$12$2FVK0lICe8wxmFXrsdn3DugvHUQHrif6PHoD32dyV5LgbUb8mQMEa');
+INSERT INTO users (first_name, last_name, email, password) VALUES ('Burrito', 'Jones', 'burrito@jones.com', '$2b$12$TqePH0mDfHHXk6pFioUlY.2Ne/bLOp.9sevJOXQPpqwW7VhEGxDeS');
+INSERT INTO users (first_name, last_name, email, password) VALUES ('Jon', 'Doe', 'jon@doe.com', '$2b$12$Y0RUI76HdtU7KNBxU7GduuMm10ZP5TvJR0I7jwQDlEoFdazh8TmFW');
+INSERT INTO users (first_name, last_name, email, password) VALUES ('Jane', 'Doe', 'jane@doe.com', '$2b$12$bHDKbFPB5XhFjD3rFHgtje4rYAS7G5jeARmLOOiEHmtQ6LVsIYw2y');
+
+INSERT INTO master (user_id) VALUES ('1');
+
+INSERT INTO products (name, description) VALUES ('Light of My Life Bouqet', 'The Light of My Life Bouquet blossoms with brilliant color and a sweet sophistication to create the perfect impression! Pink Lilies make the eyes dance across the unique design of this flower bouquet, surrounded by the blushing colors of orange roses, lavender cushion poms, hot pink carnations, and lush greens. Presented in a clear glass vase, this fresh flower arrangement has been created just for you to help you send your sweetest thank you, happy anniversary, or thinking of you wishes.');
+INSERT INTO products (name, description) VALUES ('Fiesta Bouquet', 'The Fiesta Bouquet is composed of a lively mix, fit to celebrate any and every moment. With a combination of vibrant flowers, this florist–designed arrangement brings a pop of color and a burst of excitement as soon as it arrives.');
+INSERT INTO products (name, description) VALUES ('Beautiful Spirit Basket', 'Let them know how much you care with a gorgeous bouquet that features carnations, stock, roses, lilies and Fuji mums. Each bloom is a thoughtful reminder of your support and love, while sitting in a beautifully crafted basket.');
+INSERT INTO products (name, description) VALUES ('Birthday Brights Bouquet', 'The Birthday Brights Bouquet is a true celebration of color and life to surprise and delight your special recipient on their big day! Hot pink gerbera daisies and orange roses take center stage surrounded by purple statice, yellow cushion poms, green button poms, and lush greens to create party perfect birthday display. Presented in a modern rectangular ceramic vase with colorful striping at the bottom, "Happy Birthday" lettering at the top, and a bright pink bow at the center, this unforgettable fresh flower arrangement is then accented with a striped happy birthday pick to create a fun and festive gift.');
+INSERT INTO products (name, description) VALUES ('Blush Crush Bouquet', "It's just, a little blush! Whoever you're sending this bouquet to, your loved ones are sure to crush hard on these gorgeous pink and white shades.");
+INSERT INTO products (name, description) VALUES ('Radiance in Bloom Basket', 'Inspired by bright shades and soft textures, this arrangement will wow your loved ones with its mix of roses, carnations, and lisianthus in a woven basket.');
+INSERT INTO products (name, description) VALUES ("You're Precious Bouquet", "Blushing shades of pink blooms are nestled in lush greens to charm anyone's day. This bouquet is abundant with a classic assortment of pretty florals – roses, alstroemeria and carnations to name a few.");
+
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Original', 50, 20, 1);
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Deluxe', 65, 20, 1);
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Grand', 80, 20, 1);
+
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Original', 63, 20, 2);
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Deluxe', 80, 20, 2);
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Grand', 100, 20, 2);
+
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Original', 75, 20, 3);
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Deluxe', 90, 20, 3);
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Grand', 105, 20, 3);
+
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Deluxe', 60, 20, 4);
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Grand', 70, 20, 4);
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Premium', 80, 20, 4);
+
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Original', 55, 20, 5);
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Deluxe', 65, 20, 5);
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Grand', 80, 20, 5);
+
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Original', 75, 20, 6);
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Deluxe', 90, 20, 6);
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Grand', 105, 20, 6);
+
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Original', 60, 20, 7);
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Deluxe', 75, 20, 7);
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Grand', 90, 20, 7);
+
+INSERT INTO categories (category) VALUES ('Carnation');
+INSERT INTO categories (category) VALUES ('Lily');
+INSERT INTO categories (category) VALUES ('Rose');
+INSERT INTO categories (category) VALUES ('Gerbera Daisy');
+INSERT INTO categories (category) VALUES ('Mini Rose');
+INSERT INTO categories (category) VALUES ('Stock');
+INSERT INTO categories (category) VALUES ('Daisy');
+INSERT INTO categories (category) VALUES ('Peruvian Lily');
+
+INSERT INTO product_category (product_id, category_id) VALUES (1, 1);
+INSERT INTO product_category (product_id, category_id) VALUES (1, 2);
+INSERT INTO product_category (product_id, category_id) VALUES (1, 3);
+
+INSERT INTO product_category (product_id, category_id) VALUES (2, 1);
+INSERT INTO product_category (product_id, category_id) VALUES (2, 4);
+INSERT INTO product_category (product_id, category_id) VALUES (2, 5);
+INSERT INTO product_category (product_id, category_id) VALUES (2, 3);
+INSERT INTO product_category (product_id, category_id) VALUES (2, 6);
+
+INSERT INTO product_category (product_id, category_id) VALUES (3, 1);
+INSERT INTO product_category (product_id, category_id) VALUES (3, 2);
+INSERT INTO product_category (product_id, category_id) VALUES (3, 3);
+INSERT INTO product_category (product_id, category_id) VALUES (3, 6);
+
+INSERT INTO product_category (product_id, category_id) VALUES (4, 1);
+INSERT INTO product_category (product_id, category_id) VALUES (4, 7);
+INSERT INTO product_category (product_id, category_id) VALUES (4, 2);
+
+INSERT INTO product_category (product_id, category_id) VALUES (5, 1);
+INSERT INTO product_category (product_id, category_id) VALUES (5, 5);
+
+INSERT INTO product_category (product_id, category_id) VALUES (6, 1);
+INSERT INTO product_category (product_id, category_id) VALUES (6, 3);
+INSERT INTO product_category (product_id, category_id) VALUES (6, 6);
+
+INSERT INTO product_category (product_id, category_id) VALUES (7, 1);
+INSERT INTO product_category (product_id, category_id) VALUES (7, 8);
+INSERT INTO product_category (product_id, category_id) VALUES (7, 3);
+
+INSERT INTO carts (user_id) VALUE (1);
+INSERT INTO carts (user_id) VALUE (2);
+INSERT INTO carts (user_id) VALUE (3);
+INSERT INTO carts (user_id) VALUE (4);
+INSERT INTO carts (user_id) VALUE (5);
+
+INSERT INTO products (name, description) VALUES ('The Long Stem Pink Rose Bouquet', "Picture–perfect soft pink roses make a beautiful gift for the lovely lady in your life. Wife, mother, daughter or sweetheart, she's sure to cherish this bouquet of pastel pink roses accented with seeded eucalyptus and arranged in a clear glass vase.");
+INSERT INTO products (name, description) VALUES ('Charm & Comfort Bouquet', "Designed by florists, this bouquet evokes comfort and charm through its bright shades. Roses and snapdragons add gorgeous texture to complement the blooms in this arrangement.");
+INSERT INTO products (name, description) VALUES ('Wild Berry Bouquet', "The best things in life are sweet, vibrant and blooming with freshness. Our Wild Berry Bouquet embodies all that and more with its rich blend of white, pink and purple florals to create the perfect impression.");
+INSERT INTO products (name, description) VALUES ('Sweet Surprises® Bouquet', "Want a sweet surprise? Try a fresh bouquet designed by a local florist & delivered straight to your door. Whether it's for an occasion or a pick–me–up for yourself, this sweet arrangement is ready to delight you or your loved ones.");
+
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Original', 75, 20, 8);
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Deluxe', 105, 20, 8);
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Grand', 135, 20, 8);
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Premium', 200, 20, 8);
+
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Original', 75, 20, 9);
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Deluxe', 90, 20, 9);
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Grand', 105, 20, 9);
+
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Original', 55, 20, 10);
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Deluxe', 70, 20, 10);
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Grand', 90, 20, 10);
+
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Original', 56, 20, 11);
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Deluxe', 66, 20, 11);
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Grand', 76, 20, 11);
+
+INSERT INTO categories (category) VALUES ('Eucalyptus');
+INSERT INTO categories (category) VALUES ('Snapdragon');
+INSERT INTO categories (category) VALUES ('Peruvian Lily');
+
+INSERT INTO product_category (product_id, category_id) VALUES (8, 9);
+INSERT INTO product_category (product_id, category_id) VALUES (8, 3);
+
+INSERT INTO product_category (product_id, category_id) VALUES (9, 1);
+INSERT INTO product_category (product_id, category_id) VALUES (9, 3);
+INSERT INTO product_category (product_id, category_id) VALUES (9, 10);
+
+INSERT INTO product_category (product_id, category_id) VALUES (10, 1);
+INSERT INTO product_category (product_id, category_id) VALUES (10, 7);
+INSERT INTO product_category (product_id, category_id) VALUES (10, 5);
+INSERT INTO product_category (product_id, category_id) VALUES (10, 11);
+
+INSERT INTO product_category (product_id, category_id) VALUES (11, 1);
+INSERT INTO product_category (product_id, category_id) VALUES (11, 7);
+INSERT INTO product_category (product_id, category_id) VALUES (11, 3);
+
+INSERT INTO products (name, description) VALUES ('Sorbet Bouquet', "What's the scoop on this bright arrangement? Well, our Sorbet Bouquet is curated with a full serving of freshness and fragrance by our local florists to make anyone's day sweeter. This design features roses, spider mums, carnations and poms in a whitewashed wooden box.");
+
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Original', 60, 20, 12);
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Deluxe', 77, 20, 12);
+INSERT INTO arrangements (size, price, inventory, product_id) VALUES ('Grand', 99, 20, 12);
+
+INSERT INTO product_category (product_id, category_id) VALUES (12, 1);
+INSERT INTO product_category (product_id, category_id) VALUES (12, 7);
+INSERT INTO product_category (product_id, category_id) VALUES (12, 3);
+
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/C5375S_LOL_preset_ftd-hero-lv-new.jpeg?v=1614292662', 1);
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/C5375D_LOL_preset_ftd-hero-lv-new.jpeg?v=1614292587', 2);
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/C5375P_LOL_preset_ftd-hero-lv-new.jpeg?v=1614292498', 3);
+
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/CGPS_LOL_preset_ftd-hero-lv-new.jpeg?v=1614363218', 4);
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/CGPD_LOL_preset_ftd-hero-lv-new.jpeg?v=1614357614', 5);
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/CGPP_LOL_preset_ftd-hero-lv-new.jpeg?v=1614365906', 6);
+
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/S5272S_LOL_preset_ftd-hero-lv-new.jpeg?v=1615984553', 7);
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/S5272D_LOL_preset_ftd-hero-lv-new.jpeg?v=1615900536', 8);
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/S5272P_LOL_preset_ftd-hero-lv-new.jpeg?v=1615901338', 9);
+
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/BD2D_LOL_preset_ftd-hero-lv-new.jpeg?v=1615590471', 10);
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/BD2P_LOL_preset_ftd-hero-lv-new.jpeg?v=1615590742', 11);
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/BD2E_LOL_preset_ftd-hero-lv-new.jpeg?v=1615590583', 12);
+
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/C5379S_LOL_preset_ftd-hero-lv-new.jpeg?v=1612219860', 13);
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/C5379D_LOL_preset_ftd-hero-lv-new.jpeg?v=1612218939', 14);
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/C5379P_LOL_preset_ftd-hero-lv-new.jpeg?v=1612219046', 15);
+
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/S5286S_LOL_preset_ftd-hero-lv-new.jpeg?v=1614372585', 16);
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/S5286D_LOL_preset_ftd-hero-lv-new.jpeg?v=1614371511', 17);
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/S5286P_LOL_preset_ftd-hero-lv-new.jpeg?v=1614371264', 18);
+
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/YPBS_LOL_preset_ftd-hero-lv-new.jpeg?v=1631803558', 19);
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/YPBD_LOL_preset_ftd-hero-lv-new.jpeg?v=1631802541', 20);
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/YPBP_LOL_preset_ftd-hero-lv-new.jpeg?v=1631802551', 21);
+
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/E8-4304S_LOL_preset_ftd-hero-lv-new.jpeg?v=1611937513', 22);
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/E8-4304D_LOL_preset_ftd-hero-lv-new.jpeg?v=1611937493', 23);
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/E8-4304P_LOL_preset_ftd-hero-lv-new.jpeg?v=1611937593', 24);
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/E8-4304E_LOL_preset_ftd-hero-lv-new.jpeg?v=1611937513', 25);
+
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/S5285S_LOL_preset_ftd-hero-lv-new.jpeg?v=1603699423', 26);
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/S5285D_LOL_preset_ftd-hero-lv-new.jpeg?v=1608739784', 27);
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/S5285P_LOL_preset_ftd-hero-lv-new.jpeg?v=1608740617', 28);
+
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/CGLS_LOL_preset_ftd-hero-lv-new.jpeg?v=1614363209', 29);
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/CGLD_LOL_preset_ftd-hero-lv-new.jpeg?v=1614363449', 30);
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/CGLP_LOL_preset_ftd-hero-lv-new.jpeg?v=1614362201', 31);
+
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/SSBS_LOL_preset_ftd-hero-lv-new.jpeg?v=1631894362', 32);
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/SSBD_LOL_preset_ftd-hero-lv-new.jpeg?v=1631890641', 33);
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/SSBP_LOL_preset_ftd-hero-lv-new.jpeg?v=1631893251', 34);
+
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/CGAS_LOL_preset_ftd-hero-lv-new.jpeg?v=1614366551', 35);
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/CGAD_LOL_preset_ftd-hero-lv-new.jpeg?v=1614365002', 36);
+INSERT INTO images (image, arrangement_id) VALUES ('https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/CGAP_LOL_preset_ftd-hero-lv-new.jpeg?v=1614358172', 37);

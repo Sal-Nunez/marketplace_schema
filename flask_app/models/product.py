@@ -72,7 +72,6 @@ class Product:
             'name': name + '%'
         }
         '''
-        print(f"{'data':*^30}")
         query = "SELECT * FROM products WHERE name LIKE %(name)s LIMIT 6;"
         results = query_db(query, data)
         products = []

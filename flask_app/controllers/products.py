@@ -7,7 +7,6 @@ DATABASE = "floral_schema"
 
 @app.route('/product/<int:id>')
 def one_product(id):
-    print("***************ID", id)
     product_id = {
         'id': id
     }

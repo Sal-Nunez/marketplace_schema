@@ -34,9 +34,10 @@
             </ul>
         </div>
         {% if user %}
-        <a href="/account" class="btn btn-primary me-3">Your Account</a> {% else %}
-        <button class="btn btn-primary me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-            aria-controls="offcanvasRight">Account</button> {% endif %}
+        <a href="/account" class="btn btn-primary me-3">Your Account</a> 
+        <a href="/logout" class="btn btn-primary me-3">Logout</a>
+        {% else %}
+        <button class="btn btn-primary me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Account</button> {% endif %}
         <form action="/search" method="post" class="d-flex col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
             <div>
                 <input class="form-control me-2 mt-3" name="product_name" type="text" placeholder="Search" aria-label="Search" id='search' style='position: relative'>

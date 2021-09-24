@@ -45,12 +45,10 @@ def add_to_cart():
         return redirect('/cart')
     else:
         arrangement1 = request.form['arrangement_id']
-        print("**********************",arrangement1)
         if arrangement1 in session:
             session[arrangement1] += int(request.form['quantity'])
         else:
             session[arrangement1] = int(request.form['quantity'])
-    print(f"****************************", session)
     return redirect('/cart') # redirect to current page
 
 # Takes as input the cart_item "id" and cart_item "user_id" and arrangement_id, assume a hidden input

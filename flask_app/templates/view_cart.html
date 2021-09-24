@@ -32,7 +32,9 @@
             </ul>
         </div>
         {% if user %}
-        <a href="/account" class="btn btn-primary me-3">Your Account</a> {% else %}
+        <a href="/account" class="btn btn-primary me-3">Your Account</a> 
+        <a href="/logout" class="btn btn-primary me-3">Logout</a>
+        {% else %}
         <button class="btn btn-primary me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Account</button> {% endif %}
         <form class="d-flex col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
             <div>
