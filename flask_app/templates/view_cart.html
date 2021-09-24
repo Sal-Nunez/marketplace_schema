@@ -155,16 +155,19 @@
         </div>
         {% endfor %}
         {% else %}
-        <p>NOT SIGNED IN</p>
-        <div class="d-flex flex-wrap">
+        <div class="d-flex justify-content-center mt-3 ms-3">
+            <div class="row">
             {% for cart_item in cart_items %}
-            <img class="thumbnail4" src="{{ cart_item.guest_arrangement.image }}" alt="">
-            <p>Product: {{ cart_item.guest_arrangement.product.name }}</p>
-            <p>Arrangement: {{ cart_item.guest_arrangement.size }}</p>
-            <p>Quantity: {{ cart_item.quantity }}</p>
-            <p>Price: $<span class="price">{{ cart_item.guest_arrangement.price| round| int}}</span></p>
+            <div class="col-auto">
+                <img class="thumbnail4" src="{{ cart_item.guest_arrangement.image }}" alt="">
+                <p>Product: {{ cart_item.guest_arrangement.product.name }}</p>
+                <p>Arrangement: {{ cart_item.guest_arrangement.size }}</p>
+                <p>Quantity: <span class="quantity">{{ cart_item.quantity }}</span></p>
+                <p>Price: $<span class="price">{{ cart_item.guest_arrangement.price| round| int}}</span></p>
+            </div>
             {% endfor %}
         </div>
+    </div>
         {% endif %}
     </div>
     <div class='d-flex justify-content-center'>

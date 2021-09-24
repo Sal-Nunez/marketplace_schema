@@ -34,7 +34,7 @@
             </ul>
         </div>
         {% if user %}
-        <a href="/account" class="btn btn-primary me-3">Your Account</a> 
+        <a href="/account" class="btn btn-primary me-3">Your Account</a>
         <a href="/logout" class="btn btn-primary me-3">Logout</a>
         {% else %}
         <button class="btn btn-primary me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
@@ -128,87 +128,96 @@
 </div>
 <!-- END HEADER -->
 <!-- START CHECKOUT -->
-<H1 class="text-center my-5">CHECKOUT</H1>
+<H1 class="text-center mt-4 mb-2">CHECKOUT</H1>
 {% if user %}
-<p>SIGNED IN {{ user.full_name }}</p>
-<div class="d-flex flex-wrap">
-    {% for cart_item in cart.cart_items %}
-    <img class="thumbnail4" src="{{ cart_item.guest_arrangement.image }}" alt="">
-    <p>Product: {{ cart_item.guest_arrangement.product.name }}</p>
-    <p>Arrangement: {{ cart_item.guest_arrangement.size }}</p>
-    <p>Quantity: <span class="quantity">{{ cart_item.quantity }}</span></p>
-    <p>Price: $<span class="price">{{ cart_item.guest_arrangement.price| round| int}}</span></p>
-    {% endfor %}
+<h1>Welcome! {{ user.full_name }}</h1>
+<div class="d-flex justify-content-center mt-3 ms-3">
+    <div class="row">
+        {% for cart_item in cart.cart_items %}
+        <div class="col-auto">
+            <img class="thumbnail4" src="{{ cart_item.guest_arrangement.image }}" alt="">
+            <p>Product: {{ cart_item.guest_arrangement.product.name }}</p>
+            <p>Arrangement: {{ cart_item.guest_arrangement.size }}</p>
+            <p>Quantity: <span class="quantity">{{ cart_item.quantity }}</span></p>
+            <p>Price: $<span class="price">{{ cart_item.guest_arrangement.price| round| int}}</span></p>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 {% else %}
-<p>NOT SIGNED IN</p>
-<div class="d-flex flex-wrap">
-    {% for cart_item in cart_items %}
-    <img class="thumbnail4" src="{{ cart_item.guest_arrangement.image }}" alt="">
-    <p>Product: {{ cart_item.guest_arrangement.product.name }}</p>
-    <p>Arrangement: {{ cart_item.guest_arrangement.size }}</p>
-    <p>Quantity: <span class="quantity">{{ cart_item.quantity }}</span></p>
-    <p>Price: $<span class="price">{{ cart_item.guest_arrangement.price| round| int}}</span></p>
-    {% endfor %}
+<div class="d-flex justify-content-center mt-3 ms-3">
+    <div class="row">
+        {% for cart_item in cart_items %}
+        <div class="col-auto">
+            <img class="thumbnail4" src="{{ cart_item.guest_arrangement.image }}" alt="">
+            <p>Product: {{ cart_item.guest_arrangement.product.name }}</p>
+            <p>Arrangement: {{ cart_item.guest_arrangement.size }}</p>
+            <p>Quantity: <span class="quantity">{{ cart_item.quantity }}</span></p>
+            <p>Price: $<span class="price">{{ cart_item.guest_arrangement.price| round| int}}</span></p>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 {% endif %}
 
 <div id="smart-button-container">
-    <div style="text-align: center"><label for="description"> </label><input type="text" name="descriptionInput"
-            id="description" maxlength="127" value="Flowers"></div>
-    <p id="descriptionError" style="visibility: hidden; color:red; text-align: center;">Please enter a description</p>
-    <div style="text-align: center"><label for="amount">Total: </label><input name="amountInput" type="number"
-            id="amount" value=""><span> USD</span></div>
-    <p id="priceLabelError" style="visibility: hidden; color:red; text-align: center;">Please enter a price</p>
-    <div id="invoiceidDiv" style="text-align: center; display: none;"><label for="invoiceid"> </label><input
-            name="invoiceid" maxlength="127" type="text" id="invoiceid" value=""></div>
-    <p id="invoiceidError" style="visibility: hidden; color:red; text-align: center;">Please enter an Invoice ID</p>
-    <div style="text-align: center; margin-top: 0.625rem;" id="paypal-button-container"></div>
-</div>
-<!-- END CHECKOUT -->
-<!-- START FOOTER -->
-<div class="container">
-    <footer class="py-5">
-        <div class="d-flex justify-content-between">
-            <div class="col-2">
-                <h5>Section</h5>
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="/" class="nav-link p-0 text-muted">Home</a></li>
-                    <li class="nav-item mb-2"><a href="/products/all" class="nav-link p-0 text-muted">Flowers</a></li>
-                    <li class="nav-item mb-2"><a href="/products/all" class="nav-link p-0 text-muted">Occasions</a></li>
-                    <li class="nav-item mb-2"><a href="/about_us" class="nav-link p-0 text-muted">About</a></li>
-                </ul>
-            </div>
-            <div class="col-4">
-                <form>
-                    <h5>Subscribe to our newsletter</h5>
-                    <p>Monthly digest of whats new and exciting from us.</p>
-                    <div class="d-flex w-100 gap-2">
-                        <label for="newsletter1" class="visually-hidden">Email
-                            address</label>
-                        <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-                        <button class="btn btn-primary" type="button">Subscribe</button>
+    <div style="text-align: center"><label for="description">Flowers</label>
+        <p id="descriptionError" style="visibility: hidden; color:red; text-align: center;">Please enter a description
+        </p>
+        <div style="text-align: center"><label for="amount">Total: <span id="amount"></span> </label>
+            <p id="priceLabelError" style="visibility: hidden; color:red; text-align: center;">Please enter a price</p>
+            <div id="invoiceidDiv" style="text-align: center; display: none;"><label for="invoiceid"> </label><input
+                    name="invoiceid" maxlength="127" type="text" id="invoiceid" value=""></div>
+            <p id="invoiceidError" style="visibility: hidden; color:red; text-align: center;">Please enter an Invoice ID
+            </p>
+            <div style="text-align: center; margin-top: 0.625rem;" id="paypal-button-container"></div>
+        </div>
+        <!-- END CHECKOUT -->
+        <!-- START FOOTER -->
+        <div class="container">
+            <footer class="py-5">
+                <div class="d-flex justify-content-between">
+                    <div class="col-2">
+                        <h5>Section</h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item mb-2"><a href="/" class="nav-link p-0 text-muted">Home</a></li>
+                            <li class="nav-item mb-2"><a href="/products/all"
+                                    class="nav-link p-0 text-muted">Flowers</a></li>
+                            <li class="nav-item mb-2"><a href="/products/all"
+                                    class="nav-link p-0 text-muted">Occasions</a></li>
+                            <li class="nav-item mb-2"><a href="/about_us" class="nav-link p-0 text-muted">About</a></li>
+                        </ul>
                     </div>
-                </form>
-            </div>
-        </div>
+                    <div class="col-4">
+                        <form>
+                            <h5>Subscribe to our newsletter</h5>
+                            <p>Monthly digest of whats new and exciting from us.</p>
+                            <div class="d-flex w-100 gap-2">
+                                <label for="newsletter1" class="visually-hidden">Email
+                                    address</label>
+                                <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+                                <button class="btn btn-primary" type="button">Subscribe</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
-        <div class="d-flex justify-content-between py-4 my-4 border-top">
-            <p>&copy; 2021 Company, Inc. All rights reserved.</p>
-            <ul class="list-unstyled d-flex">
-                <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
-                            <use xlink:href="#twitter" />
-                        </svg></a></li>
-                <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
-                            <use xlink:href="#instagram" />
-                        </svg></a></li>
-                <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
-                            <use xlink:href="#facebook" />
-                        </svg></a></li>
-            </ul>
+                <div class="d-flex justify-content-between py-4 my-4 border-top">
+                    <p>&copy; 2021 Company, Inc. All rights reserved.</p>
+                    <ul class="list-unstyled d-flex">
+                        <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
+                                    <use xlink:href="#twitter" />
+                                </svg></a></li>
+                        <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
+                                    <use xlink:href="#instagram" />
+                                </svg></a></li>
+                        <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24">
+                                    <use xlink:href="#facebook" />
+                                </svg></a></li>
+                    </ul>
+                </div>
+            </footer>
         </div>
-    </footer>
-</div>
-</div>
-<!-- END FOOTER -->
-{% endblock %}
+    </div>
+    <!-- END FOOTER -->
+    {% endblock %}
