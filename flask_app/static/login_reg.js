@@ -12,7 +12,6 @@ regForm.addEventListener('submit', function(e) {
         })
         .then(resp => resp.json())
         .then(data => {
-            console.log(data);
             if (data['status'] === 400) {
                 let allErrors = document.querySelectorAll(".errors")
                 for (const error of allErrors) {
@@ -38,7 +37,6 @@ loginForm.addEventListener('submit', function(e) {
         })
         .then(resp => resp.json())
         .then(data => {
-            console.log(data);
             if (data['status'] === 400) {
                 let allErrors = document.querySelectorAll(".errors")
                 for (const error of allErrors) {
