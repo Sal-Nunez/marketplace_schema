@@ -14,19 +14,19 @@
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toffle="dropdown" href="#">Flowers</a>
+                    <a class="nav-link dropdown-toggle" data-toffle="dropdown" href="/products/all">Flowers</a>
                     <div class="dropdown-menu">
-                        <a href="#" class="dropdown-item">Roses</a>
-                        <a href="#" class="dropdown-item">More Roses</a>
-                        <a href="#" class="dropdown-item">Even More Roses</a>
+                        <a href="/products/all" class="dropdown-item">Roses</a>
+                        <a href="/products/all" class="dropdown-item">More Roses</a>
+                        <a href="/products/all" class="dropdown-item">Even More Roses</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toffle="dropdown" href="#">Occasions</a>
+                    <a class="nav-link dropdown-toggle" data-toffle="dropdown" href="/products/all">Occasions</a>
                     <div class="dropdown-menu">
-                        <a href="#" class="dropdown-item">Weddings</a>
-                        <a href="#" class="dropdown-item">Divorces</a>
-                        <a href="#" class="dropdown-item">More Weddings</a>
+                        <a href="/products/all" class="dropdown-item">Weddings</a>
+                        <a href="/products/all" class="dropdown-item">Divorces</a>
+                        <a href="/products/all" class="dropdown-item">More Weddings</a>
                     </div>
                 </li>
             </ul>
@@ -35,8 +35,11 @@
         <a href="/logout" class="btn btn-primary me-3">Logout</a> {% else %}
         <button class="btn btn-primary me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Account</button> {% endif %}
         <form class="d-flex col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            <div>
+                <input class="form-control me-2 mt-3" type="search" placeholder="Search" aria-label="Search" id='search' style='position: relative'>
+                <ul id="suggestions" class='suggestions-dropdown'></ul>
+            </div>
+            <button class="btn btn-outline-success m-3" type="submit">Search</button>
         </form>
     </div>
     <a href="/cart"><img src="\static\assets\PikPng.com_wheelbarrow-png_5860717 (1).png" alt="cart" style='margin-right: 50px;' href="/cart"></a>
@@ -129,7 +132,7 @@
     {% for arrangement in arrangements %}
     <div class="card col-3 mb-5" style="width: 18rem;">
         <img src="{{arrangement.image}}" class="card-img-top" alt="arrangement image">
-        <div class="card-body">
+        <div class="card-body text-center">
             <form action="/product/{{ arrangement.id }}">
                 <h5><button class='button1' type='submit'>{{arrangement.product.name}}</button></h5>
             </form>
@@ -137,7 +140,7 @@
         <ul class="list-group list-group-flush">
             <li class="list-group-item text-center">Deluxe: ${{arrangement.price | round | int}}</li>
         </ul>
-        <div class="card-body">
+        <div class="card-body text-center">
             <form action="/product/{{ arrangement.id }}">
                 <button class='button1' type='submit'>Order</button>
             </form>
