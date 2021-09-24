@@ -14,12 +14,12 @@ def one_product(id):
         }
         data = {
             'user': user.User.select(data = id),
-            'arrangement': arrangement.Arrangement.select_one(data={'id':id})
+            'arrangement': arrangement.Arrangement.select_one(data=id)
         }
         return render_template('product.html', **data)
     else:
         data = {
-            'arrangement': arrangement.Arrangement.select_one(data={'id':id})
+            'arrangement': arrangement.Arrangement.select_one(data=id)
         }
         return render_template('product.html', **data)
 
