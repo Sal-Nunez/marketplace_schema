@@ -68,7 +68,7 @@ def remove_from_cart():
 # Takes as input cart_item "id", cart_item "user", qauntity, and arrangement_id, assume a hidden input
 @app.route('/carts/update_cart', methods=['POST'])
 def update_cart():
-    if session['uuid']:
+    if 'uuid' in session:
         if request.form['user_id'] == session['uuid']:
             data = {
                 'id': request.form['id'],
@@ -77,3 +77,31 @@ def update_cart():
             CartItem.edit_cart_quantity(data)
     else:
         session['cart']['arrangement_id'] = session['quantity']
+
+@app.route('/checkout')
+def checkout():
+    if 'uuid' in session:
+        user_data = {
+            'id': session['uuid']
+        }
+        cart_data = {
+            'user_id': session['uuid']
+        }
+        data = {
+            'user': user.User.select(data=user_data),
+            'cart': cart.Cart.select(data=cart_data)
+        }
+        return render_template('checkout.html', **data)
+    else:
+        cart_items = []
+        for cart_item in session:
+            data = {
+                'id': cart_item,
+                'quantity': session[cart_item]
+            }
+            cart_item = CartItem.create_guest_cart_item(data)
+            cart_items.append(cart_item)
+        data1 = {
+            'cart_items': cart_items 
+        }
+        return render_template('checkout.html', **data1)
