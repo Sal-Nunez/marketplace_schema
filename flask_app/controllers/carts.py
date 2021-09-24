@@ -51,7 +51,7 @@ def add_to_cart():
             session[arrangement1] = int(request.form['quantity'])
     return redirect('/cart') # redirect to current page
 
-# Takes as input the cart_item "id" and cart_item "user_id" and arrangement_id, assume a hidden input
+# Takes as input the cart_item "id", cart_item "user_id", and arrangement_id, assume a hidden input
 @app.route('/carts/remove_arrangement', methods=['POST'])
 def remove_from_cart():
     if 'uuid' in session:
