@@ -1,12 +1,24 @@
 While not logged in:
     All the trending product links lead to the general store page instead of the specific product page. (Do specific product pages even exist?)
-    On shop page, trying to go to any of the products product pages results in an error. (Key error: uuid)
+    ~~~FIXED: On shop page, trying to go to any of the products product pages results in an error. (Key error: uuid)
         Clicking order results in the same outcome.
     Clicking search results in rerouting to the home page even if entering a specific item.
-    None of the buttons in the footer work, they are all set to a default link of '#'.
+    ~~~FIXED: None of the buttons in the footer work, they are all set to a default link of '#'.
 
 Logged in as Burrito Jones:
     None of the carousel arrows work.
     Subscribe to our newsletter button doesn't seem to do anything. Don't know if this is unqiue to being logged in.
     While logged in, I am still presented with the account button leading to the login and registration. Ie, there is no account page.
         There doesn't seem to be a logout button anywhere.
+    ~~~FIXED: Attempting to manually log out (entering '/logout' in the html bar results in the uuid error).
+
+General:
+    No about us page has been made. As such the link results in an error.
+    NONE OF THE FOLLOWING ARE IN USE:
+        hello1.html
+        homepage.html
+        test.html
+
+FIX LOG:
+    Added links to footer on each page.
+    Fixed the uuid error.
