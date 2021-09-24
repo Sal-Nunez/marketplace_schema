@@ -43,34 +43,30 @@ def all_products():
         }
         return render_template('products.html', **data)
 #notdone
-# @app.route('/search/<string:name>')
-# def search_dropdown(name):
-#     print('name*****************************', name)
-#     msg = {
-#         'status': 200
-#     }
-#     # product_list = {}
-#     product_data = {
-#         'name': name+'%'
-#     }
-#     print (f"{'product_data':*^40}", product_data['name'])
-#     products = product.Product.search_products(data=product_data)
-#     print('products****************************',products)
-#     if products:
-#         return jsonify(msg)
-#     else:
-#         return jsonify(msg)
+@app.route('/search', methods=['POST'])
+def search():
+    product_name = request.form['product_name']
+    product1 = arrangement.Arrangement.select_arrangement_from_product(data={'name': product_name})
+    if product1:
+        return redirect(f"/product/{product1.id}")
+    else:
+        flash(f"There is no product called \"{request.form['product_name']}\"")
+        return redirect('/')
+
 
 @app.route('/api/search/<name>')
 def filter_users(name):
     query = "SELECT name FROM products WHERE products.name LIKE %(name)s LIMIT 5;"
     results1 = query_db(query,{"name":"%"+name+"%"})
-    query = "SELECT category FROM categories WHERE categories.category LIKE %(name)s LIMIT 5;"
-    results2 = query_db(query, {"name": "%"+name+"%"})
-    print(results1)
+    # query = "SELECT category FROM categories WHERE categories.category LIKE %(name)s LIMIT 5;"
+    # results2 = query_db(query, {"name": "%"+name+"%"})
+    # print(results1)
+    # result = []
+    # results1.extend(results2)
+    # for myDict in results1:
+    #     if myDict not in result:
+    #         result.append(myDict)
     result = []
-    results1.extend(results2)
-    for myDict in results1:
-        if myDict not in result:
-            result.append(myDict)
+    for product in results1:
+        result.append(product)
     return jsonify(result)
