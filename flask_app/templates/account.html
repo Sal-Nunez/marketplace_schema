@@ -4,7 +4,7 @@
 <div class="container d-flex justify-content-between">
     <h1>{{user.first_name}} {{user.last_name}}</h1>
     <div class='mt-3'>
-        <form action="/newsletter_signup" methods=[ 'post']>
+        <form action="/newsletter_signup" methods='post'>
             <label class="form-check-label" for="flexCheckDefault">Interested in emails?</label>
             <input type="hidden" name='email' value='{{user.email}}'>
             <button class='btn btn-primary me-3'>Sign Up</button>
