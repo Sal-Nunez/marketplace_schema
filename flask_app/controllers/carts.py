@@ -14,6 +14,7 @@ def view_cart():
             'id':session['uuid']
         }
         carts = cart.Cart.select(data)
+        print(carts.cart_items)
         user1 = user.User.select(data = user_data)
         return render_template('view_cart.html', cart = carts, user = user1)
     else:
@@ -41,7 +42,14 @@ def add_to_cart():
             'cart_id': user1.cart.id,
             'arrangement_id': request.form['arrangement_id']
         }
-        CartItem.create_cart_item(data)
+        cart_item = CartItem.select_one(data = {'arrangement_id': f"{request.form['arrangement_id']}"})
+        if cart_item:
+            CartItem.edit_cart_quantity(data = {
+                'quantity': cart_item.quantity + 1,
+                'id': cart_item.id
+            })
+        else:
+            CartItem.create_cart_item(data)
         return redirect('/cart')
     else:
         arrangement1 = request.form['arrangement_id']
@@ -58,7 +66,17 @@ def remove_from_cart():
         data = {
             'id': request.form['id']
         }
-        CartItem.delete_cart_item(data)
+        data1 = {
+            'arrangement_id': request.form['arrangement_id']
+        }
+        cart_item = CartItem.select_one(data1)
+        if cart_item.quantity == 1:
+            CartItem.delete_cart_item(data)
+        else:
+            CartItem.edit_cart_quantity(data = {
+                'quantity': cart_item.quantity - 1,
+                'id': request.form['id']
+            })
         return redirect('/cart') # redirect to current page
     else:
         arrangement1 = request.form['arrangement_id']
