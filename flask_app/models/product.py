@@ -4,6 +4,7 @@ from flask_app.models import arrangement
 from flask_app.models.category import Category
 app = Flask(__name__)
 
+
 class Product:
     def __init__(self, data):
         self.id = data['id']
@@ -64,7 +65,8 @@ class Product:
             for product in results:
                 products.append(cls(product))
             return products
-#notdone
+# notdone
+
     @classmethod
     def search_products(cls, data):
         '''
@@ -85,7 +87,7 @@ class Product:
     @classmethod
     def create_product(cls, data):
         query = "INSERT INTO products (name, description, on_sale) VALUES (%(name)s, %(description)s, %(on_sale)s);"
-        results =  query_db(query, data)
+        results = query_db(query, data)
         return results
 
     @classmethod

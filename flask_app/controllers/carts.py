@@ -4,6 +4,8 @@ from flask_app.models.cart_item import CartItem
 from flask_app.models import cart, user, arrangement
 
 # Use this route to view cart. If guest, use session['cart'] on html side.
+
+
 @app.route('/cart')
 def view_cart():
     if 'uuid' in session:
@@ -11,12 +13,12 @@ def view_cart():
             'user_id': session['uuid']
         }
         user_data = {
-            'id':session['uuid']
+            'id': session['uuid']
         }
         carts = cart.Cart.select(data)
         print(carts.cart_items)
-        user1 = user.User.select(data = user_data)
-        return render_template('view_cart.html', cart = carts, user = user1)
+        user1 = user.User.select(data=user_data)
+        return render_template('view_cart.html', cart=carts, user=user1)
     else:
         cart_items = []
         for cart_item in session:
@@ -27,24 +29,27 @@ def view_cart():
             cart_item = CartItem.create_guest_cart_item(data)
             cart_items.append(cart_item)
         data1 = {
-            'cart_items': cart_items 
+            'cart_items': cart_items
         }
         return render_template('view_cart.html', **data1)
 
 # Takes as input the cart_id, arrangement_id, and quantity
+
+
 @app.route('/carts/add_arrangement', methods=['POST'])
 def add_to_cart():
     if 'uuid' in session:
-        user1 = user.User.select(data={'id':session['uuid']})
+        user1 = user.User.select(data={'id': session['uuid']})
         data = {
             'quantity': request.form['quantity'],
-            #can get cart from session cart or uuid
+            # can get cart from session cart or uuid
             'cart_id': user1.cart.id,
             'arrangement_id': request.form['arrangement_id']
         }
-        cart_item = CartItem.select_one(data = {'arrangement_id': f"{request.form['arrangement_id']}"})
+        cart_item = CartItem.select_one(
+            data={'arrangement_id': f"{request.form['arrangement_id']}"})
         if cart_item:
-            CartItem.edit_cart_quantity(data = {
+            CartItem.edit_cart_quantity(data={
                 'quantity': cart_item.quantity + 1,
                 'id': cart_item.id
             })
@@ -57,9 +62,11 @@ def add_to_cart():
             session[arrangement1] += int(request.form['quantity'])
         else:
             session[arrangement1] = int(request.form['quantity'])
-    return redirect('/cart') # redirect to current page
+    return redirect('/cart')  # redirect to current page
 
 # Takes as input the cart_item "id", cart_item "user_id", and arrangement_id, assume a hidden input
+
+
 @app.route('/carts/remove_arrangement', methods=['POST'])
 def remove_from_cart():
     if 'uuid' in session:
@@ -73,11 +80,11 @@ def remove_from_cart():
         if cart_item.quantity == 1:
             CartItem.delete_cart_item(data)
         else:
-            CartItem.edit_cart_quantity(data = {
+            CartItem.edit_cart_quantity(data={
                 'quantity': cart_item.quantity - 1,
                 'id': request.form['id']
             })
-        return redirect('/cart') # redirect to current page
+        return redirect('/cart')  # redirect to current page
     else:
         arrangement1 = request.form['arrangement_id']
         if arrangement1 in session:
@@ -85,9 +92,11 @@ def remove_from_cart():
                 session[arrangement1] -= 1
             else:
                 session.pop(arrangement1)
-        return redirect('/cart') # redirect to current page
+        return redirect('/cart')  # redirect to current page
 
 # Takes as input cart_item "id", cart_item "user", qauntity, and arrangement_id, assume a hidden input
+
+
 @app.route('/carts/update_cart', methods=['POST'])
 def update_cart():
     if 'uuid' in session:
@@ -99,6 +108,7 @@ def update_cart():
             CartItem.edit_cart_quantity(data)
     else:
         session['cart']['arrangement_id'] = session['quantity']
+
 
 @app.route('/checkout')
 def checkout():
@@ -124,6 +134,6 @@ def checkout():
             cart_item = CartItem.create_guest_cart_item(data)
             cart_items.append(cart_item)
         data1 = {
-            'cart_items': cart_items 
+            'cart_items': cart_items
         }
         return render_template('checkout.html', **data1)

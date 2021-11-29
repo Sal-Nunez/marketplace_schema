@@ -9,6 +9,7 @@ bcrypt = Bcrypt(app)
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 NAME_REGEX = re.compile(r'^[a-zA-Z]\S*$')
 
+
 class User:
     def __init__(self, data):
         self.id = data['id']
@@ -94,7 +95,9 @@ class User:
                     'cart_id': cart_id
                 }
                 cart_item.CartItem.create_cart_item(data=cart_item_data)
-        session.clear()
+            session.clear()
+        else:
+            cart.Cart.create_cart(data=user_data)
         if query:
             session['uuid'] = results
         return results
