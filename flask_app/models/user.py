@@ -94,7 +94,8 @@ class User:
                     'cart_id': cart_id
                 }
                 cart_item.CartItem.create_cart_item(data=cart_item_data)
-        session.clear()
+            session.clear()
+        else: cart.Cart.create_cart(data=user_data)
         if query:
             session['uuid'] = results
         return results
