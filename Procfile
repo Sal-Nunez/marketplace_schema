@@ -1,1 +1,1 @@
-web: gunicorn dep:app
+web: gunicorn marketplace_schema.wsgi --log-file -
